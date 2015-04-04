@@ -1,0 +1,97 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:Silverlight_Client_Converters="clr-namespace:Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.Converters" xmlns:Silverlight_Client_ViewModels="clr-namespace:Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.ViewModels" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+	xmlns:Microsoft_Samples_NLayerApp_Presentation_Silverlight_Client_Behaviors="clr-namespace:Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.Behaviors"
+	mc:Ignorable="d"
+	x:Class="Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.EditCustomerView"
+	d:DesignWidth="769" d:DesignHeight="428">
+
+	<UserControl.Resources>
+		<Silverlight_Client_Converters:BinaryImageConverter x:Key="BinaryImageConverter"/>
+	</UserControl.Resources>
+	<Grid x:Name="LayoutRoot">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="0.405*"/>
+			<ColumnDefinition Width="0.595*"/>
+		</Grid.ColumnDefinitions>
+		<Border BorderThickness="0" Background="{StaticResource CorporateColor}" Margin="0,61,0,126" Grid.ColumnSpan="1" Grid.Column="1"/>
+		<Grid Grid.Column="1" Margin="8,65,8,0" VerticalAlignment="Top">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<TextBlock TextWrapping="Wrap" Text="Company Name" VerticalAlignment="Top" Foreground="White" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="18.667" HorizontalAlignment="Left" Margin="0"/>
+			<TextBox x:Name="TB_CompanyName" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0" Style="{StaticResource TextBoxStyle}" Grid.ColumnSpan="1" Text="{Binding Customer.Company, Mode=TwoWay}" Grid.Row="1"/>
+			<TextBlock Foreground="White" FontSize="18.667" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" TextWrapping="Wrap" Text="First Name" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Left" Grid.Row="2"/>
+			<TextBox x:Name="TB_ContactName" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="1" Foreground="#FF6E6E6E" Text="{Binding Customer.FirstName, Mode=TwoWay}" Grid.Row="3"/>
+			<TextBlock Foreground="White" FontSize="18.667" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" TextWrapping="Wrap" Text="Last Name" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Left" Grid.Row="4" d:LayoutOverrides="GridBox"/>
+			<TextBox x:Name="TB_ContactName_Copy" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="1" Foreground="#FF6E6E6E" Text="{Binding Customer.LastName, Mode=TwoWay}" Grid.Row="5" d:LayoutOverrides="GridBox" Margin="0"/>
+			<TextBlock Foreground="White" FontSize="18.667" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Address" VerticalAlignment="Top" Margin="0" Grid.Row="6"/>
+			<TextBox x:Name="TB_Address" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="1" Text="{Binding Customer.AddressAddressLine1, Mode=TwoWay}" Grid.Row="7"/>
+			<TextBlock Foreground="White" FontSize="18.667" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" HorizontalAlignment="Left" TextWrapping="Wrap" Text="City" Margin="0" VerticalAlignment="Top" Grid.Row="8"/>
+			<TextBox x:Name="TB_City" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="1" Text="{Binding Customer.AddressCity, Mode=TwoWay}" Grid.Row="9"/>
+			<TextBlock Foreground="White" FontSize="18.667" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Zip" VerticalAlignment="Top" Margin="0" Grid.Row="10"/>
+			<TextBox x:Name="TB_Zip" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="1" Text="{Binding Customer.AddressZipCode, Mode=TwoWay}" Grid.Row="11"/>
+			<TextBlock Foreground="White" FontSize="18.667" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" TextWrapping="Wrap" Text="Telephone" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Left" Grid.Row="12"/>
+			<TextBox x:Name="TB_Telephone" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="1" Text="{Binding Customer.Telephone, Mode=TwoWay}" Grid.Row="13"/>
+			<TextBlock Foreground="White" FontSize="18.667" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Country" VerticalAlignment="Top" Grid.Row="14"/>
+			<ComboBox HorizontalAlignment="Left" Width="120" Grid.Row="15" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" DisplayMemberPath="CountryName" VerticalAlignment="Bottom"/>
+		</Grid>
+		<Image Margin="0,60,0,0" Source="{Binding Photo, Converter={StaticResource BinaryImageConverter}}" Height="335" VerticalAlignment="Top" Stretch="UniformToFill" HorizontalAlignment="Left"/>
+		<TextBlock x:Name="TBlock_CustomerName" TextWrapping="Wrap" Text="{Binding Text, ElementName=TB_ContactName}" Foreground="White" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="64" Margin="0" VerticalAlignment="Top" Grid.ColumnSpan="2" d:LayoutOverrides="Width">
+			<TextBlock.OpacityMask>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="#9A000000" Offset="0"/>
+					<GradientStop Color="Transparent" Offset="1"/>
+					<GradientStop Color="#11686868" Offset="0.536"/>
+				</LinearGradientBrush>
+			</TextBlock.OpacityMask>
+		</TextBlock>
+		<Button x:Name="BTN_Save" VerticalAlignment="Top" Margin="0,0,8,0" Style="{StaticResource ButtonStyle2}" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="12" HorizontalAlignment="Right" Height="40" Width="40" Grid.Column="1" d:LayoutOverrides="VerticalAlignment" Cursor="Hand">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="Click">
+					<i:InvokeCommandAction Command="{Binding SaveCommand, Mode=OneWay}" CommandParameter="true"/>
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+			<Grid Margin="0">
+				<Path x:Name="Shape_Save" Data="F1M31.668,8.489C31.668,8.489 39.195,8.489 39.195,8.489 39.195,8.489 39.195,22.096 39.195,22.096 39.195,22.096 31.668,22.096 31.668,22.096 31.668,22.096 31.668,8.489 31.668,8.489z M5.563,5.724C5.563,5.724 5.563,5.741 5.563,5.741 5.563,5.741 5.563,55.448 5.563,55.448 5.563,55.448 5.548,55.449 5.548,55.449 5.548,55.449 55.278,55.449 55.278,55.449 55.278,55.449 55.287,28.569 55.287,28.569 55.287,28.569 55.287,5.724 55.287,5.724 55.287,5.724 47.826,5.724 47.826,5.724 47.826,5.724 47.826,5.741 47.826,5.741 47.826,5.741 47.826,23.238 47.826,23.238 47.826,25.689 45.968,27.683 43.682,27.683 43.682,27.683 15.095,27.683 15.095,27.683 12.81,27.683 10.951,25.689 10.951,23.238 10.951,23.238 10.951,5.741 10.951,5.741 10.951,5.741 10.959,5.724 10.959,5.724 10.959,5.724 5.563,5.724 5.563,5.724z M14.674,4.65C14.674,4.65 14.674,23.238 14.674,23.238 14.674,23.671 14.928,23.959 15.095,23.959 15.095,23.959 43.682,23.959 43.682,23.959 43.849,23.959 44.104,23.671 44.104,23.238 44.104,23.238 44.104,4.65 44.104,4.65 44.104,4.65 14.674,4.65 14.674,4.65z M14.656,2C14.656,2 59.008,2.001 59.008,2.001 59.008,2.001 59.008,28.569 59.008,28.569 59.008,28.569 59.109,59.258 59.109,59.258 59.109,59.258 43.962,59.172 43.962,59.172 43.962,59.172 1.84,59.172 1.84,59.172 1.84,59.172 1.84,2.001 1.84,2.001 1.84,2.001 14.656,2.001 14.656,2.001 14.656,2.001 14.656,2 14.656,2z" Fill="#FFFFFFFF" Margin="0" UseLayoutRounding="False" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="20" Stretch="Fill"/>
+			</Grid>
+		</Button>
+		<Button x:Name="BTN_ChangePicture" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Style="{StaticResource ButtonStyle3}" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" Height="40" Cursor="Hand" Click="BTN_ChangePicture_Click" Margin="0,61,1,0">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="Click">
+					<Microsoft_Samples_NLayerApp_Presentation_Silverlight_Client_Behaviors:OpenFileDialogBehavior FileDialogDialogResultCommand="{Binding Photo, Mode=TwoWay}"/>
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+			<ed:BlockArrow Fill="#FFF4F4F5" Height="22" Orientation="Up" UseLayoutRounding="False" Width="22"/>
+		</Button>
+		<Button x:Name="BTN_Cancel" VerticalAlignment="Top" Margin="0,0,52,0" Style="{StaticResource ButtonStyle2}" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="12" HorizontalAlignment="Right" Height="40" Width="40" Grid.Column="1" Cursor="Hand" d:LayoutOverrides="VerticalAlignment">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="Click">
+					<i:InvokeCommandAction Command="{Binding CancelCommand, Mode=OneWay}"/>
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+			<Grid Margin="0">
+				<ed:BlockArrow Fill="#FFF4F4F5" Orientation="Left" UseLayoutRounding="False" Width="22" Height="22"/>
+			</Grid>
+		</Button>
+	</Grid>
+</UserControl>

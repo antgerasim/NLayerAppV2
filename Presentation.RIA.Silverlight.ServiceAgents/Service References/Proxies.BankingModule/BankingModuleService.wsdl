@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BankingModuleService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:2626/BankingModuleService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:2626/BankingModuleService.svc?xsd=xsd3" namespace="Microsoft.Samples.DistributedServices.Core" />
+      <xsd:import schemaLocation="http://localhost:2626/BankingModuleService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:2626/BankingModuleService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBankingModuleService_AddNewBankAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewBankAccount" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_AddNewBankAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewBankAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_AddNewBankAccount_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q1="Microsoft.Samples.DistributedServices.Core" name="detail" element="q1:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_LockBankAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:LockBankAccount" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_LockBankAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LockBankAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_LockBankAccount_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q2="Microsoft.Samples.DistributedServices.Core" name="detail" element="q2:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_FindBankAccounts_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindBankAccounts" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_FindBankAccounts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindBankAccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_FindBankAccounts_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q3="Microsoft.Samples.DistributedServices.Core" name="detail" element="q3:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_FindBankAccountActivities_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindBankAccountActivities" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_FindBankAccountActivities_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindBankAccountActivitiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_FindBankAccountActivities_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q4="Microsoft.Samples.DistributedServices.Core" name="detail" element="q4:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_PerformTransfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:PerformTransfer" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_PerformTransfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PerformTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankingModuleService_PerformTransfer_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q5="Microsoft.Samples.DistributedServices.Core" name="detail" element="q5:ServiceError" />
+  </wsdl:message>
+  <wsdl:portType name="IBankingModuleService">
+    <wsdl:operation name="AddNewBankAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankingModuleService/AddNewBankAccount" message="tns:IBankingModuleService_AddNewBankAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankingModuleService/AddNewBankAccountResponse" message="tns:IBankingModuleService_AddNewBankAccount_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBankingModuleService/AddNewBankAccountApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IBankingModuleService_AddNewBankAccount_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LockBankAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankingModuleService/LockBankAccount" message="tns:IBankingModuleService_LockBankAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankingModuleService/LockBankAccountResponse" message="tns:IBankingModuleService_LockBankAccount_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBankingModuleService/LockBankAccountApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IBankingModuleService_LockBankAccount_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindBankAccounts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankingModuleService/FindBankAccounts" message="tns:IBankingModuleService_FindBankAccounts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankingModuleService/FindBankAccountsResponse" message="tns:IBankingModuleService_FindBankAccounts_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBankingModuleService/FindBankAccountsApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IBankingModuleService_FindBankAccounts_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindBankAccountActivities">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankingModuleService/FindBankAccountActivities" message="tns:IBankingModuleService_FindBankAccountActivities_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankingModuleService/FindBankAccountActivitiesResponse" message="tns:IBankingModuleService_FindBankAccountActivities_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBankingModuleService/FindBankAccountActivitiesApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IBankingModuleService_FindBankAccountActivities_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PerformTransfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankingModuleService/PerformTransfer" message="tns:IBankingModuleService_PerformTransfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankingModuleService/PerformTransferResponse" message="tns:IBankingModuleService_PerformTransfer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IBankingModuleService/PerformTransferApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IBankingModuleService_PerformTransfer_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="basicSilverlight" type="tns:IBankingModuleService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddNewBankAccount">
+      <soap:operation soapAction="http://tempuri.org/IBankingModuleService/AddNewBankAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="LockBankAccount">
+      <soap:operation soapAction="http://tempuri.org/IBankingModuleService/LockBankAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindBankAccounts">
+      <soap:operation soapAction="http://tempuri.org/IBankingModuleService/FindBankAccounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindBankAccountActivities">
+      <soap:operation soapAction="http://tempuri.org/IBankingModuleService/FindBankAccountActivities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PerformTransfer">
+      <soap:operation soapAction="http://tempuri.org/IBankingModuleService/PerformTransfer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BankingModuleService">
+    <wsdl:port name="basicSilverlight" binding="tns:basicSilverlight">
+      <soap:address location="http://localhost:2626/BankingModuleService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,6 @@
+
+In case we had a Visual Composite App (like when using PRISM), here we would have the specifics visual assets 
+for this BOUNDED-CONTEXT.
+Our example, even when we support a structure for having several BOUNDED-CONTEXTS with a related MODEL per each,
+for simplicity we are not using any Visual Composite App framework. 
+Therefore, we only have a single and global Presentation Layer (Client) for all the possible BCs.

@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="error_CannotPerformTransferInvalidAccounts" xml:space="preserve">
+    <value>Cannot perform the transfer, invalid data in accounts specifications</value>
+  </data>
+  <data name="exception_InvalidCountryIdentifier" xml:space="preserve">
+    <value>The country id is empty, you cannot add a new customer without country reference</value>
+  </data>
+  <data name="exception_InvalidCustomerIdentifier" xml:space="preserve">
+    <value>The customer identifier is empty</value>
+  </data>
+  <data name="exception_InvalidPageIndexOrPageCount" xml:space="preserve">
+    <value>Invalid page index or page count data</value>
+  </data>
+  <data name="info_OrderTotalIsGreaterCustomerCredit" xml:space="preserve">
+    <value>The order total is greater customer credit, you cannot perform new order</value>
+  </data>
+  <data name="warning_CannotAddBookWithNullInformation" xml:space="preserve">
+    <value>Cannot add a new book with a null book dto</value>
+  </data>
+  <data name="warning_CannotAddCustomerWithEmptyInformation" xml:space="preserve">
+    <value>Cannot add customer. The dto is null or the country identifier is empty</value>
+  </data>
+  <data name="warning_CannotAddNotValidatedBankAccount" xml:space="preserve">
+    <value>Cannot add not validated bank account</value>
+  </data>
+  <data name="warning_CannotAddNullBankAccountOrInvalidCustomer" xml:space="preserve">
+    <value>Cannot add null bank account or bank account without customer identifier</value>
+  </data>
+  <data name="warning_CannotAddOrderWithNullInformation" xml:space="preserve">
+    <value>Cannot add a new order with a null order dto</value>
+  </data>
+  <data name="warning_CannotAddSoftwareWithNullInformation" xml:space="preserve">
+    <value>Cannot add a new software with a null order dto</value>
+  </data>
+  <data name="warning_CannotCreateBankAccountForInvalidCustomer" xml:space="preserve">
+    <value>Cannot create bank account for not existing customer</value>
+  </data>
+  <data name="warning_CannotCreateBankAccountForNonExistingCustomer" xml:space="preserve">
+    <value>Cannot create a bank account for non existing customer</value>
+  </data>
+  <data name="warning_CannotCreateOrderForNonExistingCustomer" xml:space="preserve">
+    <value>Cannot create a new order for non existing customer</value>
+  </data>
+  <data name="warning_CannotGetActivitiesForInvalidOrNotExistingBankAccount" xml:space="preserve">
+    <value>Cannot get bank account activity for invalid or not existing account</value>
+  </data>
+  <data name="warning_CannotGetOrdersFromEmptyCustomerId" xml:space="preserve">
+    <value>Cannot get orders from empty customer id</value>
+  </data>
+  <data name="warning_CannotLockBankAccountWithEmptyIdentifier" xml:space="preserve">
+    <value>Cannot lock bank account ,the identifier is empty</value>
+  </data>
+  <data name="warning_CannotLockNonExistingBankAccount" xml:space="preserve">
+    <value>Cannot lock non existing bank account, the unknown key is {0}</value>
+  </data>
+  <data name="warning_CannotRemoveCustomerWithEmptyId" xml:space="preserve">
+    <value>Cannot remove customer with empty id</value>
+  </data>
+  <data name="warning_CannotRemoveNonExistingCustomer" xml:space="preserve">
+    <value>Cannot remove a non existing customer</value>
+  </data>
+  <data name="warning_CannotUpdateCustomerWithEmptyInformation" xml:space="preserve">
+    <value>Cannot add customer. The dto is null or the identifier is empty</value>
+  </data>
+  <data name="warning_CannotUpdateNonExistingCustomer" xml:space="preserve">
+    <value>Cannot update a non existing customer</value>
+  </data>
+  <data name="warning_InvalidArgumentForFindCustomer" xml:space="preserve">
+    <value>Invalid argument for FindCustomer, the customerid cannot be empty</value>
+  </data>
+  <data name="warning_InvalidArgumentForFindOrders" xml:space="preserve">
+    <value>Invalid arguments when call to CustomerManagementService FindOrders</value>
+  </data>
+  <data name="warning_InvalidArgumentForFindProducts" xml:space="preserve">
+    <value>Invalid arguments when call to CustomerManagementService FindProducts</value>
+  </data>
+  <data name="warning_InvalidArgumentsForFindCountries" xml:space="preserve">
+    <value>Invalid arguments when call to CustomerManagementService FindCountries</value>
+  </data>
+  <data name="warning_InvalidArgumentsForFindCustomers" xml:space="preserve">
+    <value>Invalid arguments when call to CustomerManagementService FindCustomers</value>
+  </data>
+</root>

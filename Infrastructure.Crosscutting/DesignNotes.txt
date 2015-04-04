@@ -1,0 +1,30 @@
+﻿ADAPTERS (DTO-Adapters)
+-----------------------
+Because of that, we want to explain the features it addresses so you can take into account why its design is done following this specific way.
+1.- We wanted that the 'Mappings definition' from one type to other could be an independend element, a class easy to find 
+and use, with no direct dependency to any framework (like emitmapper or automapper). That feature was address by TypeMapConfigurationBase, 
+because deriving from it and implementing the BeforeMap, Map y AfterMap methods we'll be able to define tha mapping for each types pair.
+For quick mappings, like what it is done within Testing methods, we have TypeMapConfiguration which using delegates allows to stablish mappings in an easy way.
+2.- We wanted to favor working for different MODULES (usually one BOUNDED-CONTEXT can have several MODULES). 
+Like Eric.E states, MODULES' main purpose is 'code partition' and better organization, most of all.
+Therefore, each MODULE can have its mappings assembly in a independent manner from the rest of MODULES.
+In order to do so, RegisterTypeMap allows, in a simple way, to define a MODULE's mappings. 
+Every instance of that class will be injected automatically like a Service Collection, within TypeAdapter.
+
+
+(Spanish)
+Cuando se decidió incluir la parte de adaptadores se pensó en aquellos elementos que tendria que cubrir así 
+como las diferentes características que estos tendrían que dar a los desarrolladores.
+Después de vista, la implementación, a primera vista uno podría pensar en si el problema se ha "sobre ingenierado",
+puesto que para una cosa tan sencilla como la adaptación no debería ser necesario "tanto trabajo". Quizás, explicando en 
+detalle cada una de las características buscadas y los elementos implementados esta sensación desaparezca.  
+En primer lugar, se buscaba que la definición de los mapeos de unos tipos a otros pudiera ser un elemento independiente, una clase en si misma fácil de localizar
+y no dependiente de ningún framework (como emitmapper,automapper etc.. ). Este trabajo, se consigue mediente TypeMapConfigurationBase, puesto que 
+heredando de este elemento podremos, mediante la implementación de los métodos BeforeMap, Map y AfterMap, definir el mapeo para cada par de tipos.
+Para aquellos mapeos rápidos ( como por ejemplo los realizados en las pruebas de estos elementos ) se dispone de TypeMapConfiguration, el cual nos permite 
+utilizando delegados establecer los mapeos de una forma muy sencilla.
+
+El segundo objetivo que se buscaba en esta sección dedicada a mapeos consistía en favorecer la separación del trabajo en módulos ( algo demandado
+en los foros de discusión para soluciones de gran tamaño con n módulos funcionales), de tal forma, que cada módulo pudiera tener su ensamblado de mapeos
+de forma independiente al resto de módulos. Para ello RegisterTypeMap nos permite, de una manera sencilla, definir los mapeos de un módulo. 
+Las diferentes instancias de esta clase, se inyectan automáticamente como una coleccion de servicios dentro de TypeAdapter.

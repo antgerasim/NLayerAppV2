@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c36df932-426c-4af1-bcc1-cd4bc1678f41" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2626/ERPModuleService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ERPModuleService.xsd" MetadataType="Schema" ID="2bac9cf4-1fac-40e8-ab36-54f89afd43bd" SourceId="1" SourceUrl="http://localhost:2626/ERPModuleService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ERPModuleService.wsdl" MetadataType="Wsdl" ID="e8576a2e-0e73-4f53-b714-1ddf9a323962" SourceId="1" SourceUrl="http://localhost:2626/ERPModuleService.svc?wsdl" />
+    <MetadataFile FileName="ERPModuleService1.xsd" MetadataType="Schema" ID="1b548863-e273-4966-9833-dd8d50f34182" SourceId="1" SourceUrl="http://localhost:2626/ERPModuleService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ERPModuleService.disco" MetadataType="Disco" ID="41938735-0cdc-4cd8-adb8-9087e35b8479" SourceId="1" SourceUrl="http://localhost:2626/ERPModuleService.svc?disco" />
+    <MetadataFile FileName="ERPModuleService2.xsd" MetadataType="Schema" ID="985b13d4-707b-40ae-a07d-6ba82b79d550" SourceId="1" SourceUrl="http://localhost:2626/ERPModuleService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ERPModuleService3.xsd" MetadataType="Schema" ID="e86e41dd-0eb4-4a54-adf1-9105b61e2d76" SourceId="1" SourceUrl="http://localhost:2626/ERPModuleService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

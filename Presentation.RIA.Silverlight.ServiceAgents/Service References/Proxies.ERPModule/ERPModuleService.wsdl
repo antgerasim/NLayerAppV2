@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ERPModuleService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:2626/ERPModuleService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:2626/ERPModuleService.svc?xsd=xsd3" namespace="Microsoft.Samples.DistributedServices.Core" />
+      <xsd:import schemaLocation="http://localhost:2626/ERPModuleService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:2626/ERPModuleService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IERPModuleService_AddNewCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_AddNewCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_AddNewCustomer_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q1="Microsoft.Samples.DistributedServices.Core" name="detail" element="q1:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_UpdateCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_UpdateCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_UpdateCustomer_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q2="Microsoft.Samples.DistributedServices.Core" name="detail" element="q2:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_RemoveCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_RemoveCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_RemoveCustomer_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q3="Microsoft.Samples.DistributedServices.Core" name="detail" element="q3:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCustomersInPage_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindCustomersInPage" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCustomersInPage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindCustomersInPageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCustomersInPage_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q4="Microsoft.Samples.DistributedServices.Core" name="detail" element="q4:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCustomer_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q5="Microsoft.Samples.DistributedServices.Core" name="detail" element="q5:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCustomersByFilter_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindCustomersByFilter" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCustomersByFilter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindCustomersByFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCustomersByFilter_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q6="Microsoft.Samples.DistributedServices.Core" name="detail" element="q6:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCountriesInPage_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindCountriesInPage" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCountriesInPage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindCountriesInPageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCountriesInPage_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q7="Microsoft.Samples.DistributedServices.Core" name="detail" element="q7:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCountriesByFilter_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindCountriesByFilter" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCountriesByFilter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindCountriesByFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindCountriesByFilter_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q8="Microsoft.Samples.DistributedServices.Core" name="detail" element="q8:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindOrdersInPage_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrdersInPage" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindOrdersInPage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrdersInPageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindOrdersInPage_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q9="Microsoft.Samples.DistributedServices.Core" name="detail" element="q9:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindOrdersByFilter_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrdersByFilter" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindOrdersByFilter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrdersByFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindOrdersByFilter_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q10="Microsoft.Samples.DistributedServices.Core" name="detail" element="q10:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindOrdersByCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrdersByCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindOrdersByCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrdersByCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindOrdersByCustomer_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q11="Microsoft.Samples.DistributedServices.Core" name="detail" element="q11:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindProductsInPage_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindProductsInPage" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindProductsInPage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindProductsInPageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindProductsInPage_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q12="Microsoft.Samples.DistributedServices.Core" name="detail" element="q12:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindProductsByFilter_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindProductsByFilter" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindProductsByFilter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindProductsByFilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_FindProductsByFilter_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q13="Microsoft.Samples.DistributedServices.Core" name="detail" element="q13:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_AddNewOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewOrder" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_AddNewOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_AddNewOrder_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q14="Microsoft.Samples.DistributedServices.Core" name="detail" element="q14:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_AddNewSoftware_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewSoftware" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_AddNewSoftware_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewSoftwareResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_AddNewSoftware_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q15="Microsoft.Samples.DistributedServices.Core" name="detail" element="q15:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_AddNewBook_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewBook" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_AddNewBook_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="IERPModuleService_AddNewBook_ApplicationServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q16="Microsoft.Samples.DistributedServices.Core" name="detail" element="q16:ServiceError" />
+  </wsdl:message>
+  <wsdl:portType name="IERPModuleService">
+    <wsdl:operation name="AddNewCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/AddNewCustomer" message="tns:IERPModuleService_AddNewCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/AddNewCustomerResponse" message="tns:IERPModuleService_AddNewCustomer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/AddNewCustomerApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_AddNewCustomer_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/UpdateCustomer" message="tns:IERPModuleService_UpdateCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/UpdateCustomerResponse" message="tns:IERPModuleService_UpdateCustomer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/UpdateCustomerApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_UpdateCustomer_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/RemoveCustomer" message="tns:IERPModuleService_RemoveCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/RemoveCustomerResponse" message="tns:IERPModuleService_RemoveCustomer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/RemoveCustomerApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_RemoveCustomer_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindCustomersInPage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/FindCustomersInPage" message="tns:IERPModuleService_FindCustomersInPage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/FindCustomersInPageResponse" message="tns:IERPModuleService_FindCustomersInPage_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/FindCustomersInPageApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_FindCustomersInPage_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/FindCustomer" message="tns:IERPModuleService_FindCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/FindCustomerResponse" message="tns:IERPModuleService_FindCustomer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/FindCustomerApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_FindCustomer_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindCustomersByFilter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/FindCustomersByFilter" message="tns:IERPModuleService_FindCustomersByFilter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/FindCustomersByFilterResponse" message="tns:IERPModuleService_FindCustomersByFilter_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/FindCustomersByFilterApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_FindCustomersByFilter_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindCountriesInPage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/FindCountriesInPage" message="tns:IERPModuleService_FindCountriesInPage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/FindCountriesInPageResponse" message="tns:IERPModuleService_FindCountriesInPage_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/FindCountriesInPageApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_FindCountriesInPage_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindCountriesByFilter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/FindCountriesByFilter" message="tns:IERPModuleService_FindCountriesByFilter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/FindCountriesByFilterResponse" message="tns:IERPModuleService_FindCountriesByFilter_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/FindCountriesByFilterApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_FindCountriesByFilter_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindOrdersInPage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/FindOrdersInPage" message="tns:IERPModuleService_FindOrdersInPage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/FindOrdersInPageResponse" message="tns:IERPModuleService_FindOrdersInPage_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/FindOrdersInPageApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_FindOrdersInPage_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindOrdersByFilter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/FindOrdersByFilter" message="tns:IERPModuleService_FindOrdersByFilter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/FindOrdersByFilterResponse" message="tns:IERPModuleService_FindOrdersByFilter_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/FindOrdersByFilterApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_FindOrdersByFilter_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindOrdersByCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/FindOrdersByCustomer" message="tns:IERPModuleService_FindOrdersByCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/FindOrdersByCustomerResponse" message="tns:IERPModuleService_FindOrdersByCustomer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/FindOrdersByCustomerApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_FindOrdersByCustomer_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindProductsInPage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/FindProductsInPage" message="tns:IERPModuleService_FindProductsInPage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/FindProductsInPageResponse" message="tns:IERPModuleService_FindProductsInPage_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/FindProductsInPageApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_FindProductsInPage_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindProductsByFilter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/FindProductsByFilter" message="tns:IERPModuleService_FindProductsByFilter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/FindProductsByFilterResponse" message="tns:IERPModuleService_FindProductsByFilter_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/FindProductsByFilterApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_FindProductsByFilter_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/AddNewOrder" message="tns:IERPModuleService_AddNewOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/AddNewOrderResponse" message="tns:IERPModuleService_AddNewOrder_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/AddNewOrderApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_AddNewOrder_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewSoftware">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/AddNewSoftware" message="tns:IERPModuleService_AddNewSoftware_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/AddNewSoftwareResponse" message="tns:IERPModuleService_AddNewSoftware_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/AddNewSoftwareApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_AddNewSoftware_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewBook">
+      <wsdl:input wsaw:Action="http://tempuri.org/IERPModuleService/AddNewBook" message="tns:IERPModuleService_AddNewBook_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IERPModuleService/AddNewBookResponse" message="tns:IERPModuleService_AddNewBook_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IERPModuleService/AddNewBookApplicationServiceErrorFault" name="ApplicationServiceErrorFault" message="tns:IERPModuleService_AddNewBook_ApplicationServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="basicSilverlight" type="tns:IERPModuleService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddNewCustomer">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/AddNewCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomer">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/UpdateCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCustomer">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/RemoveCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindCustomersInPage">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/FindCustomersInPage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindCustomer">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/FindCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindCustomersByFilter">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/FindCustomersByFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindCountriesInPage">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/FindCountriesInPage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindCountriesByFilter">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/FindCountriesByFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrdersInPage">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/FindOrdersInPage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrdersByFilter">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/FindOrdersByFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrdersByCustomer">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/FindOrdersByCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindProductsInPage">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/FindProductsInPage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindProductsByFilter">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/FindProductsByFilter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewOrder">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/AddNewOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewSoftware">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/AddNewSoftware" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewBook">
+      <soap:operation soapAction="http://tempuri.org/IERPModuleService/AddNewBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationServiceErrorFault">
+        <soap:fault use="literal" name="ApplicationServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ERPModuleService">
+    <wsdl:port name="basicSilverlight" binding="tns:basicSilverlight">
+      <soap:address location="http://localhost:2626/ERPModuleService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

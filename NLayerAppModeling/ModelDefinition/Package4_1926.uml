@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="23d94af0-b08b-4eb4-9c70-9a1956ed4a82"
+  name="CrossCutting"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="9f9e59c2-e9c8-40f9-af0d-36a039c112f9"
+      handle="viewcode://./CodeSchema_Namespace?Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="99ba5697-94dd-4b04-af17-c24ef7b03321"
+        LastKnownName="Adapters"
+        LastKnownLocation="Package5_1926.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="03858bf5-ee63-4cb6-bf6f-438f6bbac5a1"
+        LastKnownName="IoC"
+        LastKnownLocation="Package_1304.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="e665bb66-fe73-4246-9eba-de5b50254ee2"
+        name="CrosscuttingConfigurationSection"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="88dadfb4-3ed9-4f72-b601-64f6e866210d"
+            handle="viewcode://./CodeSchema_Class?Assembly=file:///C:/tfs.local/src/dev/NLayerApp/Infrastructure.Crosscutting/bin/Debug/NLayerApp.Infrastructure.CrossCutting.dll Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting Type=CrosscuttingConfigurationSection"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="99bc054e-60b1-4694-9616-8bc747574d04"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="dc2c9fc1-efac-4f06-8ece-535f23e2fb10">
+                <propertyInstance
+                  Id="e8244ae5-774a-475a-a6b3-deb6060ea972"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="941cf605-3502-44f8-810f-5699b6b1fede">
+                <propertyInstance
+                  Id="dfeecafc-fb9c-4f1c-a493-26858f61bd08"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4e5a46ed-b1b5-4d90-aed9-c0edd54371ad">
+                <propertyInstance
+                  Id="41a03e06-3045-4c78-ae1a-81cdd19cf30e"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="799df42d-b5ab-4ad3-86b4-d105ff3325ee">
+                <propertyInstance
+                  Id="de05c043-9880-4a56-a369-95860fab79cf"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="807accf9-3b42-4d3b-b863-e649e18f5c45">
+                <propertyInstance
+                  Id="3d34af32-5441-4a80-aa1f-95003a2a368a"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

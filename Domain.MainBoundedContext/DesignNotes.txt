@@ -1,0 +1,86 @@
+﻿
+ABOUT SPECIFICATION PATTERN
+---------------------------
+The Specification pattern (originally defined by Eric Evans and Martin Fowler) is a good way to encapsulate query criteria and to do composition operations. 
+Definition of the pattern: http://en.wikipedia.org/wiki/Specification_pattern
+M.F and E.E. paper: http://www.martinfowler.com/apsupp/spec.pdf
+Although the original pattern worked just with in-memory-objects, we changed the implementation to be based on Lambda-Expressions against EF,
+so the performance can be much better.
+Composing several expressions with AND, OR, NOT, (composition operations) cannot be done with simple expressions without implementing some ‘plumbing’.
+Second reason is that Specifications allows defining a query criterion and simply referencing it. If you would want to do the same you’d need to make a class returning an expression, therefore it would be similar but with no composition, denial, etc. 
+Ok, you can do something like: 
+Expression<Func<T,bool>> expression = t.property==true; 
+Which is really what we can be returning, but our specification implementation allows composition and criteria encapsulation instead of spreading it directly on lambda expressions.
+Finally, the use of the composite specification pattern is not mandatory in this Architecture, for instance, instead of using a AllMatching() for specifications you can always use the filter method providing a lambda expression directly.
+
+More examples about SPECIFICATION PATTERN and LINQ:
+http://linqspecs.codeplex.com/   (by jfromaniello)
+
+
+ABOUT MODULES & BOUNDED-CONTEXTS (BC)
+-------------------------------------
+The relationship between a BC and a MODEL is usually 1:1. But we could share the same database between several
+different BC with a different view of the database for each (a diferent MODEL). Or the DB could also be different for each BC.
+Then, we can have several MODULES per BOUNDEX-CONTEXT. MODULES organize elements within one MODEL, providing
+different namespaces and some demarcation and organization. 
+MODULES are like chapters (modules) in a book (BC-MODEL).
+[For more info, see references from Eric Evans, Udi Dahan, etc. regarding BC]
+ 
+IMPORTANT!!: Each MODEL depends on your specific DOMAIN. In our case, our fictitious DOMAIN is very simple 
+because it is a sample-app, not a real app. Therefore, for our DOMAIN, we chose that we initially have
+a single MainBoundedContext and two Modules (BankingModule and ERPModule) which share the same MODEL.
+But of course, different DOMAINS have different MODELS and MODULES. In a large business app, probably
+the ERP system would be a BOUNDED-CONTEXT and the Banking system would be another BOUNDED-CONTEXT, as both
+concepts are really different in reality.
+But in our fictitious DOMAIN, this is how we chose it to be, for simplicity. Our goal is only to show DDD patterns implementation using .NET,
+not to teach how to apply DDD (Ubiquitous Language, DDD practices, etc.). There are excelent theorical books for that, like Eric Evans and many others.
+Your BC, MODEL & MODULES will depend on your specific DOMAINS and you'll have to determine that 
+while talking with your DOMAIN experts and business users.
+ 
+Also, we called our BC as 'MainBoundedContext' because it is an example and we want explicitely to show what
+is our Bounded-Context related to the MODEL. Usually, in a real project, you will simply name it with a meaningful name for your system, 
+from your ubiquitous language.
+
+BOUNDED-CONTEXTS COMPOSITION
+There are a few patterns in order to compose several BC. We are not covering this subject within this .NET example, as we have a single BC and MODEL. 
+In order to know more about this, search information about the following patterns:
+- Shared Kernel
+- Customer Supplier
+- Conformist
+- Anticorruption Layer
+- Separate Ways
+- Open-Host Service 
+
+ABOUT ENTITIES AND AGGREGATES
+-----------------------------
+We would have liked to create a Domain Model 'even more precise', but in this first version of Code-First we still don't have some features we would like:
+- Mapping private members (With no workaround playing with expression trees)
+- Hiding our navigations in a better way.
+ 
+In any case, we gave to our Domain Model a good 'object oriented sense', like it should be following DDD patterns (No Anemic-domain-model, etc.).
+ 
+ABOUT AGGREGATE FACTORIES
+-------------------------
+This pattern is explained by Eric Evans in his book, and also is quite common in many DDD architectures.
+Jimmy Nilson also makes a heavy use of this pattern in his DDD book.
+Most DDD experts agree about that it is not mandatory to have a Factory for each Aggregate, 
+but we only should used create and use Aggregate-Factories for those aggregates where its construction is complex. 
+
+
+=====================================================================================================
+(Spanish)
+
+SOBRE LAS ENTIDADES Y AGREGADOS
+-------------------------------
+Aquí, nos hubiera gustado realmente hacer un modelo de dominio "mas preciso", pero, en esta primera version de EF 4.1 y Code First no tenemos 
+algunas features que hubiésemos querido. Desde el mapeo de miembros privados ( sin hacer el workaround de jugar con árboles de expresion ya que 
+tiene otras consecuencias) hasta la posiblidad de esconder nuestras navegaciones de una forma más adecuada. No obstante, se ha intentado dotar 
+al dominio de ese "sentido de la orientación a objetos" que realmente debe de tener.
+
+SOBRE LAS FACTORIAS DE AGREGADOS
+---------------------------------
+En un patrón mostrado por Eric Evans en su ya más que mencionado libro, y también aparece en literatura técnica 
+como por ejemplo el libro de Jimmy Nilson acerca de DDD. Hay algunas notas importantes 
+acerca de como conseguir buenas factorias, generalmente estas notas hablan acerca de la opcionalidad de las mismas, 
+no teniendo porque construirlas si en realida el objeto no es "dificil" de construir, 
+así como la ausencia de factorias para las entidades pertenecientes a un aggregate root.

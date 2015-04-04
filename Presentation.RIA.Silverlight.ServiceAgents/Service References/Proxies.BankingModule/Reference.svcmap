@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c42b7bf8-a23f-44f4-8ab9-a4658c4d4864" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2626/BankingModuleService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BankingModuleService.xsd" MetadataType="Schema" ID="7394f66c-9411-4093-bff3-0ef691a701c7" SourceId="1" SourceUrl="http://localhost:2626/BankingModuleService.svc?xsd=xsd0" />
+    <MetadataFile FileName="BankingModuleService.disco" MetadataType="Disco" ID="0fadc1f2-5a87-4fa4-adfc-3af88aac77d1" SourceId="1" SourceUrl="http://localhost:2626/BankingModuleService.svc?disco" />
+    <MetadataFile FileName="BankingModuleService1.xsd" MetadataType="Schema" ID="8ba62ef3-7fa2-414d-905e-8ed68b6226ec" SourceId="1" SourceUrl="http://localhost:2626/BankingModuleService.svc?xsd=xsd1" />
+    <MetadataFile FileName="BankingModuleService2.xsd" MetadataType="Schema" ID="1e063eb7-6bf6-41bd-b4e5-4de2e9cf1edc" SourceId="1" SourceUrl="http://localhost:2626/BankingModuleService.svc?xsd=xsd2" />
+    <MetadataFile FileName="BankingModuleService3.xsd" MetadataType="Schema" ID="78dbff39-7347-49ae-9337-6fae58e90add" SourceId="1" SourceUrl="http://localhost:2626/BankingModuleService.svc?xsd=xsd3" />
+    <MetadataFile FileName="BankingModuleService.wsdl" MetadataType="Wsdl" ID="0a6bc0d5-afac-46e1-98fd-c12d9b11c09f" SourceId="1" SourceUrl="http://localhost:2626/BankingModuleService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

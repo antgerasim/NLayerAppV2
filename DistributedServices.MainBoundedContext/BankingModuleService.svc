@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Microsoft.Samples.NLayerApp.DistributedServices.MainBoundedContext.BankingModuleService" CodeBehind="BankingModuleService.svc.cs" %>

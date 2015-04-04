@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:2626/BankingModuleService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="BankAccountDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Balance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BankAccountNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerFirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerId" type="ser:guid" />
+      <xs:element minOccurs="0" name="CustomerLastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Locked" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BankAccountDTO" nillable="true" type="tns:BankAccountDTO" />
+  <xs:complexType name="ArrayOfBankAccountDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BankAccountDTO" nillable="true" type="tns:BankAccountDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBankAccountDTO" nillable="true" type="tns:ArrayOfBankAccountDTO" />
+  <xs:complexType name="ArrayOfBankActivityDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BankActivityDTO" nillable="true" type="tns:BankActivityDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBankActivityDTO" nillable="true" type="tns:ArrayOfBankActivityDTO" />
+  <xs:complexType name="BankActivityDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActivityDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BankActivityDTO" nillable="true" type="tns:BankActivityDTO" />
+</xs:schema>

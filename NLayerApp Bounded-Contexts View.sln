@@ -1,0 +1,306 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-Modeling and Design", "0-Modeling and Design", "{0E35F26B-95B8-4D95-808D-28C13B015A4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-BoundedContext A", "3-BoundedContext A", "{95501A1D-3360-4612-A32E-1D0D757B079E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-BoundedContext B", "4-BoundedContext B", "{8B3ADEBF-14D2-4ED6-91A4-F30FD3EFE443}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.1-Presentation", "2.1-Presentation", "{B97F79DB-D83B-4A27-ADF3-A55EDA299132}"
+	ProjectSection(SolutionItems) = preProject
+		Specific Visual Composite App Assets.txt = Specific Visual Composite App Assets.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.2-Distributed Services", "2.2-Distributed Services", "{B3DBA8EF-79E3-4020-8F6A-538F26756C98}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.3-Application", "2.3-Application", "{909F9798-DD03-4606-B59D-0F1350F9C815}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.4-Domain", "2.4-Domain", "{AF8D9A0B-4D1E-4992-9AFA-93A7C8BD347A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.5-Infrastructure", "2.5-Infrastructure", "{85516F25-AAE2-4581-AB23-CEE66B7C4FE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.5.1-Data", "2.5.1-Data", "{BB095221-6A30-4842-93E8-B7786BEA083F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.5.3-CrossCutting", "2.5.3-CrossCutting", "{52711E8B-1E70-4085-8995-CF471DCD9AFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Crosscutting", "Infrastructure.Crosscutting\Infrastructure.Crosscutting.csproj", "{106C7F00-C03F-4E29-87AF-ACD1BA292078}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EBDD4495-4AF9-47EA-9071-47438246A48B}"
+	ProjectSection(SolutionItems) = preProject
+		CodeDictionary.xml = CodeDictionary.xml
+		Local.testsettings = Local.testsettings
+		NLayerApp.vsmdi = NLayerApp.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Crosscutting.Tests", "Infrastructure.Crosscutting.Tests\Infrastructure.Crosscutting.Tests.csproj", "{7F302C0B-7C20-4CED-8E9A-C35E28C81889}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Crosscutting.NetFramework", "Infrastructure.Crosscutting.NetFramework\Infrastructure.Crosscutting.NetFramework.csproj", "{81CAB7AA-5235-42DB-82E6-2B4A0A1F9987}"
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "NLayerAppModeling", "NLayerAppModeling\NLayerAppModeling.modelproj", "{758BE55B-ECFB-48A5-A97F-4A057088D6F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data.MainBoundedContext", "Infrastructure.Data.MainBoundedContext\Infrastructure.Data.MainBoundedContext.csproj", "{35E13CFB-E992-475D-8E53-EA09A539AB43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.MainBoundedContext", "Application.MainBoundedContext\Application.MainBoundedContext.csproj", "{75E4283A-61D1-4067-9F51-25EFB55113A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.MainBoundedContext.Tests", "Application.MainBoundedContext.Tests\Application.MainBoundedContext.Tests.csproj", "{85497CC6-AA5A-47AB-AF72-34EABC10EB72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.MainBoundedContext", "Domain.MainBoundedContext\Domain.MainBoundedContext.csproj", "{F7F15F85-A171-4EDC-B507-03A8D80915A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.MainBoundedContext.Tests", "Domain.MainBoundedContext.Tests\Domain.MainBoundedContext.Tests.csproj", "{22AAFBA0-1493-4A12-B085-399FCA959C43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data.MainBoundedContext.Tests", "Infrastructure.Data.MainBoundedContext.Tests\Infrastructure.Data.MainBoundedContext.Tests.csproj", "{28E6495D-BC08-4A62-8A82-7E67194D712D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Layers Seedwork", "1-Layers Seedwork", "{6ED3B893-E8B0-4D74-B80A-572A8C2527C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.1-Presentation", "1.1-Presentation", "{7463EEBE-67F1-4DCC-BDAB-5AC13A7C588B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.2-Distributed Services", "1.2-Distributed Services", "{E659F38E-5AF5-4401-ABB0-D11AB3282BE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.3-Application", "1.3-Application", "{6060E1CF-E1BB-4484-8B6F-C4FBF54F5A38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.4-Domain", "1.4-Domain", "{6CB81B7E-9747-41D6-B993-854E5EEAF30F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.5 Infrastructure", "1.5 Infrastructure", "{CE064C82-20BC-4859-AA26-870067F52896}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.5.1-Data", "1.5.1-Data", "{3F1145CD-6095-4D7B-B14C-849E35AC52BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.5.2-CrossCutting", "1.5.2-CrossCutting", "{2636A201-AD7E-4F56-A264-320336184AEF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Global Presentation Layer", "2-Global Presentation Layer", "{66ACB1C0-8F4A-4ACA-83BB-8EEF99D57A92}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RIA", "RIA", "{A13E2EEA-706E-44F9-9F00-EFDF590E189F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Silverlight", "Silverlight", "{6D934B12-B884-422B-BEAA-AE942F7AF635}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight.ServiceAgents", "Presentation.RIA.Silverlight.ServiceAgents\Silverlight.ServiceAgents.csproj", "{E4014D48-55A6-4019-9463-9AF3D4E0AF8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight.Client", "Presentation.RIA.Silverlight.Client\Silverlight.Client.csproj", "{1832D5D5-E2C8-4767-B3E8-CA96F98F4346}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverlight.Client.Web", "Presentation.RIA.Silverlight.Client.Web\Silverlight.Client.Web.csproj", "{34EC53BB-E021-46E1-A569-705A977B98FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedServices.MainBoundedContext", "DistributedServices.MainBoundedContext\DistributedServices.MainBoundedContext.csproj", "{7199A95A-D458-447A-84D4-A5B161ADFE57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedServices.Seedwork", "DistributedServices.Seedwork\DistributedServices.Seedwork.csproj", "{32241C1D-E0D2-41D0-907A-0631943B360C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Seedwork", "Application.Seedwork\Application.Seedwork.csproj", "{7F17BC81-B7D1-46D8-A94B-FDBAE17F94B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Seedwork", "Domain.Seedwork\Domain.Seedwork.csproj", "{04D675A3-B794-44BD-A25C-673BB44739CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Seedwork.Tests", "Domain.Seedwork.Tests\Domain.Seedwork.Tests.csproj", "{5183434D-BBD0-47FE-9ECE-A58C4AF5E914}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data.Seedwork", "Infrastructure.Data.Seedwork\Infrastructure.Data.Seedwork.csproj", "{09AAF2C8-47DC-4F12-A3A0-130DCDB1495B}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 20
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs10
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Infrastructure.Crosscutting.NetFramework\\Infrastructure.Crosscutting.NetFramework.csproj
+		SccProjectTopLevelParentUniqueName1 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName1 = Infrastructure.Crosscutting.NetFramework
+		SccLocalPath1 = Infrastructure.Crosscutting.NetFramework
+		SccProjectUniqueName2 = Infrastructure.Crosscutting\\Infrastructure.Crosscutting.csproj
+		SccProjectTopLevelParentUniqueName2 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName2 = Infrastructure.Crosscutting
+		SccLocalPath2 = Infrastructure.Crosscutting
+		SccProjectUniqueName3 = Infrastructure.Data.MainBoundedContext\\Infrastructure.Data.MainBoundedContext.csproj
+		SccProjectTopLevelParentUniqueName3 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName3 = Infrastructure.Data.MainBoundedContext
+		SccLocalPath3 = Infrastructure.Data.MainBoundedContext
+		SccProjectUniqueName4 = Application.MainBoundedContext\\Application.MainBoundedContext.csproj
+		SccProjectTopLevelParentUniqueName4 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName4 = Application.MainBoundedContext
+		SccLocalPath4 = Application.MainBoundedContext
+		SccProjectUniqueName5 = Application.MainBoundedContext.Tests\\Application.MainBoundedContext.Tests.csproj
+		SccProjectTopLevelParentUniqueName5 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName5 = Application.MainBoundedContext.Tests
+		SccLocalPath5 = Application.MainBoundedContext.Tests
+		SccProjectUniqueName6 = Domain.MainBoundedContext\\Domain.MainBoundedContext.csproj
+		SccProjectTopLevelParentUniqueName6 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName6 = Domain.MainBoundedContext
+		SccLocalPath6 = Domain.MainBoundedContext
+		SccProjectUniqueName7 = Domain.MainBoundedContext.Tests\\Domain.MainBoundedContext.Tests.csproj
+		SccProjectTopLevelParentUniqueName7 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName7 = Domain.MainBoundedContext.Tests
+		SccLocalPath7 = Domain.MainBoundedContext.Tests
+		SccProjectUniqueName8 = Infrastructure.Crosscutting.Tests\\Infrastructure.Crosscutting.Tests.csproj
+		SccProjectTopLevelParentUniqueName8 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName8 = Infrastructure.Crosscutting.Tests
+		SccLocalPath8 = Infrastructure.Crosscutting.Tests
+		SccProjectUniqueName9 = NLayerAppModeling\\NLayerAppModeling.modelproj
+		SccProjectTopLevelParentUniqueName9 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName9 = NLayerAppModeling
+		SccLocalPath9 = NLayerAppModeling
+		SccProjectUniqueName10 = Infrastructure.Data.MainBoundedContext.Tests\\Infrastructure.Data.MainBoundedContext.Tests.csproj
+		SccProjectTopLevelParentUniqueName10 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName10 = Infrastructure.Data.MainBoundedContext.Tests
+		SccLocalPath10 = Infrastructure.Data.MainBoundedContext.Tests
+		SccProjectUniqueName11 = Presentation.RIA.Silverlight.ServiceAgents\\Silverlight.ServiceAgents.csproj
+		SccProjectTopLevelParentUniqueName11 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName11 = Presentation.RIA.Silverlight.ServiceAgents
+		SccLocalPath11 = Presentation.RIA.Silverlight.ServiceAgents
+		SccProjectUniqueName12 = Presentation.RIA.Silverlight.Client\\Silverlight.Client.csproj
+		SccProjectTopLevelParentUniqueName12 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName12 = Presentation.RIA.Silverlight.Client
+		SccLocalPath12 = Presentation.RIA.Silverlight.Client
+		SccProjectUniqueName13 = Presentation.RIA.Silverlight.Client.Web\\Silverlight.Client.Web.csproj
+		SccProjectTopLevelParentUniqueName13 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName13 = Presentation.RIA.Silverlight.Client.Web
+		SccLocalPath13 = Presentation.RIA.Silverlight.Client.Web
+		SccProjectUniqueName14 = DistributedServices.MainBoundedContext\\DistributedServices.MainBoundedContext.csproj
+		SccProjectTopLevelParentUniqueName14 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName14 = DistributedServices.MainBoundedContext
+		SccLocalPath14 = DistributedServices.MainBoundedContext
+		SccProjectUniqueName15 = DistributedServices.Seedwork\\DistributedServices.Seedwork.csproj
+		SccProjectTopLevelParentUniqueName15 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName15 = DistributedServices.Seedwork
+		SccLocalPath15 = DistributedServices.Seedwork
+		SccProjectUniqueName16 = Application.Seedwork\\Application.Seedwork.csproj
+		SccProjectTopLevelParentUniqueName16 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName16 = Application.Seedwork
+		SccLocalPath16 = Application.Seedwork
+		SccProjectUniqueName17 = Domain.Seedwork\\Domain.Seedwork.csproj
+		SccProjectTopLevelParentUniqueName17 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName17 = Domain.Seedwork
+		SccLocalPath17 = Domain.Seedwork
+		SccProjectUniqueName18 = Domain.Seedwork.Tests\\Domain.Seedwork.Tests.csproj
+		SccProjectTopLevelParentUniqueName18 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName18 = Domain.Seedwork.Tests
+		SccLocalPath18 = Domain.Seedwork.Tests
+		SccProjectUniqueName19 = Infrastructure.Data.Seedwork\\Infrastructure.Data.Seedwork.csproj
+		SccProjectTopLevelParentUniqueName19 = NLayerApp\u0020Bounded-Contexts\u0020View.sln
+		SccProjectName19 = Infrastructure.Data.Seedwork
+		SccLocalPath19 = Infrastructure.Data.Seedwork
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = NLayerApp.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{106C7F00-C03F-4E29-87AF-ACD1BA292078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{106C7F00-C03F-4E29-87AF-ACD1BA292078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{106C7F00-C03F-4E29-87AF-ACD1BA292078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{106C7F00-C03F-4E29-87AF-ACD1BA292078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F302C0B-7C20-4CED-8E9A-C35E28C81889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F302C0B-7C20-4CED-8E9A-C35E28C81889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F302C0B-7C20-4CED-8E9A-C35E28C81889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F302C0B-7C20-4CED-8E9A-C35E28C81889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81CAB7AA-5235-42DB-82E6-2B4A0A1F9987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81CAB7AA-5235-42DB-82E6-2B4A0A1F9987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81CAB7AA-5235-42DB-82E6-2B4A0A1F9987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81CAB7AA-5235-42DB-82E6-2B4A0A1F9987}.Release|Any CPU.Build.0 = Release|Any CPU
+		{758BE55B-ECFB-48A5-A97F-4A057088D6F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{758BE55B-ECFB-48A5-A97F-4A057088D6F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{758BE55B-ECFB-48A5-A97F-4A057088D6F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{758BE55B-ECFB-48A5-A97F-4A057088D6F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35E13CFB-E992-475D-8E53-EA09A539AB43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35E13CFB-E992-475D-8E53-EA09A539AB43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35E13CFB-E992-475D-8E53-EA09A539AB43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35E13CFB-E992-475D-8E53-EA09A539AB43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75E4283A-61D1-4067-9F51-25EFB55113A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75E4283A-61D1-4067-9F51-25EFB55113A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75E4283A-61D1-4067-9F51-25EFB55113A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75E4283A-61D1-4067-9F51-25EFB55113A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85497CC6-AA5A-47AB-AF72-34EABC10EB72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85497CC6-AA5A-47AB-AF72-34EABC10EB72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85497CC6-AA5A-47AB-AF72-34EABC10EB72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85497CC6-AA5A-47AB-AF72-34EABC10EB72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7F15F85-A171-4EDC-B507-03A8D80915A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7F15F85-A171-4EDC-B507-03A8D80915A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7F15F85-A171-4EDC-B507-03A8D80915A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7F15F85-A171-4EDC-B507-03A8D80915A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22AAFBA0-1493-4A12-B085-399FCA959C43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22AAFBA0-1493-4A12-B085-399FCA959C43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22AAFBA0-1493-4A12-B085-399FCA959C43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22AAFBA0-1493-4A12-B085-399FCA959C43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28E6495D-BC08-4A62-8A82-7E67194D712D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28E6495D-BC08-4A62-8A82-7E67194D712D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28E6495D-BC08-4A62-8A82-7E67194D712D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28E6495D-BC08-4A62-8A82-7E67194D712D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4014D48-55A6-4019-9463-9AF3D4E0AF8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4014D48-55A6-4019-9463-9AF3D4E0AF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4014D48-55A6-4019-9463-9AF3D4E0AF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4014D48-55A6-4019-9463-9AF3D4E0AF8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1832D5D5-E2C8-4767-B3E8-CA96F98F4346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1832D5D5-E2C8-4767-B3E8-CA96F98F4346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1832D5D5-E2C8-4767-B3E8-CA96F98F4346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1832D5D5-E2C8-4767-B3E8-CA96F98F4346}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34EC53BB-E021-46E1-A569-705A977B98FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34EC53BB-E021-46E1-A569-705A977B98FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34EC53BB-E021-46E1-A569-705A977B98FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34EC53BB-E021-46E1-A569-705A977B98FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7199A95A-D458-447A-84D4-A5B161ADFE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7199A95A-D458-447A-84D4-A5B161ADFE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7199A95A-D458-447A-84D4-A5B161ADFE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7199A95A-D458-447A-84D4-A5B161ADFE57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32241C1D-E0D2-41D0-907A-0631943B360C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32241C1D-E0D2-41D0-907A-0631943B360C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32241C1D-E0D2-41D0-907A-0631943B360C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32241C1D-E0D2-41D0-907A-0631943B360C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F17BC81-B7D1-46D8-A94B-FDBAE17F94B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F17BC81-B7D1-46D8-A94B-FDBAE17F94B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F17BC81-B7D1-46D8-A94B-FDBAE17F94B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F17BC81-B7D1-46D8-A94B-FDBAE17F94B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04D675A3-B794-44BD-A25C-673BB44739CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D675A3-B794-44BD-A25C-673BB44739CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04D675A3-B794-44BD-A25C-673BB44739CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D675A3-B794-44BD-A25C-673BB44739CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5183434D-BBD0-47FE-9ECE-A58C4AF5E914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5183434D-BBD0-47FE-9ECE-A58C4AF5E914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5183434D-BBD0-47FE-9ECE-A58C4AF5E914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5183434D-BBD0-47FE-9ECE-A58C4AF5E914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09AAF2C8-47DC-4F12-A3A0-130DCDB1495B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09AAF2C8-47DC-4F12-A3A0-130DCDB1495B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09AAF2C8-47DC-4F12-A3A0-130DCDB1495B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09AAF2C8-47DC-4F12-A3A0-130DCDB1495B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{758BE55B-ECFB-48A5-A97F-4A057088D6F2} = {0E35F26B-95B8-4D95-808D-28C13B015A4A}
+		{B97F79DB-D83B-4A27-ADF3-A55EDA299132} = {95501A1D-3360-4612-A32E-1D0D757B079E}
+		{B3DBA8EF-79E3-4020-8F6A-538F26756C98} = {95501A1D-3360-4612-A32E-1D0D757B079E}
+		{909F9798-DD03-4606-B59D-0F1350F9C815} = {95501A1D-3360-4612-A32E-1D0D757B079E}
+		{AF8D9A0B-4D1E-4992-9AFA-93A7C8BD347A} = {95501A1D-3360-4612-A32E-1D0D757B079E}
+		{85516F25-AAE2-4581-AB23-CEE66B7C4FE3} = {95501A1D-3360-4612-A32E-1D0D757B079E}
+		{7199A95A-D458-447A-84D4-A5B161ADFE57} = {B3DBA8EF-79E3-4020-8F6A-538F26756C98}
+		{75E4283A-61D1-4067-9F51-25EFB55113A6} = {909F9798-DD03-4606-B59D-0F1350F9C815}
+		{85497CC6-AA5A-47AB-AF72-34EABC10EB72} = {909F9798-DD03-4606-B59D-0F1350F9C815}
+		{F7F15F85-A171-4EDC-B507-03A8D80915A8} = {AF8D9A0B-4D1E-4992-9AFA-93A7C8BD347A}
+		{22AAFBA0-1493-4A12-B085-399FCA959C43} = {AF8D9A0B-4D1E-4992-9AFA-93A7C8BD347A}
+		{BB095221-6A30-4842-93E8-B7786BEA083F} = {85516F25-AAE2-4581-AB23-CEE66B7C4FE3}
+		{52711E8B-1E70-4085-8995-CF471DCD9AFE} = {85516F25-AAE2-4581-AB23-CEE66B7C4FE3}
+		{35E13CFB-E992-475D-8E53-EA09A539AB43} = {BB095221-6A30-4842-93E8-B7786BEA083F}
+		{28E6495D-BC08-4A62-8A82-7E67194D712D} = {BB095221-6A30-4842-93E8-B7786BEA083F}
+		{CE064C82-20BC-4859-AA26-870067F52896} = {6ED3B893-E8B0-4D74-B80A-572A8C2527C1}
+		{6CB81B7E-9747-41D6-B993-854E5EEAF30F} = {6ED3B893-E8B0-4D74-B80A-572A8C2527C1}
+		{6060E1CF-E1BB-4484-8B6F-C4FBF54F5A38} = {6ED3B893-E8B0-4D74-B80A-572A8C2527C1}
+		{7463EEBE-67F1-4DCC-BDAB-5AC13A7C588B} = {6ED3B893-E8B0-4D74-B80A-572A8C2527C1}
+		{E659F38E-5AF5-4401-ABB0-D11AB3282BE5} = {6ED3B893-E8B0-4D74-B80A-572A8C2527C1}
+		{2636A201-AD7E-4F56-A264-320336184AEF} = {CE064C82-20BC-4859-AA26-870067F52896}
+		{3F1145CD-6095-4D7B-B14C-849E35AC52BC} = {CE064C82-20BC-4859-AA26-870067F52896}
+		{106C7F00-C03F-4E29-87AF-ACD1BA292078} = {2636A201-AD7E-4F56-A264-320336184AEF}
+		{7F302C0B-7C20-4CED-8E9A-C35E28C81889} = {2636A201-AD7E-4F56-A264-320336184AEF}
+		{81CAB7AA-5235-42DB-82E6-2B4A0A1F9987} = {2636A201-AD7E-4F56-A264-320336184AEF}
+		{04D675A3-B794-44BD-A25C-673BB44739CB} = {6CB81B7E-9747-41D6-B993-854E5EEAF30F}
+		{5183434D-BBD0-47FE-9ECE-A58C4AF5E914} = {6CB81B7E-9747-41D6-B993-854E5EEAF30F}
+		{09AAF2C8-47DC-4F12-A3A0-130DCDB1495B} = {3F1145CD-6095-4D7B-B14C-849E35AC52BC}
+		{7F17BC81-B7D1-46D8-A94B-FDBAE17F94B7} = {6060E1CF-E1BB-4484-8B6F-C4FBF54F5A38}
+		{32241C1D-E0D2-41D0-907A-0631943B360C} = {E659F38E-5AF5-4401-ABB0-D11AB3282BE5}
+		{A13E2EEA-706E-44F9-9F00-EFDF590E189F} = {66ACB1C0-8F4A-4ACA-83BB-8EEF99D57A92}
+		{6D934B12-B884-422B-BEAA-AE942F7AF635} = {A13E2EEA-706E-44F9-9F00-EFDF590E189F}
+		{E4014D48-55A6-4019-9463-9AF3D4E0AF8D} = {6D934B12-B884-422B-BEAA-AE942F7AF635}
+		{1832D5D5-E2C8-4767-B3E8-CA96F98F4346} = {6D934B12-B884-422B-BEAA-AE942F7AF635}
+		{34EC53BB-E021-46E1-A569-705A977B98FC} = {6D934B12-B884-422B-BEAA-AE942F7AF635}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+	EndGlobalSection
+EndGlobal

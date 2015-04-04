@@ -1,0 +1,96 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:Microsoft_Samples_NLayerApp_Presentation_Silverlight_Client_ViewModels="clr-namespace:Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.ViewModels"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+	xmlns:Microsoft_Samples_NLayerApp_Presentation_Silverlight_Client_Converters="clr-namespace:Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.Converters"
+	xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data" mc:Ignorable="d"    
+	x:Class="Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.PerformTransferView"
+	d:DesignWidth="640" d:DesignHeight="480">
+    
+	<UserControl.Resources>
+		<Microsoft_Samples_NLayerApp_Presentation_Silverlight_Client_Converters:BoolToOppositeBoolConverter x:Key="BoolToOppositeBoolConverter"/>
+        <Microsoft_Samples_NLayerApp_Presentation_Silverlight_Client_Converters:BooleanVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+	</UserControl.Resources>
+    
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="0.117*"/>
+			<RowDefinition Height="0.883*"/>
+		</Grid.RowDefinitions>
+		<Border BorderThickness="1" Background="White" Grid.Row="1" Height="37" VerticalAlignment="Bottom" Margin="0,0,0,19"/>
+		<TextBlock x:Name="TBlock_CustomerName" TextWrapping="Wrap" Text="Transfers" Foreground="White" FontFamily="/Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="96" HorizontalAlignment="Left" Margin="0,-1,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="109.5">
+			<TextBlock.OpacityMask>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="#9A000000" Offset="0"/>
+					<GradientStop Color="Transparent" Offset="1"/>
+					<GradientStop Color="#11686868" Offset="0.536"/>
+				</LinearGradientBrush>
+			</TextBlock.OpacityMask>
+		</TextBlock>
+		<Border Background="{StaticResource CorporateColor}" Margin="0,24,0,0" Grid.Row="1" Height="2" VerticalAlignment="Top"/>
+		<Button x:Name="BTN_Refresh" VerticalAlignment="Top" Style="{StaticResource ButtonStyle2}" Foreground="White" FontFamily="/Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="12" Height="40" Margin="0,0,62,0" HorizontalAlignment="Right" Width="40" ToolTipService.ToolTip="Refresh Transfers" Command="{Binding RefreshActivitiesCommand, Mode=OneWay}">
+			<Grid>
+				<Path x:Name="Shape_Refresh" Data="F1M11.491,13.548C11.491,13.548 22.52,13.548 22.52,13.548 22.52,13.548 22.52,17.933 22.52,17.933 22.52,17.933 11.491,17.933 11.491,17.933 8.205,17.933 5.541,20.596 5.541,23.882 5.541,27.168 8.205,29.831 11.491,29.831 11.491,29.831 18.567,29.831 18.567,29.831 18.567,29.831 18.567,26.698 18.567,26.698 18.567,26.698 27.79,32.023 27.79,32.023 27.79,32.023 18.567,37.348 18.567,37.348 18.567,37.348 18.567,34.216 18.567,34.216 18.567,34.216 11.491,34.216 11.491,34.216 5.783,34.216 1.156,29.589 1.156,23.882 1.156,18.175 5.783,13.548 11.491,13.548z M20.853,1.412C20.853,1.412 20.853,4.544 20.853,4.544 20.853,4.544 27.93,4.544 27.93,4.544 33.638,4.544 38.264,9.171 38.264,14.878 38.264,20.585 33.638,25.212 27.93,25.212 27.93,25.212 16.9,25.212 16.9,25.212 16.9,25.212 16.9,20.826 16.9,20.826 16.9,20.826 27.93,20.826 27.93,20.826 31.215,20.826 33.879,18.163 33.879,14.878 33.879,11.592 31.215,8.929 27.93,8.929 27.93,8.929 20.853,8.929 20.853,8.929 20.853,8.929 20.853,12.061 20.853,12.061 20.853,12.061 11.63,6.737 11.63,6.737 11.63,6.737 20.853,1.412 20.853,1.412z" Fill="#FFFFFFFF" Margin="0" UseLayoutRounding="False" Width="19" Height="19" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"/>
+			</Grid>
+		</Button>
+		<Button x:Name="BTN_Save" VerticalAlignment="Top" Margin="0,0,18,0" Style="{StaticResource ButtonStyle2}" FontFamily="/Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="12" HorizontalAlignment="Right" Height="40" Width="40" Command="{Binding CloseCommand, Mode=OneWay}">
+			<Grid Margin="0">
+				<ed:BlockArrow Fill="#FFFFFFFF" Orientation="Left" UseLayoutRounding="False" Margin="4" StrokeThickness="0"/>
+			</Grid>
+		</Button>
+		<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Bank Transfer" VerticalAlignment="Top" Foreground="{StaticResource CorporateColor}" FontFamily="/Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="21.333" Margin="8,5,0,0" Grid.Row="1"/>
+		<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Account Lock" VerticalAlignment="Bottom" Foreground="{StaticResource CorporateColor}" FontFamily="/Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="21.333" Margin="8,0,0,99" Grid.Row="1"/>
+		<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Lock Account" VerticalAlignment="Bottom" Foreground="White" FontFamily="/Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="18.667" Margin="8,0,0,50" Grid.Row="1"/>
+		<TextBox x:Name="TB_LockAccount" Margin="8,0,80,26" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="{Binding BankAccountSource.BankAccountNumber, Mode=TwoWay}" IsReadOnly="True" />
+		<ToggleButton x:Name="Toggle_LockAccount" Content="ToggleButton" VerticalAlignment="Bottom" Margin="0,0,24,26" Grid.Row="1" Style="{StaticResource ToggleButtonStyle}" Width="24" Height="24" HorizontalAlignment="Right" IsChecked="{Binding BankAccountToLock.Locked, Converter={StaticResource BoolToOppositeBoolConverter}, Mode=TwoWay}">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="Click">
+					<i:InvokeCommandAction Command="{Binding LockBankAccountCommand, Mode=OneWay}"/>
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+		</ToggleButton>
+		<Grid Height="151" Margin="8,53,261,0" Grid.Row="1" VerticalAlignment="Top">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Source Account" VerticalAlignment="Top" Foreground="White" FontFamily="/Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="18.667"/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Destination Account" Foreground="White" FontFamily="/Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="18.667" d:LayoutOverrides="Height" Grid.Row="2"/>
+			<TextBlock x:Name="TB_Contact" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Quantity" Foreground="White" FontFamily="/Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="18.667" VerticalAlignment="Bottom" Grid.Row="4"/>
+			<TextBlock x:Name="TB_SourceAccount" TextWrapping="Wrap" Text="{Binding BankAccountSource.BankAccountNumber}" Foreground="White" FontSize="16" Grid.Row="1" Margin="0,0,26,0"/>
+			<ToggleButton Content="ToggleButton" VerticalAlignment="Bottom" Grid.Row="1" Style="{StaticResource ToggleButtonStyle}" Width="24" Height="24" HorizontalAlignment="Right" IsChecked="{Binding BankAccountSource.Locked, Mode=TwoWay}" IsHitTestVisible="False" IsEnabled="False"/>
+			<ComboBox x:Name="TB_DestinationAccount" d:LayoutOverrides="Height" ItemsSource="{Binding BankAccounts}" SelectedValue="{Binding BankAccountDestination, Mode=TwoWay}" DisplayMemberPath="BankAccountNumber" Grid.Row="3" Margin="0,0,26,0"/>
+			<ToggleButton Content="ToggleButton" VerticalAlignment="Bottom" Grid.Row="3" Style="{StaticResource ToggleButtonStyle}" Width="24" Height="24" HorizontalAlignment="Right" IsChecked="{Binding BankAccountDestination.Locked, Mode=TwoWay}" IsHitTestVisible="False" IsEnabled="False"/>
+			<TextBox x:Name="TB_Quantity" Margin="0,0,28,0" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="{Binding BankTransferAmount, Mode=TwoWay}" Grid.Row="5"/>
+			<Button x:Name="BTN_TransferMoney" VerticalAlignment="Top" Style="{StaticResource ButtonStyle2}" FontFamily="/Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" FontSize="12" HorizontalAlignment="Right" Height="24" Width="24" Command="{Binding TransferCommand, Mode=OneWay}" Grid.Row="5">
+				<Grid Margin="0">
+					<Path x:Name="Shape_Transfer" Data="F1M26.567,9.698C26.567,9.698 35.79,15.023 35.79,15.023 35.79,15.023 26.567,20.348 26.567,20.348 26.567,20.348 26.567,17.216 26.567,17.216 26.567,17.216 19.491,17.216 19.491,17.216L19.491,12.831C19.491,12.831 26.567,12.831 26.567,12.831 26.567,12.831 26.567,9.698 26.567,9.698z M14.065,1.725C16.512,1.725 18.604,2.417 20.342,3.799 22.079,5.182 23.18,7.244 23.645,9.984 23.645,9.984 18.47,9.984 18.47,9.984 18.2,8.932 17.717,8.051 17.02,7.341 16.322,6.632 15.337,6.277 14.065,6.277 13.355,6.277 12.731,6.399 12.193,6.644 11.655,6.889 11.202,7.219 10.835,7.635 10.517,7.978 10.278,8.363 10.119,8.791 9.96,9.219 9.844,9.8 9.771,10.534 9.771,10.534 15.203,10.534 15.203,10.534 15.203,10.534 15.203,13.581 15.203,13.581 15.203,13.581 9.55,13.581 9.55,13.581 9.55,13.581 9.55,16.334 9.55,16.334 9.55,16.334 15.203,16.334 15.203,16.334 15.203,16.334 15.203,19.38 15.203,19.38 15.203,19.38 9.734,19.38 9.734,19.38 9.807,20.164 9.929,20.775 10.101,21.216 10.272,21.656 10.517,22.048 10.835,22.39 11.202,22.806 11.655,23.137 12.193,23.381 12.731,23.626 13.355,23.748 14.065,23.748 15.337,23.748 16.328,23.394 17.038,22.684 17.748,21.974 18.237,21.093 18.506,20.041 18.506,20.041 23.645,20.041 23.645,20.041 23.425,21.412 23.027,22.61 22.452,23.638 21.877,24.666 21.167,25.528 20.323,26.226 19.479,26.923 18.525,27.443 17.46,27.786 16.396,28.128 15.264,28.299 14.065,28.299 12.621,28.299 11.318,28.055 10.156,27.565 8.993,27.076 7.947,26.367 7.018,25.437 6.161,24.58 5.568,23.669 5.238,22.702 4.907,21.736 4.681,20.628 4.559,19.38 4.559,19.38 1.879,19.38 1.879,19.38 1.879,19.38 1.879,16.334 1.879,16.334 1.879,16.334 4.412,16.334 4.412,16.334 4.412,16.334 4.412,13.581 4.412,13.581 4.412,13.581 1.879,13.581 1.879,13.581 1.879,13.581 1.879,10.534 1.879,10.534 1.879,10.534 4.559,10.534 4.559,10.534 4.681,9.311 4.913,8.222 5.256,7.268 5.598,6.313 6.186,5.42 7.018,4.588 7.947,3.659 8.993,2.949 10.156,2.459 11.318,1.97 12.621,1.725 14.065,1.725z" Fill="#FFFFFFFF" Margin="0" UseLayoutRounding="False" Stretch="Fill" Width="14" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+				</Grid>
+			</Button>
+		</Grid>
+		<Border Background="{StaticResource CorporateColor}" Margin="0,0,0,102" Grid.Row="1" Height="2" VerticalAlignment="Bottom"/>
+		<Border Margin="8,220,18,134" Grid.Row="1" BorderThickness="1" CornerRadius="4" BorderBrush="White" >
+            <data:DataGrid
+                       ItemsSource="{Binding BankActivities}"
+                       Grid.Row="2"
+                       AlternatingRowBackground="#548D8D8D"
+                       AutoGenerateColumns="False"
+                       Background="{x:Null}"
+                       Foreground="White">
+                <data:DataGrid.Columns>                    
+                    <data:DataGridTextColumn Header="Description" Binding="{Binding ActivityDescription}"/>
+                    <data:DataGridTextColumn Header="Amount" Binding="{Binding Amount}"/>
+                    <data:DataGridTextColumn Header="Date Performed" Binding="{Binding Date}"/>
+                    <!--, StringFormat=\{0:D\}-->
+                </data:DataGrid.Columns>
+            </data:DataGrid>          
+		</Border>
+	</Grid>
+</UserControl>

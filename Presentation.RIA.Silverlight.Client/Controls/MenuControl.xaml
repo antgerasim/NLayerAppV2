@@ -1,0 +1,25 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:Controls="clr-namespace:Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.Controls"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+    xmlns:im="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
+	xmlns:Silverlight_Client_ViewModels="clr-namespace:Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.ViewModels"
+	mc:Ignorable="d"
+	x:Class="Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.Controls.MenuControl"
+	d:DesignWidth="105" d:DesignHeight="167">
+
+	<!--<UserControl.DataContext>
+		<Silverlight_Client_ViewModels:VMMenu/>
+	</UserControl.DataContext>-->
+
+	<Grid x:Name="LayoutRoot">
+		<StackPanel Height="167" Margin="0" VerticalAlignment="Center">
+			<Button x:Name="BTN_Customer" Content="CUSTOMER" MouseEnter="BTN_Menu_Click" Foreground="White" FontSize="12" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" Style="{StaticResource ButtonStyle1}" VerticalAlignment="Top" HorizontalAlignment="Right" d:LayoutOverrides="Width" DataContext="{Binding Customers}"/>
+            <Button x:Name="BTN_Banking" Content="BANKING" MouseEnter="BTN_Menu_Click" Foreground="White" FontSize="12" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" Style="{StaticResource ButtonStyle1}" VerticalAlignment="Top" HorizontalAlignment="Right" d:LayoutOverrides="Width" DataContext="{Binding Banking}"/>
+            <Button x:Name="BTN_Orders" Content="ORDERS"  MouseEnter="BTN_Menu_Click" Foreground="White" FontSize="12" FontFamily="/Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;component/Resources/Fonts/HelveticaThn.ttf#Helvetica35-Thin" Style="{StaticResource ButtonStyle1}" VerticalAlignment="Top" HorizontalAlignment="Right" d:LayoutOverrides="Width" DataContext="{Binding Orders}"/>
+		</StackPanel>
+	</Grid>
+</UserControl>

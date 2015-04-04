@@ -1,0 +1,488 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NLayerApp.Infrastructure.CrossCutting.Moles</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.MEntityValidatorFactory">
+            <summary>Mole type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.EntityValidatorFactory"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.MEntityValidatorFactory.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.MEntityValidatorFactory.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.MEntityValidatorFactory.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.MEntityValidatorFactory.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.MEntityValidatorFactory.CreateValidator">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.EntityValidatorFactory.CreateValidator"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.MEntityValidatorFactory.SetCurrentIEntityValidatorFactory">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.EntityValidatorFactory.SetCurrent(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.IEntityValidatorFactory)"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.MLogFactory">
+            <summary>Mole type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.LogFactory"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.MLogFactory.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.MLogFactory.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.MLogFactory.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.MLogFactory.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.MLogFactory.CreateLog">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.LogFactory.CreateLog"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.MLogFactory.SetCurrentILogFactory">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.LogFactory.SetCurrent(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILogFactory)"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MRegisterTypesMap">
+            <summary>Mole type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MRegisterTypesMap.#ctor(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MRegisterTypesMap.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MRegisterTypesMap.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MRegisterTypesMap.RegisterMapTypeMapConfigurationBaseOfTSourceTTarget``2(Microsoft.Moles.Framework.MolesDelegates.Action{Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase{``0,``1}})">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap.RegisterMap``2(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2{``0,``1})"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MRegisterTypesMap.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MRegisterTypesMap.Constructor">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MRegisterTypesMap.MapsGet">
+            <summary>Sets the mole of <see cref="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap.Maps"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MRegisterTypesMap.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MRegisterTypesMap.AllInstances.RegisterMapTypeMapConfigurationBaseOfTSourceTTarget``2(Microsoft.Moles.Framework.MolesDelegates.Action{Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap,Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase{``0,``1}})">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap.RegisterMap``2(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2{``0,``1})"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MRegisterTypesMap.AllInstances.MapsGet">
+            <summary>Sets the mole of <see cref="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap.Maps"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter">
+            <summary>Mole type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.#ctor(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter)">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.AdaptTSource``2(Microsoft.Moles.Framework.MolesDelegates.Func{``0,``1})">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter.Adapt``2(``0)"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.AdaptTSourceObjectArray``2(Microsoft.Moles.Framework.MolesDelegates.Func{``0,System.Object[],``1})">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter.Adapt``2(``0,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.Bind(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.ITypeAdapter)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.ConstructorRegisterTypesMapArray">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter.#ctor(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap[])"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.InitializeAdapterRegisterTypesMapArray">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter.InitializeAdapter(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap[])"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.MapsGet">
+            <summary>Sets the mole of <see cref="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter.Maps"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.AllInstances.AdaptTSource``2(Microsoft.Moles.Framework.MolesDelegates.Func{Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter,``0,``1})">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter.Adapt``2(``0)"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.AllInstances.AdaptTSourceObjectArray``2(Microsoft.Moles.Framework.MolesDelegates.Func{Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter,``0,System.Object[],``1})">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter.Adapt``2(``0,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.AllInstances.InitializeAdapterRegisterTypesMapArray">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter.InitializeAdapter(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap[])"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeAdapter.AllInstances.MapsGet">
+            <summary>Sets the mole of <see cref="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeAdapter.Maps"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2">
+            <summary>Mole type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.#ctor">
+            <summary>Initializes a new mole</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.#ctor(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration{`0,`1})">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.Bind(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.ITypeMapConfigurationBase)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.AfterActionOfTTargetObjectArray">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2.After(System.Action`2{`2,System.Object[]})"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.BeforeActionOfTSource">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2.Before(System.Action`1{`1})"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.BeforeMapTSourceRef">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2.BeforeMap(`1@)"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.Constructor">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.MapFuncOfTSourceTTarget">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2.Map(System.Func`2{`1,`2})"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.MapTSource">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2.Map(`1)"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.AllInstances.AfterActionOfTTargetObjectArray">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2.After(System.Action`2{`2,System.Object[]})"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.AllInstances.BeforeActionOfTSource">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2.Before(System.Action`1{`1})"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.AllInstances.BeforeMapTSourceRef">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2.BeforeMap(`1@)"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.AllInstances.MapFuncOfTSourceTTarget">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2.Map(System.Func`2{`1,`2})"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfiguration`2.AllInstances.MapTSource">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfiguration`2.Map(`1)"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2">
+            <summary>Mole type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.#ctor(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase{`0,`1})">
+            <summary>Initializes a new mole for the given instance</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the moled type</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.Bind(Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.ITypeMapConfigurationBase)">
+            <summary>Binds the members of the interface to the mole.</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.Behavior">
+            <summary>Assigns the behavior for all methods of the moled type</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.Constructor">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.#ctor"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.DescriptorGet">
+            <summary>Sets the mole of <see cref="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.Descriptor"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.EqualsObject">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.GetDescriptor">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.GetDescriptor"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.GetHashCode">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.ResolveTSourceObjectArray">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.Resolve(`1,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.AllInstances">
+            <summary>Define moles for all instances members</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.AllInstances.DescriptorGet">
+            <summary>Sets the mole of <see cref="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.Descriptor"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.AllInstances.EqualsObject">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.AllInstances.GetHashCode01">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.MTypeMapConfigurationBase`2.AllInstances.ResolveTSourceObjectArray">
+            <summary>Sets the mole of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.Resolve(`1,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Moles.Framework.NLayerAppInfrastructureCrossCuttingDelegates">
+            <summary>Contains custom delegates used for the stubs and moles of NLayerApp.Infrastructure.CrossCutting</summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.SIEntityValidator">
+            <summary>Stub type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.IEntityValidator"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.SIEntityValidator.#ctor">
+            <summary>Initializes a new instance of type SIEntityValidator</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.SIEntityValidator.GetInvalidMessagesTEntity``1(Microsoft.Moles.Framework.MolesDelegates.Func{``0,System.Collections.Generic.IEnumerable{System.String}})">
+            <summary>Sets stubs of GetInvalidMessages(!!0 item)</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.SIEntityValidator.IsValidTEntity``1(Microsoft.Moles.Framework.MolesDelegates.Func{``0,System.Boolean})">
+            <summary>Sets stubs of IsValid(!!0 item)</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.SIEntityValidator.nlaicc::Microsoft#Samples#NLayerApp#Infrastructure#CrossCutting#Validator#IEntityValidator#GetInvalidMessages``1(``0)">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.IEntityValidator.GetInvalidMessages``1(``0)"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.SIEntityValidator.nlaicc::Microsoft#Samples#NLayerApp#Infrastructure#CrossCutting#Validator#IEntityValidator#IsValid``1(``0)">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.IEntityValidator.IsValid``1(``0)"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.SIEntityValidatorFactory">
+            <summary>Stub type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.IEntityValidatorFactory"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.SIEntityValidatorFactory.#ctor">
+            <summary>Initializes a new instance of type SIEntityValidatorFactory</summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.SIEntityValidatorFactory.Create">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.IEntityValidatorFactory.Create"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.Moles.SIEntityValidatorFactory.nlaicc::Microsoft#Samples#NLayerApp#Infrastructure#CrossCutting#Validator#IEntityValidatorFactory#Create">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Validator.IEntityValidatorFactory.Create"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILog">
+            <summary>Stub type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILog"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILog.#ctor">
+            <summary>Initializes a new instance of type SILog</summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILog.LogErrorStringExceptionObjectArray">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILog.LogError(System.String,System.Exception,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILog.LogErrorStringObjectArray">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILog.LogError(System.String,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILog.LogInfoStringObjectArray">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILog.LogInfo(System.String,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILog.LogWarningStringObjectArray">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILog.LogWarning(System.String,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILog.nlaicc::Microsoft#Samples#NLayerApp#Infrastructure#CrossCutting#Logging#ILog#LogError(System.String,System.Object[])">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILog.LogError(System.String,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILog.nlaicc::Microsoft#Samples#NLayerApp#Infrastructure#CrossCutting#Logging#ILog#LogError(System.String,System.Exception,System.Object[])">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILog.LogError(System.String,System.Exception,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILog.nlaicc::Microsoft#Samples#NLayerApp#Infrastructure#CrossCutting#Logging#ILog#LogInfo(System.String,System.Object[])">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILog.LogInfo(System.String,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILog.nlaicc::Microsoft#Samples#NLayerApp#Infrastructure#CrossCutting#Logging#ILog#LogWarning(System.String,System.Object[])">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILog.LogWarning(System.String,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILogFactory">
+            <summary>Stub type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILogFactory"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILogFactory.#ctor">
+            <summary>Initializes a new instance of type SILogFactory</summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILogFactory.Create">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILogFactory.Create"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.Moles.SILogFactory.nlaicc::Microsoft#Samples#NLayerApp#Infrastructure#CrossCutting#Logging#ILogFactory#Create">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Logging.ILogFactory.Create"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SITypeAdapter">
+            <summary>Stub type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.ITypeAdapter"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SITypeAdapter.#ctor">
+            <summary>Initializes a new instance of type SITypeAdapter</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SITypeAdapter.AdaptTSource``2(Microsoft.Moles.Framework.MolesDelegates.Func{``0,``1})">
+            <summary>Sets stubs of Adapt(!!0 source)</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SITypeAdapter.AdaptTSourceObjectArray``2(Microsoft.Moles.Framework.MolesDelegates.Func{``0,System.Object[],``1})">
+            <summary>Sets stubs of Adapt(!!0 source, Object[] moreSources)</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SITypeAdapter.nlaicc::Microsoft#Samples#NLayerApp#Infrastructure#CrossCutting#Adapters#ITypeAdapter#Adapt``2(``0)">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.ITypeAdapter.Adapt``2(``0)"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SITypeAdapter.nlaicc::Microsoft#Samples#NLayerApp#Infrastructure#CrossCutting#Adapters#ITypeAdapter#Adapt``2(``0,System.Object[])">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.ITypeAdapter.Adapt``2(``0,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SITypeMapConfigurationBase">
+            <summary>Stub type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.ITypeMapConfigurationBase"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SITypeMapConfigurationBase.#ctor">
+            <summary>Initializes a new instance of type SITypeMapConfigurationBase</summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SITypeMapConfigurationBase.DescriptorGet">
+            <summary>Sets the stub of <see cref="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.ITypeMapConfigurationBase.Descriptor"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SITypeMapConfigurationBase.nlaicc::Microsoft#Samples#NLayerApp#Infrastructure#CrossCutting#Adapters#ITypeMapConfigurationBase#Descriptor">
+            <summary>Sets the stub of <see cref="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.ITypeMapConfigurationBase.Descriptor"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SRegisterTypesMap">
+            <summary>Stub type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.RegisterTypesMap"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SRegisterTypesMap.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SRegisterTypesMap.InitializeStub">
+            <summary>Initializes a new instance of type SRegisterTypesMap</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SRegisterTypesMap.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.SRegisterTypesMap.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2">
+            <summary>Stub type of <see cref="T:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2"/>
+            .</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.AfterMap(`1@,System.Object[])">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.AfterMap(`2@,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.AfterMapTTargetRefObjectArray">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.AfterMap(`2@,System.Object[])"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.BeforeMap(`0@)">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.BeforeMap(`1@)"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.BeforeMapTSourceRef">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.BeforeMap(`1@)"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.Equals(System.Object)">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.EqualsObject">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.Equals(System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.GetHashCode">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.GetHashCode01">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.GetHashCode"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.InitializeStub">
+            <summary>Initializes a new instance of type STypeMapConfigurationBase</summary>
+        </member>
+        <member name="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.Map(`0)">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.Map(`1)"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.MapTSource">
+            <summary>Sets the stub of <see cref="M:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.TypeMapConfigurationBase`2.Map(`1)"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.Adapters.Moles.STypeMapConfigurationBase`2.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+    </members>
+</doc>

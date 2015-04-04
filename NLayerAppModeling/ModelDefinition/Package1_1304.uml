@@ -1,0 +1,659 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="0028e6e6-f0ab-4c67-9314-7ecff0c79a16"
+  name="Configuration"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="fe343cbf-b1c3-4616-883c-0d98ba5fb4c0"
+      handle="viewcode://./CodeSchema_Namespace?Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.IoC.Configuration"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="76142c50-0983-490b-aa7f-9183b431886c"
+        name="ContainerConfigurationElement"
+        isAbstract="false"
+        isLeaf="true"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="dde84cfc-b516-45ca-bed7-5cda51152aa0"
+            handle="viewcode://./CodeSchema_Class?Assembly=file:///C:/tfs.local/src/dev/NLayerApp/Infrastructure.Crosscutting/bin/Debug/NLayerApp.Infrastructure.CrossCutting.dll Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.IoC.Configuration Type=ContainerConfigurationElement"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="900999fc-e901-48a0-ae4c-256fb7f90c0c"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="db97b341-1dda-45d9-8167-57eee2b4c56d">
+                <propertyInstance
+                  Id="72896b45-4c64-4fa5-bd6b-502aa215bb0b"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5e4ccf8b-2237-467a-bd79-cc33955c5240">
+                <propertyInstance
+                  Id="b2aab522-399b-44e6-903f-0243087ea75e"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="488ac0a9-797d-4f75-9dac-9d7a297723b2">
+                <propertyInstance
+                  Id="8bb1d4d9-9d0a-48cc-94d0-037658045a06"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="da12c904-af8d-4d84-8483-561b575348ec">
+                <propertyInstance
+                  Id="7acb1a14-6918-4cd9-8c76-82a91864cc4c"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2be02768-0de8-4c26-905d-9f440fef7351">
+                <propertyInstance
+                  Id="143b48f0-de8e-4b48-95b3-416b0eed5ed6"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="f7dd0dae-a05f-40cf-bc88-096575584237"
+            isSubstitutable="false">
+            <classMoniker
+              Id="04bfd29d-df3e-4cfb-87b8-3b6a818bba4c"
+              LastKnownName="ConfigurationElement"
+              LastKnownLocation="Package10_1926.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="709d2cbd-b235-42d8-9bf1-b9ac61c062fb"
+            name="ModuleName"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="c101c9ff-d950-4a47-9a5d-6762b0f68d89"
+                handle="viewcode://./CodeSchema_Property?Assembly=file:///C:/tfs.local/src/dev/NLayerApp/Infrastructure.Crosscutting/bin/Debug/NLayerApp.Infrastructure.CrossCutting.dll Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.IoC.Configuration Type=ContainerConfigurationElement Member=ModuleName"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="37e9e334-a9c3-4761-be3a-117d54f9f088"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0b7cd20c-ea6c-4035-924a-d3e82f61c137">
+                    <propertyInstance
+                      Id="08046aec-6780-4b7b-bd82-4a9ac4af988f"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="93b93abd-46ff-4f15-ad68-c1758b94a504">
+                    <propertyInstance
+                      Id="698e5a7f-8256-4647-815e-b283f2a209a5"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0d5fdca9-7bd8-46a1-b4aa-fe34a973508b">
+                    <propertyInstance
+                      Id="f7e02eeb-d34e-415f-aefe-89f194c66fd9"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2d21c7af-1063-4190-8bc2-5e1c8264e47f">
+                    <propertyInstance
+                      Id="9ad7bd50-2d43-4c62-923b-cf9d7c1dcc2b"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5789a3f2-1a33-432b-a29f-5ffed211efa1">
+                    <propertyInstance
+                      Id="600caf86-30e2-469e-9a8f-df01e1c42a32"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="56b6f5ee-7bc5-47b7-9c69-6f27b0899fad">
+                    <propertyInstance
+                      Id="29a8277e-0bca-43cf-8f14-6a92f6ae4bf2"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
+                LastKnownLocation="NLayerAppModeling.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="22a4c40a-b007-4421-b294-c840932d6eb1"
+            name="Type"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="2943bee5-6c0d-4f87-a475-d12521268cda"
+                handle="viewcode://./CodeSchema_Property?Assembly=file:///C:/tfs.local/src/dev/NLayerApp/Infrastructure.Crosscutting/bin/Debug/NLayerApp.Infrastructure.CrossCutting.dll Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.IoC.Configuration Type=ContainerConfigurationElement Member=Type"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="6c5bc5a0-5907-41cb-91ed-d1c17611c352"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="30cde435-d415-4387-9979-d0e7079eed0b">
+                    <propertyInstance
+                      Id="60ab1dc0-089f-44ff-a527-4c773d2b0e95"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="34c312ce-6690-4038-9f8c-5529542ee345">
+                    <propertyInstance
+                      Id="1fc44d96-0ac4-4ec2-819c-3deb4de400a4"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="03cc81ae-93a4-42c9-b532-e5f2cc911001">
+                    <propertyInstance
+                      Id="a655d551-d83e-49d7-92ed-b207fb319262"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8e6f771c-9de2-4e66-b32d-7298de636108">
+                    <propertyInstance
+                      Id="202fbcd5-a06b-446e-83d6-49b2773b892e"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5b069092-fa33-4cd1-9ebd-f5b181158604">
+                    <propertyInstance
+                      Id="7afc551c-4e3f-4a8e-bf8d-b299ed0daf02"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="015fc601-595e-465b-b2a1-abe997360003">
+                    <propertyInstance
+                      Id="5d279646-70e9-42b7-b796-da743c972533"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
+                LastKnownLocation="NLayerAppModeling.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="c4acbe37-c8da-4c93-ab39-f405a81524f5"
+            name="ContainerConfigurationElement"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="bc6ececb-c0a2-4260-9bfe-88a001c3d1e3"
+                handle="viewcode://./CodeSchema_Method?Assembly=file:///C:/tfs.local/src/dev/NLayerApp/Infrastructure.Crosscutting/bin/Debug/NLayerApp.Infrastructure.CrossCutting.dll Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.IoC.Configuration Type=ContainerConfigurationElement Member=.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="39d020aa-17c1-42b3-98b9-9fb8fd4d221a"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="18e607c3-b444-426d-83ce-737104e67f51">
+                    <propertyInstance
+                      Id="247a9b3e-e24e-458c-a4a0-76bdacf65d46"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a8e1fe71-9b6a-46bb-9bd0-2870a43c4652">
+                    <propertyInstance
+                      Id="f3007c18-e3ba-4fd7-8931-c09c8f3dc97a"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2ca2fbdb-64f4-4318-8b11-d2b582002c6a">
+                    <propertyInstance
+                      Id="f48a7723-e580-4e9a-997a-7123d514d15f"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d54ae112-8958-4c25-a43f-b64ae97d5df1">
+                    <propertyInstance
+                      Id="20cfeb07-61f4-4373-8dc7-a5de7e715d66"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="063387fb-5d84-4642-88c9-f42fe697127b">
+                    <propertyInstance
+                      Id="a96b2eb8-7537-45ed-9fe1-d16eda444696"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a1301218-6d85-488a-ae65-4a79d7b6d55c"
+        name="ContainerConfigurationElementCollection"
+        isAbstract="false"
+        isLeaf="true"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="b3f14086-b0b6-48d7-bb59-386adbac7ead"
+            handle="viewcode://./CodeSchema_Class?Assembly=file:///C:/tfs.local/src/dev/NLayerApp/Infrastructure.Crosscutting/bin/Debug/NLayerApp.Infrastructure.CrossCutting.dll Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.IoC.Configuration Type=ContainerConfigurationElementCollection"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="5340242b-ac13-42b1-a6a6-db092df7bd6d"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4b501493-de1e-47d1-ba98-90f2f81fa526">
+                <propertyInstance
+                  Id="1d18ca9b-bcb4-4467-ae26-0c63453d7688"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e9532969-9aa6-422e-880d-281c96f968e8">
+                <propertyInstance
+                  Id="73eef0ba-db40-499e-a753-ee3564538733"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="23d09950-fa2c-42ce-a914-ea84adb8a525">
+                <propertyInstance
+                  Id="ccfbda20-e518-44fd-9890-f38b2cede129"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3ef5dbd9-15c2-48fb-b3de-0fae8f8ac96c">
+                <propertyInstance
+                  Id="c14bedd1-acee-4e9c-85b2-31d45ba4fbb1"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d40160cd-fbaf-4ee9-853f-b49c25688df7">
+                <propertyInstance
+                  Id="17b15e52-6463-4d94-8fdf-6d6c6885b393"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="f25580fc-b5ae-407a-b41d-4f6167cb57fd"
+            isSubstitutable="false">
+            <classMoniker
+              Id="4889d95c-4401-4418-8362-0564ca383c90"
+              LastKnownName="ConfigurationElementCollection"
+              LastKnownLocation="Package10_1926.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="e8491fb1-a221-4027-a0d3-3e2bb7de2969"
+            name="Container"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="eb1bc962-d662-4bdd-bb51-86c3299352f4"
+                handle="viewcode://./CodeSchema_Property?Assembly=file:///C:/tfs.local/src/dev/NLayerApp/Infrastructure.Crosscutting/bin/Debug/NLayerApp.Infrastructure.CrossCutting.dll Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.IoC.Configuration Type=ContainerConfigurationElementCollection Member=Container"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="8ea86aa3-217e-4eba-9771-5ed83da12c11"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="75fe7833-79b8-45dc-93b5-fa4a499347c2">
+                    <propertyInstance
+                      Id="5a21671d-9f49-4371-a9ff-107cae0cb486"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d3d7389d-48d1-4843-901a-4f3ae3776450">
+                    <propertyInstance
+                      Id="f4449c88-b70c-48e2-94e4-cef5182e34cf"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c0075201-5071-424e-81be-1f8500b39e38">
+                    <propertyInstance
+                      Id="befdb0d9-ed32-4e42-90f0-2d65055e864a"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="78918e6e-f6c8-4d5f-9fd1-60d72fefab74">
+                    <propertyInstance
+                      Id="37a74073-10e9-4082-9c29-2af785ad5d08"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ec87a2f6-23c5-49d5-a96f-7ce87cd8ee1c">
+                    <propertyInstance
+                      Id="058e68a8-1bfe-47d9-b466-ae8696c55f42"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ca7a1da8-424a-4d39-adbe-d0defc1361cc">
+                    <propertyInstance
+                      Id="c23bae26-bcfe-4f38-84ba-df6b7b9d3cf2"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
+                LastKnownLocation="NLayerAppModeling.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="ae831b4a-a6d8-42e2-8dba-bb866d532e02"
+            name="ContainerConfigurationElementCollection"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="d53e5773-07ad-445a-9265-72d893043a43"
+                handle="viewcode://./CodeSchema_Method?Assembly=file:///C:/tfs.local/src/dev/NLayerApp/Infrastructure.Crosscutting/bin/Debug/NLayerApp.Infrastructure.CrossCutting.dll Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.IoC.Configuration Type=ContainerConfigurationElementCollection Member=.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="5372607f-0e79-4ee6-9742-9d508a17fbd3"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="912b4da8-6cf8-4723-b499-b4b9795fdad0">
+                    <propertyInstance
+                      Id="e29a55f4-c27d-470d-8bc5-6415f215765a"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5bd11a2e-a3df-4e59-9aa0-82975ad0e3dc">
+                    <propertyInstance
+                      Id="3a652068-66d8-41c3-b225-32c53f8c6eb4"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3a545a29-3a9b-48e0-9dfb-07ea2499a46c">
+                    <propertyInstance
+                      Id="99f3a2fe-6e6b-4b2a-9e59-663bf207c85b"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="eedea5b4-8a01-4a6f-a0d0-4e89bca72b7c">
+                    <propertyInstance
+                      Id="9c1a45d9-fe79-48d4-9024-0d3a817ba261"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="49da297e-63d8-4197-8e30-f916ab7eecd6">
+                    <propertyInstance
+                      Id="5833f674-0aea-4bd3-9093-bd9145f16f55"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="ab240740-177d-442b-acdf-0e4aab37d38e"
+            name="GetElementKey"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="d395e90e-78e3-4d01-95cd-b9676d2ae438"
+                handle="viewcode://./CodeSchema_Method?Assembly=file:///C:/tfs.local/src/dev/NLayerApp/Infrastructure.Crosscutting/bin/Debug/NLayerApp.Infrastructure.CrossCutting.dll Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.IoC.Configuration Type=ContainerConfigurationElementCollection Member=(Name=GetElementKey OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/System.configuration.dll&quot; Namespace=System.Configuration Type=ConfigurationElement)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="4632fbf0-8068-47fc-b0de-4f04255c47b5"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0710facf-98ae-4ce1-981d-2a981bdb5497">
+                    <propertyInstance
+                      Id="816f0af2-6d6f-4a11-bacc-1d6bf1cd4114"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c8253513-579b-41a1-b4c1-30333e433ffb">
+                    <propertyInstance
+                      Id="7606cb40-27a2-4c67-86cc-d904c70c9c28"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d8223541-4f95-4fc9-9bfc-f548f7bde3ee">
+                    <propertyInstance
+                      Id="3adc3f07-f033-4003-8ae3-9738a4bd669b"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e1002cde-f7a2-4aec-937c-556b1b53f006">
+                    <propertyInstance
+                      Id="cebb0555-0403-4116-a1bf-1d26390ed152"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="26b5cd09-a63a-4ab8-9195-84ae5a9bee1e">
+                    <propertyInstance
+                      Id="246105a1-570b-4413-8376-92a50a192f2c"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7a1aca3a-a2fd-4c1e-a967-89b10b2c3b1e"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="40de409a-bb1f-4f42-b696-4cf884825b39"
+                      LastKnownName="Object"
+                      LastKnownLocation="Package6_1926.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="1bf0d3c0-04e1-4e32-aae5-db4e61216356"
+                  name="element"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="fa3f62b1-d4a6-4e68-a9ff-8670556df2e3"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly=file:///C:/tfs.local/src/dev/NLayerApp/Infrastructure.Crosscutting/bin/Debug/NLayerApp.Infrastructure.CrossCutting.dll Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.IoC.Configuration Type=ContainerConfigurationElementCollection Member=(Name=GetElementKey OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/System.configuration.dll&quot; Namespace=System.Configuration Type=ConfigurationElement)]) ParameterIdentifier=element"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="04bfd29d-df3e-4cfb-87b8-3b6a818bba4c"
+                      LastKnownName="ConfigurationElement"
+                      LastKnownLocation="Package10_1926.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="32bd4af0-3230-4344-8245-a2fccc82618a"
+            name="CreateNewElement"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="78204ef5-7f12-4c66-b680-d5a4b52a3bb3"
+                handle="viewcode://./CodeSchema_Method?Assembly=file:///C:/tfs.local/src/dev/NLayerApp/Infrastructure.Crosscutting/bin/Debug/NLayerApp.Infrastructure.CrossCutting.dll Namespace=Microsoft.Samples.NLayerApp.Infrastructure.CrossCutting.IoC.Configuration Type=ContainerConfigurationElementCollection Member=CreateNewElement"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="d8d5ff62-76d0-483e-9a06-ad72b1c9cc60"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a7f61056-445c-48e1-b114-a63d6f4ccaa4">
+                    <propertyInstance
+                      Id="58ca245b-221d-41d7-bda4-528b824baedb"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ef702668-c032-49d9-8712-bc54146a13ec">
+                    <propertyInstance
+                      Id="96503449-0a0a-4229-b9b9-326632d9687f"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="84242b7a-3dc4-4ca8-8442-c580d44db5de">
+                    <propertyInstance
+                      Id="8969713f-e84d-4748-8aa7-5a45a9eec490"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="16ce55e2-717f-47cd-a5ef-b77cc06a021a">
+                    <propertyInstance
+                      Id="be188f10-bb64-462b-85ce-3bcfec65a007"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="da19e678-21c5-4d8c-8efb-bd3b27fe26c2">
+                    <propertyInstance
+                      Id="a851469b-d537-407f-97ac-1aa0fa032aff"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="85adc9af-98cb-480e-ac27-fe9490154edf"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="04bfd29d-df3e-4cfb-87b8-3b6a818bba4c"
+                      LastKnownName="ConfigurationElement"
+                      LastKnownLocation="Package10_1926.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

@@ -1,0 +1,20 @@
+<configuration>
+  <system.serviceModel>
+    <bindings>
+      <basicHttpBinding>
+        <binding name="basicSilverlight" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+          <security mode="None" />
+        </binding>
+      </basicHttpBinding>
+    </bindings>
+    <client>
+      <endpoint address="http://localhost:2626/BankingModuleService.svc"
+          binding="basicHttpBinding" bindingConfiguration="basicSilverlight" contract="Proxies.BankingModule.IBankingModuleService"
+          name="banking" />
+      <endpoint address="http://localhost:2626/ERPModuleService.svc"
+          binding="basicHttpBinding" bindingConfiguration="basicSilverlight"
+          contract="Proxies.ERPModule.IERPModuleService" name="erp" />
+    </client>
+  </system.serviceModel>
+</configuration>
+
