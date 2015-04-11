@@ -1,66 +1,70 @@
-﻿
+﻿using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
+using Microsoft.Samples.NLayerApp.Domain.Seedwork.Specification;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace Domain.MainBoundedContext.Tests
 {
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork.Specification;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+   [TestClass()]
+   public class CustomerSpecificationsTests
+   {
 
+      [TestMethod()]
+      public void CustomerFullTextEmptyTextReturnDirectSpecification()
+      {
+         //Arrange 
+         ISpecification<Customer> spec = null;
 
-    [TestClass()]
-    public class CustomerSpecificationsTests
-    {
-        [TestMethod()]
-        public void CustomerFullTextEmptyTextReturnDirectSpecification()
-        {
-            //Arrange 
-            ISpecification<Customer> spec = null;
+         //Act
+         spec = CustomerSpecifications.CustomerFullText(string.Empty);
 
-            //Act
-            spec = CustomerSpecifications.CustomerFullText(string.Empty);
+         //Assert
+         Assert.IsNotNull(spec);
+         Assert.IsInstanceOfType(spec, typeof (DirectSpecification<Customer>));
+      }
 
-            //Assert
-            Assert.IsNotNull(spec);
-            Assert.IsInstanceOfType(spec, typeof(DirectSpecification<Customer>));
-        }
-        [TestMethod()]
-        public void CustomerFullTextNullTextReturnDirectSpecification()
-        {
-            //Arrange 
-            ISpecification<Customer> spec = null;
+      [TestMethod()]
+      public void CustomerFullTextNullTextReturnDirectSpecification()
+      {
+         //Arrange 
+         ISpecification<Customer> spec = null;
 
-            //Act
-            spec = CustomerSpecifications.CustomerFullText(null);
+         //Act
+         spec = CustomerSpecifications.CustomerFullText(null);
 
-            //Assert
-            Assert.IsNotNull(spec);
-            Assert.IsInstanceOfType(spec, typeof(DirectSpecification<Customer>));
-        }
-        [TestMethod()]
-        public void CustomerFullTextNonEmptyTextReturnAndSpecification()
-        {
-            //Arrange 
-            ISpecification<Customer> spec = null;
+         //Assert
+         Assert.IsNotNull(spec);
+         Assert.IsInstanceOfType(spec, typeof (DirectSpecification<Customer>));
+      }
 
-            //Act
-            spec = CustomerSpecifications.CustomerFullText("Unai");
+      [TestMethod()]
+      public void CustomerFullTextNonEmptyTextReturnAndSpecification()
+      {
+         //Arrange 
+         ISpecification<Customer> spec = null;
 
-            //Assert
-            Assert.IsNotNull(spec);
-            Assert.IsInstanceOfType(spec, typeof(AndSpecification<Customer>));
-        }
-        [TestMethod()]
-        public void CustomerEnabledCustomersSpecificationReturnDirectSpecification()
-        {
-            //Arrange 
-            ISpecification<Customer> spec = null;
+         //Act
+         spec = CustomerSpecifications.CustomerFullText("Unai");
 
-            //Act
-            spec = CustomerSpecifications.EnabledCustomers();
+         //Assert
+         Assert.IsNotNull(spec);
+         Assert.IsInstanceOfType(spec, typeof (AndSpecification<Customer>));
+      }
 
-            //Assert
-            Assert.IsNotNull(spec);
-            Assert.IsInstanceOfType(spec, typeof(DirectSpecification<Customer>));
-        }
-    }
+      [TestMethod()]
+      public void CustomerEnabledCustomersSpecificationReturnDirectSpecification()
+      {
+         //Arrange 
+         ISpecification<Customer> spec = null;
+
+         //Act
+         spec = CustomerSpecifications.EnabledCustomers();
+
+         //Assert
+         Assert.IsNotNull(spec);
+         Assert.IsInstanceOfType(spec, typeof (DirectSpecification<Customer>));
+      }
+
+   }
+
 }

@@ -1,5 +1,4 @@
-﻿
-//===================================================================================
+﻿//===================================================================================
 // Microsoft Developer & Platform Evangelism
 //=================================================================================== 
 // THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
@@ -10,189 +9,191 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
+
+using System;
+using System.Linq;
+
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
+using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.ERPModule.Repositories;
+using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.UnitOfWork;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Infrastructure.Data.MainBoundedContext.Tests
 {
-    using System;
-    using System.Linq;
 
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
+   [TestClass()]
+   public class CustomerRepositoryTests
+   {
 
-    using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.ERPModule.Repositories;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.UnitOfWork;
+      [TestMethod()]
+      public void CustomerRepositoryGetMethodReturnCustomerWithPicture()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var customerRepository = new CustomerRepository(unitOfWork);
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg;
+         var customerId = new Guid("43A38AC8-EAA9-4DF0-981F-2685882C7C45");
 
-    [TestClass()]
-    public class CustomerRepositoryTests
-    {
-        [TestMethod()]
-        public void CustomerRepositoryGetMethodReturnCustomerWithPicture()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var customerRepository = new CustomerRepository(unitOfWork);
+         //Act
+         var customer = customerRepository.Get(customerId);
 
-            var customerId = new Guid("43A38AC8-EAA9-4DF0-981F-2685882C7C45");
+         //Assert
+         Assert.IsNotNull(customer);
+         Assert.IsNotNull(customer.Picture);
+         Assert.IsTrue(customer.Id == customerId);
+      }
 
-            
-            //Act
-            var customer = customerRepository.Get(customerId);
+      [TestMethod()]
+      public void CustomerRepositoryGetMethodReturnNullWhenIdIsEmpty()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var customerRepository = new CustomerRepository(unitOfWork);
 
-            //Assert
-            Assert.IsNotNull(customer);
-            Assert.IsNotNull(customer.Picture);
-            Assert.IsTrue(customer.Id == customerId);
-        }
+         //Act
+         var customer = customerRepository.Get(Guid.Empty);
 
-        [TestMethod()]
-        public void CustomerRepositoryGetMethodReturnNullWhenIdIsEmpty()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var customerRepository = new CustomerRepository(unitOfWork);
+         //Assert
+         Assert.IsNull(customer);
+      }
 
-            //Act
-            var customer = customerRepository.Get(Guid.Empty);
+      [TestMethod()]
+      public void CustomerRepositoryGetEnalbedReturnOnlyEnabledCustomers()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var customerRepository = new CustomerRepository(unitOfWork);
 
-            //Assert
-            Assert.IsNull(customer);
-        }
+         //Act
+         var result = customerRepository.GetEnabled(0, 10);
 
-        [TestMethod()]
-        public void CustomerRepositoryGetEnalbedReturnOnlyEnabledCustomers()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var customerRepository = new CustomerRepository(unitOfWork);
+         //Assert
+         Assert.IsNotNull(result);
+         Assert.IsTrue(result.Any());
+         Assert.IsTrue(result.All(c => c.IsEnabled));
+      }
 
-            
-            //Act
-            var result = customerRepository.GetEnabled(0, 10);
+      [TestMethod()]
+      public void CustomerRepositoryAddNewItemSaveItem()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var customerRepository = new CustomerRepository(unitOfWork);
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Any());
-            Assert.IsTrue(result.All(c => c.IsEnabled));
-        }
+         var country = new Country("spain", "es-ES");
+         country.ChangeCurrentIdentity(new Guid("32BB805F-40A4-4C37-AA96-B7945C8C385C"));
 
-        [TestMethod()]
-        public void CustomerRepositoryAddNewItemSaveItem()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var customerRepository = new CustomerRepository(unitOfWork);
+         var customer = CustomerFactory.CreateCustomer(
+            "Felix",
+            "Trend",
+            "+3434",
+            "company",
+            country,
+            new Address("city", "zipCode", "addressLine1", "addressLine2"));
+         customer.SetTheCountryReference(country.Id);
 
-            var country = new Country("spain", "es-ES");
-            country.ChangeCurrentIdentity(new Guid("32BB805F-40A4-4C37-AA96-B7945C8C385C"));
+         //Act
+         customerRepository.Add(customer);
+         unitOfWork.Commit();
+      }
 
-            var customer = CustomerFactory.CreateCustomer("Felix", "Trend","+3434","company", country, new Address("city", "zipCode", "addressLine1", "addressLine2"));
-            customer.SetTheCountryReference(country.Id);
+      [TestMethod()]
+      public void CustomerRepositoryGetAllReturnMaterializedAllItems()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var customerRepository = new CustomerRepository(unitOfWork);
 
+         //Act
+         var allItems = customerRepository.GetAll();
 
-            //Act
-            customerRepository.Add(customer);
-            unitOfWork.Commit();
-        }
+         //Assert
+         Assert.IsNotNull(allItems);
+         Assert.IsTrue(allItems.Any());
+      }
 
-        [TestMethod()]
-        public void CustomerRepositoryGetAllReturnMaterializedAllItems()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var customerRepository = new CustomerRepository(unitOfWork);
+      [TestMethod()]
+      public void CustomerRepositoryAllMatchingMethodReturnEntitiesWithSatisfiedCriteria()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var customerRepository = new CustomerRepository(unitOfWork);
 
-            //Act
-            var allItems = customerRepository.GetAll();
+         var spec = CustomerSpecifications.EnabledCustomers();
 
-            //Assert
-            Assert.IsNotNull(allItems);
-            Assert.IsTrue(allItems.Any());
-        }
+         //Act
+         var result = customerRepository.AllMatching(spec);
 
-        [TestMethod()]
-        public void CustomerRepositoryAllMatchingMethodReturnEntitiesWithSatisfiedCriteria()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var customerRepository = new CustomerRepository(unitOfWork);
-            
-            var spec = CustomerSpecifications.EnabledCustomers();
+         //Assert
+         Assert.IsNotNull(result.All(c => c.IsEnabled));
 
-            //Act
-            var result = customerRepository.AllMatching(spec);
+      }
 
-            //Assert
-            Assert.IsNotNull(result.All(c => c.IsEnabled));
+      [TestMethod()]
+      public void CustomerRepositoryFilterMethodReturnEntitisWithSatisfiedFilter()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var customerRepository = new CustomerRepository(unitOfWork);
 
-        }
+         //Act
+         var result = customerRepository.GetFiltered(c => c.CreditLimit > 0);
 
-        [TestMethod()]
-        public void CustomerRepositoryFilterMethodReturnEntitisWithSatisfiedFilter()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var customerRepository = new CustomerRepository(unitOfWork);
+         //Assert
+         Assert.IsNotNull(result);
+         Assert.IsTrue(result.All(c => c.CreditLimit > 0));
+      }
 
-            //Act
-            var result = customerRepository.GetFiltered(c => c.CreditLimit > 0);
+      [TestMethod()]
+      public void CustomerRepositoryPagedMethodReturnEntitiesInPageFashion()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var customerRepository = new CustomerRepository(unitOfWork);
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.All(c => c.CreditLimit>0));
-        }
+         //Act
+         var pageI = customerRepository.GetPaged(0, 1, b => b.Id, false);
+         var pageIi = customerRepository.GetPaged(1, 1, b => b.Id, false);
 
-        [TestMethod()]
-        public void CustomerRepositoryPagedMethodReturnEntitiesInPageFashion()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var customerRepository = new CustomerRepository(unitOfWork);
+         //Assert
+         Assert.IsNotNull(pageI);
+         Assert.IsTrue(pageI.Count() == 1);
 
-            //Act
-            var pageI = customerRepository.GetPaged(0, 1, b => b.Id, false);
-            var pageII = customerRepository.GetPaged(1, 1, b => b.Id, false);
+         Assert.IsNotNull(pageIi);
+         Assert.IsTrue(pageIi.Count() == 1);
 
-            //Assert
-            Assert.IsNotNull(pageI);
-            Assert.IsTrue(pageI.Count() == 1);
+         Assert.IsFalse(pageI.Intersect(pageIi).Any());
+      }
 
-            Assert.IsNotNull(pageII);
-            Assert.IsTrue(pageII.Count() == 1);
+      [TestMethod()]
+      public void CustomerRepositoryRemoveItemDeleteIt()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var customerRepository = new CustomerRepository(unitOfWork);
 
-            Assert.IsFalse(pageI.Intersect(pageII).Any());
-        }
-        [TestMethod()]
-        public void CustomerRepositoryRemoveItemDeleteIt()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var customerRepository = new CustomerRepository(unitOfWork);
+         var country = new Country("Spain", "es-ES");
+         country.ChangeCurrentIdentity(new Guid("32BB805F-40A4-4C37-AA96-B7945C8C385C"));
 
-            var country = new Country("Spain","es-ES");
-            country.ChangeCurrentIdentity(new Guid("32BB805F-40A4-4C37-AA96-B7945C8C385C"));
+         var address = new Address("city", "zipCode", "addressline1", "addressline2");
 
-            
+         var customer = CustomerFactory.CreateCustomer("Frank", "Frank", "+3444", "company", country, address);
+         customer.SetTheCountryReference(country.Id);
 
-            var address =  new Address("city", "zipCode", "addressline1", "addressline2");
+         customerRepository.Add(customer);
+         unitOfWork.Commit();
 
-            var customer = CustomerFactory.CreateCustomer("Frank", "Frank","+3444","company", country,address);
-            customer.SetTheCountryReference(country.Id);
-            
-            customerRepository.Add(customer);
-            unitOfWork.Commit();
+         //Act
+         customerRepository.Remove(customer);
+         unitOfWork.Commit();
 
-            //Act
-            customerRepository.Remove(customer);
-            unitOfWork.Commit();
+         var result = customerRepository.Get(customer.Id);
 
-            var result = customerRepository.Get(customer.Id);
+         //Assert
+         Assert.IsNull(result);
+      }
 
-            //Assert
-            Assert.IsNull(result);
-        }
-    }
+   }
+
 }

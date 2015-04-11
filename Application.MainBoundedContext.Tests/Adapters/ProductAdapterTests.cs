@@ -10,162 +10,170 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System.Collections.Generic;
 
-namespace Application.MainBoundedContext.Tests
+using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.ProductAgg;
+using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Application.MainBoundedContext.Tests.Adapters
 {
-    using System.Collections.Generic;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.ProductAgg;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.ERPModule;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Adapter;
 
-    [TestClass()]
-    public class ProductAdapterTests
-    {
-        [TestMethod()]
-        public void ProductToProductDTOAdapter()
-        {
-            //Arrange
-            var product = new Software("the title", "The description","AB001");
-            product.ChangeUnitPrice(10);
-            product.IncrementStock(10);
-            product.GenerateNewIdentity();
+   [TestClass()]
+   public class ProductAdapterTests
+   {
 
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var productDTO = adapter.Adapt<Product, ProductDTO>(product);
+      [TestMethod()]
+      public void ProductToProductDtoAdapter()
+      {
+         //Arrange
+         var product = new Software("the title", "The description", "AB001");
+         product.ChangeUnitPrice(10);
+         product.IncrementStock(10);
+         product.GenerateNewIdentity();
 
-            //Assert
-            Assert.AreEqual(product.Id, productDTO.Id);
-            Assert.AreEqual(product.Title, productDTO.Title);
-            Assert.AreEqual(product.Description, productDTO.Description);
-            Assert.AreEqual(product.AmountInStock, productDTO.AmountInStock);
-            Assert.AreEqual(product.UnitPrice, productDTO.UnitPrice);
-        }
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var productDto = adapter.Adapt<Product, ProductDto>(product);
 
-        [TestMethod()]
-        public void EnumerableProductToListProductDTOAdapter()
-        {
-            //Arrange
-            var software = new Software("the title", "The description","AB001");
-            software.ChangeUnitPrice(10);
-            software.IncrementStock(10);
-            software.GenerateNewIdentity();
+         //Assert
+         Assert.AreEqual(product.Id, productDto.Id);
+         Assert.AreEqual(product.Title, productDto.Title);
+         Assert.AreEqual(product.Description, productDto.Description);
+         Assert.AreEqual(product.AmountInStock, productDto.AmountInStock);
+         Assert.AreEqual(product.UnitPrice, productDto.UnitPrice);
+      }
 
-            var products = new List<Software>() { software };
+      [TestMethod()]
+      public void EnumerableProductToListProductDtoAdapter()
+      {
+         //Arrange
+         var software = new Software("the title", "The description", "AB001");
+         software.ChangeUnitPrice(10);
+         software.IncrementStock(10);
+         software.GenerateNewIdentity();
 
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var productsDTO = adapter.Adapt<IEnumerable<Product>, List<ProductDTO>>(products);
+         var products = new List<Software>()
+         {
+            software
+         };
 
-            //Assert
-            Assert.AreEqual(products[0].Id, productsDTO[0].Id);
-            Assert.AreEqual(products[0].Title, productsDTO[0].Title);
-            Assert.AreEqual(products[0].Description, productsDTO[0].Description);
-            Assert.AreEqual(products[0].AmountInStock, productsDTO[0].AmountInStock);
-            Assert.AreEqual(products[0].UnitPrice, productsDTO[0].UnitPrice);
-        }
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var productsDto = adapter.Adapt<IEnumerable<Product>, List<ProductDto>>(products);
 
-        [TestMethod()]
-        public void SoftwareToSoftwareDTOAdapter()
-        {
-            //Arrange
-            var software = new Software("the title", "The description","AB001");
-            software.ChangeUnitPrice(10);
-            software.IncrementStock(10);
-            software.GenerateNewIdentity();
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var softwareDTO = adapter.Adapt<Software, SoftwareDTO>(software);
+         //Assert
+         Assert.AreEqual(products[0].Id, productsDto[0].Id);
+         Assert.AreEqual(products[0].Title, productsDto[0].Title);
+         Assert.AreEqual(products[0].Description, productsDto[0].Description);
+         Assert.AreEqual(products[0].AmountInStock, productsDto[0].AmountInStock);
+         Assert.AreEqual(products[0].UnitPrice, productsDto[0].UnitPrice);
+      }
 
-            //Assert
-            Assert.AreEqual(software.Id, softwareDTO.Id);
-            Assert.AreEqual(software.Title, softwareDTO.Title);
-            Assert.AreEqual(software.Description, softwareDTO.Description);
-            Assert.AreEqual(software.AmountInStock, softwareDTO.AmountInStock);
-            Assert.AreEqual(software.UnitPrice, softwareDTO.UnitPrice);
-            Assert.AreEqual(software.LicenseCode, softwareDTO.LicenseCode);
-        }
+      [TestMethod()]
+      public void SoftwareToSoftwareDtoAdapter()
+      {
+         //Arrange
+         var software = new Software("the title", "The description", "AB001");
+         software.ChangeUnitPrice(10);
+         software.IncrementStock(10);
+         software.GenerateNewIdentity();
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var softwareDto = adapter.Adapt<Software, SoftwareDto>(software);
 
-        [TestMethod()]
-        public void EnumerableSoftwareToListSoftwareDTOAdapter()
-        {
-            //Arrange
-            var software = new Software("the title", "The description", "AB001");
+         //Assert
+         Assert.AreEqual(software.Id, softwareDto.Id);
+         Assert.AreEqual(software.Title, softwareDto.Title);
+         Assert.AreEqual(software.Description, softwareDto.Description);
+         Assert.AreEqual(software.AmountInStock, softwareDto.AmountInStock);
+         Assert.AreEqual(software.UnitPrice, softwareDto.UnitPrice);
+         Assert.AreEqual(software.LicenseCode, softwareDto.LicenseCode);
+      }
 
-            software.ChangeUnitPrice(10);
-            software.IncrementStock(10);
-            software.GenerateNewIdentity();
+      [TestMethod()]
+      public void EnumerableSoftwareToListSoftwareDtoAdapter()
+      {
+         //Arrange
+         var software = new Software("the title", "The description", "AB001");
 
-            var softwares = new List<Software>() { software };
-            
+         software.ChangeUnitPrice(10);
+         software.IncrementStock(10);
+         software.GenerateNewIdentity();
 
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var softwaresDTO = adapter.Adapt<IEnumerable<Software>, List<SoftwareDTO>>(softwares);
+         var softwares = new List<Software>()
+         {
+            software
+         };
 
-            //Assert
-            Assert.AreEqual(softwares[0].Id, softwaresDTO[0].Id);
-            Assert.AreEqual(softwares[0].Title, softwaresDTO[0].Title);
-            Assert.AreEqual(softwares[0].Description, softwaresDTO[0].Description);
-            Assert.AreEqual(softwares[0].AmountInStock, softwaresDTO[0].AmountInStock);
-            Assert.AreEqual(softwares[0].UnitPrice, softwaresDTO[0].UnitPrice);
-            Assert.AreEqual(softwares[0].LicenseCode, softwaresDTO[0].LicenseCode);
-        }
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var softwaresDto = adapter.Adapt<IEnumerable<Software>, List<SoftwareDto>>(softwares);
 
-        [TestMethod()]
-        public void BookToBookDTOAdapter()
-        {
-            //Arrange
-            var book = new Book("the title", "The description", "Krasis Press", "ABD12");
+         //Assert
+         Assert.AreEqual(softwares[0].Id, softwaresDto[0].Id);
+         Assert.AreEqual(softwares[0].Title, softwaresDto[0].Title);
+         Assert.AreEqual(softwares[0].Description, softwaresDto[0].Description);
+         Assert.AreEqual(softwares[0].AmountInStock, softwaresDto[0].AmountInStock);
+         Assert.AreEqual(softwares[0].UnitPrice, softwaresDto[0].UnitPrice);
+         Assert.AreEqual(softwares[0].LicenseCode, softwaresDto[0].LicenseCode);
+      }
 
-            book.ChangeUnitPrice(10);
-            book.IncrementStock(10);
+      [TestMethod()]
+      public void BookToBookDtoAdapter()
+      {
+         //Arrange
+         var book = new Book("the title", "The description", "Krasis Press", "ABD12");
 
-            book.GenerateNewIdentity();
+         book.ChangeUnitPrice(10);
+         book.IncrementStock(10);
 
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var bookDTO = adapter.Adapt<Book, BookDTO>(book);
+         book.GenerateNewIdentity();
 
-            //Assert
-            Assert.AreEqual(book.Id, bookDTO.Id);
-            Assert.AreEqual(book.Title, bookDTO.Title);
-            Assert.AreEqual(book.Description, bookDTO.Description);
-            Assert.AreEqual(book.AmountInStock, bookDTO.AmountInStock);
-            Assert.AreEqual(book.UnitPrice, bookDTO.UnitPrice);
-            Assert.AreEqual(book.ISBN, bookDTO.ISBN);
-            Assert.AreEqual(book.Publisher, bookDTO.Publisher);
-        }
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var bookDto = adapter.Adapt<Book, BookDto>(book);
 
-        [TestMethod()]
-        public void EnumerableBookToListBookDTOAdapter()
-        {
-            //Arrange
-            var book = new Book("the title", "The description","Krasis Press","ABD12");
+         //Assert
+         Assert.AreEqual(book.Id, bookDto.Id);
+         Assert.AreEqual(book.Title, bookDto.Title);
+         Assert.AreEqual(book.Description, bookDto.Description);
+         Assert.AreEqual(book.AmountInStock, bookDto.AmountInStock);
+         Assert.AreEqual(book.UnitPrice, bookDto.UnitPrice);
+         Assert.AreEqual(book.Isbn, bookDto.Isbn);
+         Assert.AreEqual(book.Publisher, bookDto.Publisher);
+      }
 
-            book.ChangeUnitPrice(10);
-            book.IncrementStock(10);
-            book.GenerateNewIdentity();
+      [TestMethod()]
+      public void EnumerableBookToListBookDtoAdapter()
+      {
+         //Arrange
+         var book = new Book("the title", "The description", "Krasis Press", "ABD12");
 
-            var books = new List<Book>() { book };
+         book.ChangeUnitPrice(10);
+         book.IncrementStock(10);
+         book.GenerateNewIdentity();
 
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var booksDTO = adapter.Adapt<IEnumerable<Book>, List<BookDTO>>(books);
+         var books = new List<Book>()
+         {
+            book
+         };
 
-            //Assert
-            Assert.AreEqual(books[0].Id, booksDTO[0].Id);
-            Assert.AreEqual(books[0].Title, booksDTO[0].Title);
-            Assert.AreEqual(books[0].Description, booksDTO[0].Description);
-            Assert.AreEqual(books[0].AmountInStock, booksDTO[0].AmountInStock);
-            Assert.AreEqual(books[0].UnitPrice, booksDTO[0].UnitPrice);
-            Assert.AreEqual(books[0].ISBN, booksDTO[0].ISBN);
-            Assert.AreEqual(books[0].Publisher, booksDTO[0].Publisher);
-        }
-    }
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var booksDto = adapter.Adapt<IEnumerable<Book>, List<BookDto>>(books);
+
+         //Assert
+         Assert.AreEqual(books[0].Id, booksDto[0].Id);
+         Assert.AreEqual(books[0].Title, booksDto[0].Title);
+         Assert.AreEqual(books[0].Description, booksDto[0].Description);
+         Assert.AreEqual(books[0].AmountInStock, booksDto[0].AmountInStock);
+         Assert.AreEqual(books[0].UnitPrice, booksDto[0].UnitPrice);
+         Assert.AreEqual(books[0].Isbn, booksDto[0].Isbn);
+         Assert.AreEqual(books[0].Publisher, booksDto[0].Publisher);
+      }
+
+   }
+
 }

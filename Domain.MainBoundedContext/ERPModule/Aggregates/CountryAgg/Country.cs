@@ -10,53 +10,47 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System;
+
+using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
 namespace Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
 
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.Resources;
+   /// <summary>
+   ///    The country entity
+   /// </summary>
+   public class Country : Entity
+   {
+      #region Properties
+      /// <summary>
+      ///    Get or set the Country Name
+      /// </summary>
+      public string CountryName { get; private set; }
 
-    /// <summary>
-    /// The country entity
-    /// </summary>
-    public class Country
-        :Entity
-    {
-        #region Properties
+      /// <summary>
+      ///    Get or set the Country ISO Code
+      /// </summary>
+      public string CountryIsoCode { get; private set; }
+      #endregion
 
-        /// <summary>
-        /// Get or set the Country Name
-        /// </summary>
-        public string CountryName { get; private set; }
+      #region Constructor
 
-        /// <summary>
-        /// Get or set the Country ISO Code
-        /// </summary>
-        public string CountryISOCode { get; private set; }
+      //required by EF
+      private Country()
+      {
+      }
 
-        #endregion
+      public Country(string countryName, string countryIsoCode)
+      {
+         if (String.IsNullOrWhiteSpace(countryName)) { throw new ArgumentNullException("countryName"); }
 
-        #region Constructor
+         if (String.IsNullOrWhiteSpace(countryIsoCode)) { throw new ArgumentNullException("countryIsoCode"); }
 
-        //required by EF
-        private Country() { } 
+         this.CountryName = countryName;
+         this.CountryIsoCode = countryIsoCode;
+      }
+      #endregion
+   }
 
-        public Country(string countryName, string countryISOCode)
-        {
-            if (String.IsNullOrWhiteSpace(countryName))
-                throw new ArgumentNullException("countryName");
-
-            if (String.IsNullOrWhiteSpace(countryISOCode))
-                throw new ArgumentNullException("countryISOCode");
-
-            this.CountryName = countryName;
-            this.CountryISOCode = countryISOCode;
-        }
-
-        #endregion
-    }
 }

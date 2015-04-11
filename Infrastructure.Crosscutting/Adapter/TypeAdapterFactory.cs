@@ -9,41 +9,35 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
 
 namespace Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
-    public static class TypeAdapterFactory
-    {
-        #region Members
+   public static class TypeAdapterFactory
+   {
+      #region Members
+      private static ITypeAdapterFactory _currentTypeAdapterFactory = null;
+      #endregion
 
-        static ITypeAdapterFactory _currentTypeAdapterFactory = null;
+      #region Public Static Methods
+      /// <summary>
+      ///    Set the current type adapter factory
+      /// </summary>
+      /// <param name="adapterFactory">The adapter factory to set</param>
+      public static void SetCurrent(ITypeAdapterFactory adapterFactory)
+      {
+         _currentTypeAdapterFactory = adapterFactory;
+      }
 
-        #endregion
+      /// <summary>
+      ///    Create a new type adapter from currect factory
+      /// </summary>
+      /// <returns>Created type adapter</returns>
+      public static ITypeAdapter CreateAdapter()
+      {
+         return _currentTypeAdapterFactory.Create();
+      }
+      #endregion
+   }
 
-        #region Public Static Methods
-
-        /// <summary>
-        /// Set the current type adapter factory
-        /// </summary>
-        /// <param name="adapterFactory">The adapter factory to set</param>
-        public static void SetCurrent(ITypeAdapterFactory adapterFactory)
-        {
-            _currentTypeAdapterFactory = adapterFactory;
-        }
-        /// <summary>
-        /// Create a new type adapter from currect factory
-        /// </summary>
-        /// <returns>Created type adapter</returns>
-        public static ITypeAdapter CreateAdapter()
-        {
-            return _currentTypeAdapterFactory.Create();
-        }
-        #endregion
-    }
 }

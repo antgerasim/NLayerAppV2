@@ -10,73 +10,76 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System;
+using System.Text.RegularExpressions;
+
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.Resources;
+using Microsoft.Samples.NLayerApp.Domain.Seedwork.Specification;
 
 namespace Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.OrderAgg
 {
-    using System;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork.Specification;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
-    using System.Text.RegularExpressions;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.Resources;
 
-    /// <summary>
-    /// The Orders specifications
-    /// </summary>
-    public static class OrdersSpecifications
-    {
-        /// <summary>
-        /// Orders by Customer specification
-        /// </summary>
-        /// <param name="customer">The customer</param>
-        /// <returns>Related specification for this criterion</returns>
-        public static ISpecification<Order> OrdersByCustomer(Customer customer)
-        {
-            if (customer == null
-                ||
-                customer.IsTransient())
-            {
-                throw new ArgumentNullException("customer");
-            }
+   /// <summary>
+   ///    The Orders specifications
+   /// </summary>
+   public static class OrdersSpecifications
+   {
 
-            return new DirectSpecification<Order>(o => o.CustomerId == customer.Id);
-        }
-        /// <summary>
-        /// Order by order number
-        /// </summary>
-        /// <param name="orderNumber">Find orders using the order number</param>
-        /// <returns>Related specification for this criterion</returns>
-        public static ISpecification<Order> OrdersByNumber(string orderNumber)
-        {
-            string orderNumberPattern = @"\d{4}/\d{1,2}-\d+";
+      /// <summary>
+      ///    Orders by Customer specification
+      /// </summary>
+      /// <param name="customer">The customer</param>
+      /// <returns>Related specification for this criterion</returns>
+      public static ISpecification<Order> OrdersByCustomer(Customer customer)
+      {
+         if (customer == null || customer.IsTransient()) { throw new ArgumentNullException("customer"); }
 
-            if (Regex.IsMatch(orderNumber, orderNumberPattern))
-            {
-                int sequenceNumber = Int32.Parse(Regex.Split(orderNumber, "-")[1]);
-                return new DirectSpecification<Order>(o => o.SequenceNumberOrder == sequenceNumber);
-            }
-            else
-                throw new InvalidOperationException(Messages.exception_OrderNumberSpecificationInvalidOrderNumberPattern);
-            
-        }
+         return new DirectSpecification<Order>(o => o.CustomerId == customer.Id);
+      }
 
-        /// <summary>
-        /// The orders in a date range
-        /// </summary>
-        /// <param name="startDate">The start date </param>
-        /// <param name="endDate">The end date</param>
-        /// <returns>Related specification for this criteria</returns>
-        public static ISpecification<Order> OrderFromDateRange(DateTime? startDate, DateTime? endDate)
-        {
-            Specification<Order> spec = new TrueSpecification<Order>();
+      /// <summary>
+      ///    Order by order number
+      /// </summary>
+      /// <param name="orderNumber">Find orders using the order number</param>
+      /// <returns>Related specification for this criterion</returns>
+      public static ISpecification<Order> OrdersByNumber(string orderNumber)
+      {
+         var orderNumberPattern = @"\d{4}/\d{1,2}-\d+";
 
-            if (startDate.HasValue)
-                spec &= new DirectSpecification<Order>(o => o.OrderDate > (startDate ?? DateTime.MinValue));
+         if (Regex.IsMatch(orderNumber, orderNumberPattern))
+         {
+            var sequenceNumber = Int32.Parse(Regex.Split(orderNumber, "-")[1]);
+            return new DirectSpecification<Order>(o => o.SequenceNumberOrder == sequenceNumber);
+         }
+         else
+         {
+            throw new InvalidOperationException(Messages.exception_OrderNumberSpecificationInvalidOrderNumberPattern);
+         }
 
-            if (endDate.HasValue)
-                spec &= new DirectSpecification<Order>(o => o.OrderDate < (endDate ?? DateTime.MaxValue));
+      }
 
-            return spec;
-        }
+      /// <summary>
+      ///    The orders in a date range
+      /// </summary>
+      /// <param name="startDate">The start date </param>
+      /// <param name="endDate">The end date</param>
+      /// <returns>Related specification for this criteria</returns>
+      public static ISpecification<Order> OrderFromDateRange(DateTime? startDate, DateTime? endDate)
+      {
+         Specification<Order> spec = new TrueSpecification<Order>();
 
-    }
+         if (startDate.HasValue) {
+            spec &= new DirectSpecification<Order>(o => o.OrderDate > (startDate ?? DateTime.MinValue));
+         }
+
+         if (endDate.HasValue) {
+            spec &= new DirectSpecification<Order>(o => o.OrderDate < (endDate ?? DateTime.MaxValue));
+         }
+
+         return spec;
+      }
+
+   }
+
 }

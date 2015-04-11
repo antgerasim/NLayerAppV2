@@ -10,47 +10,43 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
-
 using System;
+
 namespace Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.ProductAgg
 {
 
-    /// <summary>
-    /// The software product
-    /// </summary>
-    public class Software
-        :Product
-    {
-        #region Properties
+   /// <summary>
+   ///    The software product
+   /// </summary>
+   public class Software : Product
+   {
+      #region Properties
+      /// <summary>
+      ///    Get or set the license code
+      /// </summary>
+      public string LicenseCode { get; private set; }
+      #endregion
 
-        /// <summary>
-        /// Get or set the license code
-        /// </summary>
-        public string LicenseCode { get; private set; }
+      #region Constructor
 
-        #endregion
+      //required by ef
+      private Software()
+      {
+      }
 
-        #region Constructor
+      public Software(string title, string description, string licenseCode)
+      {
+         if (string.IsNullOrWhiteSpace(title)) { throw new ArgumentNullException("title"); }
 
-        //required by ef
-        private Software() { }
+         if (String.IsNullOrWhiteSpace(description)) { throw new ArgumentNullException("description"); }
 
-        public Software(string title, string description,string licenseCode)
-        {
-            if (string.IsNullOrWhiteSpace(title))
-                throw new ArgumentNullException("title");
+         if (String.IsNullOrWhiteSpace(licenseCode)) { throw new ArgumentNullException("licenseCode"); }
 
-            if (String.IsNullOrWhiteSpace(description))
-                throw new ArgumentNullException("description");
+         this.Title = title;
+         this.Description = description;
+         this.LicenseCode = licenseCode;
+      }
+      #endregion
+   }
 
-            if (String.IsNullOrWhiteSpace(licenseCode))
-                throw new ArgumentNullException("licenseCode");
-
-            this.Title = title;
-            this.Description = description;
-            this.LicenseCode = licenseCode;
-        }
-
-        #endregion
-    }
 }

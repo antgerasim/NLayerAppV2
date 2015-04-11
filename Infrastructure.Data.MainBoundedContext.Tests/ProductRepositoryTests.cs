@@ -9,160 +9,162 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
+
+using System;
+using System.Linq;
+
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.ProductAgg;
+using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.ERPModule.Repositories;
+using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.UnitOfWork;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Infrastructure.Data.MainBoundedContext.Tests
 {
-    using System;
-    using System.Linq;
 
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.ProductAgg;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.ERPModule.Repositories;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.UnitOfWork;
+   [TestClass()]
+   public class ProductRepositoryTests
+   {
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+      [TestMethod()]
+      public void ProductRepositoryGetMethodReturnMaterializedEntityById()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         IProductRepository productRepository = new ProductRepository(unitOfWork);
 
-    [TestClass()]
-    public class ProductRepositoryTests
-    {
-        [TestMethod()]
-        public void ProductRepositoryGetMethodReturnMaterializedEntityById()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            IProductRepository productRepository = new ProductRepository(unitOfWork);
+         var productId = new Guid("44668EBF-7B54-4431-8D61-C1298DB50857");
+         Product product = null;
 
-            var productId = new Guid("44668EBF-7B54-4431-8D61-C1298DB50857");
-            Product product = null;
+         //Act
+         product = productRepository.Get(productId);
 
-            //Act
-            product = productRepository.Get(productId);
+         //Assert
+         Assert.IsNotNull(product);
+         Assert.IsTrue(product.Id == productId);
+      }
 
-            //Assert
-            Assert.IsNotNull(product);
-            Assert.IsTrue(product.Id == productId);
-        }
+      [TestMethod()]
+      public void ProductRepositoryGetMethodReturnNullWhenIdIsEmpty()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var productRepository = new ProductRepository(unitOfWork);
 
-        [TestMethod()]
-        public void ProductRepositoryGetMethodReturnNullWhenIdIsEmpty()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var productRepository = new ProductRepository(unitOfWork);
+         Product product = null;
 
-            Product product = null;
+         //Act
+         product = productRepository.Get(Guid.Empty);
 
-            //Act
-            product = productRepository.Get(Guid.Empty);
+         //Assert
+         Assert.IsNull(product);
+      }
 
-            //Assert
-            Assert.IsNull(product);
-        }
+      [TestMethod()]
+      public void ProductRepositoryAddNewItemSaveItem()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         IProductRepository productRepository = new ProductRepository(unitOfWork);
 
-        [TestMethod()]
-        public void ProductRepositoryAddNewItemSaveItem()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            IProductRepository productRepository = new ProductRepository(unitOfWork);
+         var book = new Book("The book title", "Any book description", "Krasis Press", "ABC");
 
-            var book = new Book("The book title", "Any book description", "Krasis Press", "ABC");
+         book.ChangeUnitPrice(40);
+         book.IncrementStock(1);
+         book.GenerateNewIdentity();
 
-            book.ChangeUnitPrice(40);
-            book.IncrementStock(1);
-            book.GenerateNewIdentity();
+         //Act
+         productRepository.Add(book);
+         unitOfWork.Commit();
 
-            //Act
-            productRepository.Add(book);
-            unitOfWork.Commit();
-          
-        }
+      }
 
-        [TestMethod()]
-        public void ProductRepositoryGetAllReturnMaterializedAllItems()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            IProductRepository productRepository = new ProductRepository(unitOfWork);
+      [TestMethod()]
+      public void ProductRepositoryGetAllReturnMaterializedAllItems()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         IProductRepository productRepository = new ProductRepository(unitOfWork);
 
-            //Act
-            var allItems = productRepository.GetAll();
+         //Act
+         var allItems = productRepository.GetAll();
 
-            //Assert
-            Assert.IsNotNull(allItems);
-            Assert.IsTrue(allItems.Any());
-        }
+         //Assert
+         Assert.IsNotNull(allItems);
+         Assert.IsTrue(allItems.Any());
+      }
 
-        [TestMethod()]
-        public void ProductRepositoryAllMatchingMethodReturnEntitiesWithSatisfiedCriteria()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            IProductRepository productRepository = new ProductRepository(unitOfWork);
+      [TestMethod()]
+      public void ProductRepositoryAllMatchingMethodReturnEntitiesWithSatisfiedCriteria()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         IProductRepository productRepository = new ProductRepository(unitOfWork);
 
-            var spec = ProductSpecifications.ProductFullText("book");
+         var spec = ProductSpecifications.ProductFullText("book");
 
-            //Act
-            var result = productRepository.AllMatching(spec);
+         //Act
+         var result = productRepository.AllMatching(spec);
 
-            //Assert
-            Assert.IsNotNull(result.All(p => p.Title.Contains("book") || p.Description.Contains("book")));
+         //Assert
+         Assert.IsNotNull(result.All(p => p.Title.Contains("book") || p.Description.Contains("book")));
 
-        }
+      }
 
-        [TestMethod()]
-        public void ProductRepositoryFilterMethodReturnEntitisWithSatisfiedFilter()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            IProductRepository productRepository = new ProductRepository(unitOfWork);
+      [TestMethod()]
+      public void ProductRepositoryFilterMethodReturnEntitisWithSatisfiedFilter()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         IProductRepository productRepository = new ProductRepository(unitOfWork);
 
-            //Act
-            var result = productRepository.GetFiltered(p => p.AmountInStock > 1);
+         //Act
+         var result = productRepository.GetFiltered(p => p.AmountInStock > 1);
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.All(p=>p.AmountInStock > 1));
-        }
+         //Assert
+         Assert.IsNotNull(result);
+         Assert.IsTrue(result.All(p => p.AmountInStock > 1));
+      }
 
-        [TestMethod()]
-        public void ProductRepositoryPagedMethodReturnEntitiesInPageFashion()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            IProductRepository productRepository = new ProductRepository(unitOfWork);
+      [TestMethod()]
+      public void ProductRepositoryPagedMethodReturnEntitiesInPageFashion()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         IProductRepository productRepository = new ProductRepository(unitOfWork);
 
-            //Act
-            var pageI = productRepository.GetPaged(0, 1, b => b.Id, false);
-            var pageII = productRepository.GetPaged(1, 1, b => b.Id, false);
+         //Act
+         var pageI = productRepository.GetPaged(0, 1, b => b.Id, false);
+         var pageIi = productRepository.GetPaged(1, 1, b => b.Id, false);
 
-            //Assert
-            Assert.IsNotNull(pageI);
-            Assert.IsTrue(pageI.Count() == 1);
+         //Assert
+         Assert.IsNotNull(pageI);
+         Assert.IsTrue(pageI.Count() == 1);
 
-            Assert.IsNotNull(pageII);
-            Assert.IsTrue(pageII.Count() == 1);
+         Assert.IsNotNull(pageIi);
+         Assert.IsTrue(pageIi.Count() == 1);
 
-            Assert.IsFalse(pageI.Intersect(pageII).Any());
-        }
-        [TestMethod()]
-        public void OrderRepositoryRemoveItemDeleteIt()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            IProductRepository productRepository = new ProductRepository(unitOfWork);
+         Assert.IsFalse(pageI.Intersect(pageIi).Any());
+      }
 
-            var book = new Book("The book title", "Any book description", "Krasis Press", "ABC");
+      [TestMethod()]
+      public void OrderRepositoryRemoveItemDeleteIt()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         IProductRepository productRepository = new ProductRepository(unitOfWork);
 
-            book.ChangeUnitPrice(40M);
-            book.IncrementStock(1);
-            book.GenerateNewIdentity();
+         var book = new Book("The book title", "Any book description", "Krasis Press", "ABC");
 
-            //Act
-            productRepository.Add(book);
-            unitOfWork.Commit();
-            
-        }
-    }
+         book.ChangeUnitPrice(40M);
+         book.IncrementStock(1);
+         book.GenerateNewIdentity();
+
+         //Act
+         productRepository.Add(book);
+         unitOfWork.Commit();
+
+      }
+
+   }
+
 }

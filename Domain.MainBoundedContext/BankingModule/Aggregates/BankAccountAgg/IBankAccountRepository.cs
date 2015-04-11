@@ -10,17 +10,18 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
 namespace Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg
 {
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
-    /// <summary>
-    /// Base contract for bank account repository
-    /// <see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{BankAccount}"/>
-    /// </summary>
-    public interface IBankAccountRepository
-        :IRepository<BankAccount>
-    {
-    }
+   /// <summary>
+   ///    Base contract for bank account repository
+   ///    <see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{BankAccount}" />
+   /// </summary>
+   public interface IBankAccountRepository : IRepository<BankAccount>
+   {
+
+   }
+
 }

@@ -10,16 +10,18 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using Microsoft.Samples.NLayerApp.Domain.Seedwork;
+
 namespace Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.ProductAgg
 {
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
-    /// <summary>
-    /// Base contract for product repository
-    /// <see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{Product}"/>
-    /// </summary>
-    public interface  IProductRepository
-        :IRepository<Product>
-    {
-    }
+   /// <summary>
+   ///    Base contract for product repository
+   ///    <see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{Product}" />
+   /// </summary>
+   public interface IProductRepository : IRepository<Product>
+   {
+
+   }
+
 }

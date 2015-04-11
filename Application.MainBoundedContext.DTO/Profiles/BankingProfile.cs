@@ -9,23 +9,26 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
+using AutoMapper;
+
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
+
 namespace Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO.Profiles
 {
-    using AutoMapper;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
 
-    class BankingProfile
-        : Profile
-    {
-        protected override void Configure()
-        {
-            //bankAccount => BankAccountDTO
-            var map = Mapper.CreateMap<BankAccount, BankAccountDTO>();
-            map.ForMember(dto => dto.BankAccountNumber, mc => mc.MapFrom(e => e.Iban));
+   internal class BankingProfile : Profile
+   {
 
-            //bankAccountActivity=>bankaccountactivityDTO
-            Mapper.CreateMap<BankAccountActivity, BankActivityDTO>();
-        }
-    }
+      protected override void Configure()
+      {
+         //bankAccount => BankAccountDTO
+         var map = Mapper.CreateMap<BankAccount, BankAccountDto>();
+         map.ForMember(dto => dto.BankAccountNumber, mc => mc.MapFrom(e => e.Iban));
+
+         //bankAccountActivity=>bankaccountactivityDTO
+         Mapper.CreateMap<BankAccountActivity, BankActivityDto>();
+      }
+
+   }
+
 }

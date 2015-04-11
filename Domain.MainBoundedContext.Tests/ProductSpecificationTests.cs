@@ -1,51 +1,56 @@
-﻿
+﻿using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.ProductAgg;
+using Microsoft.Samples.NLayerApp.Domain.Seedwork.Specification;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace Domain.MainBoundedContext.Tests
 {
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork.Specification;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.ProductAgg;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    [TestClass()]
-    public class ProductSpecificationTests
-    {
-        [TestMethod()]
-        public void ProductFullTextSpecificationEmptyDataReturnTrueSpecification()
-        {
-            //Arrange
-            string productData = string.Empty;
+   [TestClass()]
+   public class ProductSpecificationTests
+   {
 
-            //Act
-            var specification = ProductSpecifications.ProductFullText(productData);
+      [TestMethod()]
+      public void ProductFullTextSpecificationEmptyDataReturnTrueSpecification()
+      {
+         //Arrange
+         var productData = string.Empty;
 
-            //Assert
-            Assert.IsNotNull(specification);
-            Assert.IsInstanceOfType(specification, typeof(TrueSpecification<Product>));
-        }
-        [TestMethod()]
-        public void ProductFullTextSpecificationNullDataReturnTrueSpecification()
-        {
-            //Arrange
-            string productData = null;
+         //Act
+         var specification = ProductSpecifications.ProductFullText(productData);
 
-            //Act
-            var specification = ProductSpecifications.ProductFullText(productData);
+         //Assert
+         Assert.IsNotNull(specification);
+         Assert.IsInstanceOfType(specification, typeof (TrueSpecification<Product>));
+      }
 
-            //Assert
-            Assert.IsNotNull(specification);
-            Assert.IsInstanceOfType(specification, typeof(TrueSpecification<Product>));
-        }
-        [TestMethod()]
-        public void ProductFullTextSpecificationNonEmptyDataReturnAndSpecification()
-        {
-            //Arrange
-            string productData = "the product title or product description data";
+      [TestMethod()]
+      public void ProductFullTextSpecificationNullDataReturnTrueSpecification()
+      {
+         //Arrange
+         string productData = null;
 
-            //Act
-            var specification = ProductSpecifications.ProductFullText(productData);
+         //Act
+         var specification = ProductSpecifications.ProductFullText(productData);
 
-            //Assert
-            Assert.IsNotNull(specification);
-            Assert.IsInstanceOfType(specification, typeof(AndSpecification<Product>));
-        }
-    }
+         //Assert
+         Assert.IsNotNull(specification);
+         Assert.IsInstanceOfType(specification, typeof (TrueSpecification<Product>));
+      }
+
+      [TestMethod()]
+      public void ProductFullTextSpecificationNonEmptyDataReturnAndSpecification()
+      {
+         //Arrange
+         var productData = "the product title or product description data";
+
+         //Act
+         var specification = ProductSpecifications.ProductFullText(productData);
+
+         //Assert
+         Assert.IsNotNull(specification);
+         Assert.IsInstanceOfType(specification, typeof (AndSpecification<Product>));
+      }
+
+   }
+
 }

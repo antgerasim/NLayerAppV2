@@ -10,20 +10,22 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System.Collections.Generic;
+
+using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
 namespace Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg
 {
 
-    using System.Collections.Generic;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
+   /// <summary>
+   ///    Customer repository contract
+   ///    <see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{Customer}" />
+   /// </summary>
+   public interface ICustomerRepository : IRepository<Customer>
+   {
 
-    /// <summary>
-    /// Customer repository contract
-    /// <see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{Customer}"/>
-    /// </summary>
-    public interface ICustomerRepository
-        :IRepository<Customer>
-    {
-        IEnumerable<Customer> GetEnabled(int pageIndex, int pageCount);
-    }
+      IEnumerable<Customer> GetEnabled(int pageIndex, int pageCount);
+
+   }
+
 }

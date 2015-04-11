@@ -10,26 +10,22 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
 namespace Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg
 {
 
-    using System;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
+   /// <summary>
+   ///    Picture of customer
+   /// </summary>
+   public class Picture : Entity
+   {
+      #region Properties
+      /// <summary>
+      ///    Get the raw of photo
+      /// </summary>
+      public byte[] RawPhoto { get; set; }
+      #endregion
+   }
 
-    /// <summary>
-    /// Picture of customer
-    /// </summary>
-    public class Picture
-        :Entity
-    {
-        #region Properties
-
-        /// <summary>
-        /// Get the raw of photo
-        /// </summary>
-        public byte[] RawPhoto{ get; set; }
-
-        #endregion
-    }
 }

@@ -10,149 +10,151 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System;
+
+using Domain.Seedwork.Tests.Classes;
+
+using Microsoft.Samples.NLayerApp.Domain.Seedwork;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace Domain.Seedwork.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
-    using Domain.Seedwork.Tests.Classes;
 
-    [TestClass()]
-    public class EntityTests
-    {
-        [TestMethod()]
-        public void SameIdentityProduceEqualsTrueTest()
-        {
-            //Arrange
-            Guid id = Guid.NewGuid();
+   [TestClass()]
+   public class EntityTests
+   {
 
-            var entityLeft = new SampleEntity();
-            var entityRight = new SampleEntity();
+      [TestMethod()]
+      public void SameIdentityProduceEqualsTrueTest()
+      {
+         //Arrange
+         var id = Guid.NewGuid();
 
-            entityLeft.ChangeCurrentIdentity(id);
-            entityRight.ChangeCurrentIdentity(id);
-            
-            //Act
-            bool resultOnEquals = entityLeft.Equals(entityRight);
-            bool resultOnOperator = entityLeft == entityRight;
+         var entityLeft = new SampleEntity();
+         var entityRight = new SampleEntity();
 
-            //Assert
-            Assert.IsTrue(resultOnEquals);
-            Assert.IsTrue(resultOnOperator);
+         entityLeft.ChangeCurrentIdentity(id);
+         entityRight.ChangeCurrentIdentity(id);
 
-        }
-        [TestMethod()]
-        public void DiferentIdProduceEqualsFalseTest()
-        {
-            //Arrange
-            
-            var entityLeft = new SampleEntity();
-            var entityRight = new SampleEntity();
+         //Act
+         var resultOnEquals = entityLeft.Equals(entityRight);
+         var resultOnOperator = entityLeft == entityRight;
 
-            entityLeft.GenerateNewIdentity();
-            entityRight.GenerateNewIdentity();
-           
+         //Assert
+         Assert.IsTrue(resultOnEquals);
+         Assert.IsTrue(resultOnOperator);
 
-            //Act
-            bool resultOnEquals = entityLeft.Equals(entityRight);
-            bool resultOnOperator = entityLeft == entityRight;
+      }
 
-            //Assert
-            Assert.IsFalse(resultOnEquals);
-            Assert.IsFalse(resultOnOperator);
+      [TestMethod()]
+      public void DiferentIdProduceEqualsFalseTest()
+      {
+         //Arrange
 
-        }
-        [TestMethod()]
-        public void CompareUsingEqualsOperatorsAndNullOperandsTest()
-        {
-            //Arrange
+         var entityLeft = new SampleEntity();
+         var entityRight = new SampleEntity();
 
-            SampleEntity entityLeft = null;
-            SampleEntity entityRight = new SampleEntity();
+         entityLeft.GenerateNewIdentity();
+         entityRight.GenerateNewIdentity();
 
-            entityRight.GenerateNewIdentity();
+         //Act
+         var resultOnEquals = entityLeft.Equals(entityRight);
+         var resultOnOperator = entityLeft == entityRight;
 
-            //Act
-            if (!(entityLeft == (Entity)null))//this perform ==(left,right)
-                Assert.Fail();
+         //Assert
+         Assert.IsFalse(resultOnEquals);
+         Assert.IsFalse(resultOnOperator);
 
-            if (!(entityRight != (Entity)null))//this perform !=(left,right)
-                Assert.Fail();
+      }
 
-            entityRight = null;
+      [TestMethod()]
+      public void CompareUsingEqualsOperatorsAndNullOperandsTest()
+      {
+         //Arrange
 
-            //Act
-            if (!(entityLeft == entityRight))//this perform ==(left,right)
-                Assert.Fail();
+         SampleEntity entityLeft = null;
+         var entityRight = new SampleEntity();
 
-            if (entityLeft != entityRight)//this perform !=(left,right)
-                Assert.Fail();
+         entityRight.GenerateNewIdentity();
 
-          
-        }
-        [TestMethod()]
-        public void CompareTheSameReferenceReturnTrueTest()
-        {
-            //Arrange
-            var entityLeft = new SampleEntity();
-            SampleEntity entityRight = entityLeft;
+         //Act
+         if (!(entityLeft == (Entity) null)) //this perform ==(left,right)
+         { Assert.Fail(); }
 
+         if (!(entityRight != (Entity) null)) //this perform !=(left,right)
+         { Assert.Fail(); }
 
-            //Act
-            if (! entityLeft.Equals(entityRight))
-                Assert.Fail();
+         entityRight = null;
 
-            if (!(entityLeft == entityRight))
-                Assert.Fail();
+         //Act
+         if (!(entityLeft == entityRight)) //this perform ==(left,right)
+         { Assert.Fail(); }
 
-        }
-        [TestMethod()]
-        public void CompareWhenLeftIsNullAndRightIsNullReturnFalseTest()
-        {
-            //Arrange
+         if (entityLeft != entityRight) //this perform !=(left,right)
+         { Assert.Fail(); }
 
-            SampleEntity entityLeft = null;
-            var entityRight = new SampleEntity();
+      }
 
-            entityRight.GenerateNewIdentity();
+      [TestMethod()]
+      public void CompareTheSameReferenceReturnTrueTest()
+      {
+         //Arrange
+         var entityLeft = new SampleEntity();
+         var entityRight = entityLeft;
 
-            //Act
-            if (!(entityLeft == (Entity)null))//this perform ==(left,right)
-                Assert.Fail();
+         //Act
+         if (!entityLeft.Equals(entityRight)) { Assert.Fail(); }
 
-            if (!(entityRight != (Entity)null))//this perform !=(left,right)
-                Assert.Fail();
-        }
+         if (!(entityLeft == entityRight)) { Assert.Fail(); }
 
-        [TestMethod()]
-        public void SetIdentitySetANonTransientEntity()
-        {
-            //Arrange
-            var entity = new SampleEntity();
+      }
 
-            //Act
-            entity.GenerateNewIdentity();
+      [TestMethod()]
+      public void CompareWhenLeftIsNullAndRightIsNullReturnFalseTest()
+      {
+         //Arrange
 
-            //Assert
-            Assert.IsFalse(entity.IsTransient());
-        }
+         SampleEntity entityLeft = null;
+         var entityRight = new SampleEntity();
 
-        [TestMethod()]
-        public void ChangeIdentitySetNewIdentity()
-        {
-            //Arrange
-            var entity = new SampleEntity();
-            entity.GenerateNewIdentity();
+         entityRight.GenerateNewIdentity();
 
-            //act
-            Guid expected = entity.Id;
-            entity.ChangeCurrentIdentity(Guid.NewGuid());
+         //Act
+         if (!(entityLeft == (Entity) null)) //this perform ==(left,right)
+         { Assert.Fail(); }
 
-            //assert
-            Assert.AreNotEqual(expected, entity.Id);
-        }
-    }
+         if (!(entityRight != (Entity) null)) //this perform !=(left,right)
+         { Assert.Fail(); }
+      }
+
+      [TestMethod()]
+      public void SetIdentitySetANonTransientEntity()
+      {
+         //Arrange
+         var entity = new SampleEntity();
+
+         //Act
+         entity.GenerateNewIdentity();
+
+         //Assert
+         Assert.IsFalse(entity.IsTransient());
+      }
+
+      [TestMethod()]
+      public void ChangeIdentitySetNewIdentity()
+      {
+         //Arrange
+         var entity = new SampleEntity();
+         entity.GenerateNewIdentity();
+
+         //act
+         var expected = entity.Id;
+         entity.ChangeCurrentIdentity(Guid.NewGuid());
+
+         //assert
+         Assert.AreNotEqual(expected, entity.Id);
+      }
+
+   }
+
 }

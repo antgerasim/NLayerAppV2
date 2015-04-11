@@ -9,113 +9,118 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
+
+using System;
+
+using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging;
+using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Logging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Infrastructure.Crosscutting.Tests
 {
-    using System;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Logging;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.Dynamic;
 
-    [TestClass]
-    public partial class TraceSourceLogTest
-    {
-        #region Class Initialize
+   [TestClass]
+   public partial class TraceSourceLogTest
+   {
+      #region Class Initialize
+      [ClassInitialize()]
+      public static void ClassInitialze(TestContext context)
+      {
+         // Initialize default log factory
+         LoggerFactory.SetCurrent(new TraceSourceLogFactory());
+      }
+      #endregion
 
-        [ClassInitialize()]
-        public static void ClassInitialze(TestContext context)
-        {
-            // Initialize default log factory
-            LoggerFactory.SetCurrent(new TraceSourceLogFactory());
-        }
+      [TestMethod()]
+      public void LogInfo()
+      {
+         //Arrange
+         var log = LoggerFactory.CreateLog();
 
-        #endregion
+         //Act
+         log.LogInfo("{0}", "the info message");
+      }
 
-        [TestMethod()]
-        public void LogInfo()
-        {
-            //Arrange
-            ILogger log = LoggerFactory.CreateLog();
+      [TestMethod()]
+      public void LogWarning()
+      {
+         //Arrange
+         var log = LoggerFactory.CreateLog();
 
-            //Act
-            log.LogInfo("{0}","the info message"); 
-        }
-        [TestMethod()]
-        public void LogWarning()
-        {
-            //Arrange
-            ILogger log = LoggerFactory.CreateLog();
+         //Act
+         log.LogWarning("{0}", "the warning message");
+      }
 
-            //Act
-            log.LogWarning("{0}","the warning message");
-        }
-        [TestMethod()]
-        public void LogError()
-        {
-            //Arrange
-            ILogger log = LoggerFactory.CreateLog();
+      [TestMethod()]
+      public void LogError()
+      {
+         //Arrange
+         var log = LoggerFactory.CreateLog();
 
-            //Act
-            log.LogError("{0}", "the error message"); 
-        }
-            
-        [TestMethod()]
-        public void LogErrorWithException()
-        {
-            //Arrange
-            ILogger log = LoggerFactory.CreateLog();
+         //Act
+         log.LogError("{0}", "the error message");
+      }
 
-            //Act
-            log.LogError("{0}", new ArgumentNullException("param"), "the error message");
-        }
-        [TestMethod()]
-        public void LogDebugWithObject()
-        {
-            //Arrange
-            ILogger log = LoggerFactory.CreateLog();
+      [TestMethod()]
+      public void LogErrorWithException()
+      {
+         //Arrange
+         var log = LoggerFactory.CreateLog();
 
-            //Act
-            log.Debug(new object());
-        }
-        [TestMethod()]
-        public void LogDebugWithMessage()
-        {
-            //Arrange
-            ILogger log = LoggerFactory.CreateLog();
+         //Act
+         log.LogError("{0}", new ArgumentNullException("param"), "the error message");
+      }
 
-            //Act
-            log.Debug("{0}","the debug mesage");
-        }
-        [TestMethod()]
-        public void LogDebugWithException()
-        {
-            //Arrange
-            ILogger log = LoggerFactory.CreateLog();
+      [TestMethod()]
+      public void LogDebugWithObject()
+      {
+         //Arrange
+         var log = LoggerFactory.CreateLog();
 
-            //Act
-            log.Debug("{0}", new ArgumentNullException("param"),"the debug mesage");
-        }
-        [TestMethod()]
-        public void LogFatalWithMessage()
-        {
-            //Arrange
-            ILogger log = LoggerFactory.CreateLog();
+         //Act
+         log.Debug(new object());
+      }
 
-            //Act
-            log.Fatal("{0}", "the debug mesage");
-        }
-        [TestMethod()]
-        public void LogFatalWithException()
-        {
-            //Arrange
-            ILogger log = LoggerFactory.CreateLog();
+      [TestMethod()]
+      public void LogDebugWithMessage()
+      {
+         //Arrange
+         var log = LoggerFactory.CreateLog();
 
-            //Act
-            log.Fatal("{0}", new ArgumentNullException("param"), "the debug mesage");
-        }
+         //Act
+         log.Debug("{0}", "the debug mesage");
+      }
 
-        
-    }
+      [TestMethod()]
+      public void LogDebugWithException()
+      {
+         //Arrange
+         var log = LoggerFactory.CreateLog();
+
+         //Act
+         log.Debug("{0}", new ArgumentNullException("param"), "the debug mesage");
+      }
+
+      [TestMethod()]
+      public void LogFatalWithMessage()
+      {
+         //Arrange
+         var log = LoggerFactory.CreateLog();
+
+         //Act
+         log.Fatal("{0}", "the debug mesage");
+      }
+
+      [TestMethod()]
+      public void LogFatalWithException()
+      {
+         //Arrange
+         var log = LoggerFactory.CreateLog();
+
+         //Act
+         log.Fatal("{0}", new ArgumentNullException("param"), "the debug mesage");
+      }
+
+   }
+
 }

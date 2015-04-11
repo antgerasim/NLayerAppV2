@@ -9,100 +9,91 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //====================================================================================
-using System;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;
+
+using Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.ViewModelBase;
 
 namespace Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.ViewModels
 {
-    /// <summary>
-    /// ViewModel Menu orders
-    /// </summary>
-    public class VMMenuOrders
-        : ObservableObject
-    {
 
-        #region Private fields
+   /// <summary>
+   ///    ViewModel Menu orders
+   /// </summary>
+   public class VmMenuOrders : ObservableObject
+   {
+      #region Private fields
+      private ICommand _addOrderCommand;
+      private ICommand _viewOrdersCommand;
+      #endregion
 
-        private ICommand _addOrderCommand;
-        private ICommand _viewOrdersCommand;
+      #region Properties
+      public string ActualState
+      {
+         get
+         {
+            return ((MainPage) App.Current.RootVisual).ActualState;
+         }
+         set
+         {
+            ((MainPage) App.Current.RootVisual).ActualState = value;
+         }
+      }
 
-        #endregion
+      public MainPage MainPage
+      {
+         get
+         {
+            return ((MainPage) App.Current.RootVisual);
+         }
+      }
+      #endregion
 
-        #region Properties
-
-        public string ActualState
-        {
-            get { return ((MainPage)App.Current.RootVisual).actualState; }
-            set { ((MainPage)App.Current.RootVisual).actualState = value; }
-        }
-
-        public MainPage MainPage
-        {
-            get { return ((MainPage)App.Current.RootVisual); }
-        }
-
-        #endregion
-
-        #region Command Properties
-
-        public ICommand AddCommand
-        {
-            get
-            {
-                if (_addOrderCommand == null)
-                {
-                    _addOrderCommand = new DelegateCommand(AddOrderExecute, CanAddOrderExecute);
-                }
-                return _addOrderCommand;
+      #region Command Properties
+      public ICommand AddCommand
+      {
+         get
+         {
+            if (_addOrderCommand == null) {
+               _addOrderCommand = new DelegateCommand(AddOrderExecute, CanAddOrderExecute);
             }
-        }
+            return _addOrderCommand;
+         }
+      }
 
-        public ICommand ViewCommand
-        {
-            get
-            {
-                if (_viewOrdersCommand == null)
-                {
-                    _viewOrdersCommand = new DelegateCommand(ViewOrdersExecute, CanViewOrdersExecute);
-                }
-                return _viewOrdersCommand;
+      public ICommand ViewCommand
+      {
+         get
+         {
+            if (_viewOrdersCommand == null) {
+               _viewOrdersCommand = new DelegateCommand(ViewOrdersExecute, CanViewOrdersExecute);
             }
-        }
+            return _viewOrdersCommand;
+         }
+      }
+      #endregion
 
-        #endregion
+      #region Command Methods
+      private bool CanAddOrderExecute()
+      {
+         return true;
+      }
 
-        #region Command Methods
+      private void AddOrderExecute()
+      {
+         VisualStateManager.GoToState(MainPage, "ToAddOrder", true);
+      }
 
-        private bool CanAddOrderExecute()
-        {
-            return true;
-        }
+      private bool CanViewOrdersExecute()
+      {
+         return true;
+      }
 
-        private void AddOrderExecute()
-        {
-            VisualStateManager.GoToState(MainPage, "ToAddOrder", true);
-        }
+      private void ViewOrdersExecute()
+      {
+         VisualStateManager.GoToState(MainPage, "ToOrderList", true);
+      }
+      #endregion
+   }
 
-        private bool CanViewOrdersExecute()
-        {
-            return true;
-        }
-
-        private void ViewOrdersExecute()
-        {
-            VisualStateManager.GoToState(MainPage, "ToOrderList", true);
-        }
-
-        #endregion
-
-    }
 }

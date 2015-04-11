@@ -10,256 +10,271 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Transactions;
+
+using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
+using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.Resources;
+using Microsoft.Samples.NLayerApp.Application.Seedwork;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Services;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
+using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging;
+using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Validator;
 
 namespace Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Transactions;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.Resources;
-    using Microsoft.Samples.NLayerApp.Application.Seedwork;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Services;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Validator;
 
-    /// <summary>
-    /// The bank management service implementation
-    /// </summary>
-    public class BankAppService
-        : IBankAppService
-    {
-        #region Members
+   /// <summary>
+   ///    The bank management service implementation
+   /// </summary>
+   public class BankAppService : IBankAppService
+   {
+      #region Constructor
+      /// <summary>
+      ///    Create a new instance
+      /// </summary>
+      public BankAppService(
+         IBankAccountRepository bankAccountRepository,
+         // the bank account repository dependency
+         ICustomerRepository customerRepository,
+         // the customer repository dependency
+         IBankTransferService transferService)
+      {
+         //check preconditions
+         if (bankAccountRepository == null) { throw new ArgumentNullException("bankAccountRepository"); }
 
-        readonly IBankAccountRepository _bankAccountRepository;
-        readonly ICustomerRepository _customerRepository;
-        readonly IBankTransferService _transferService;
+         if (customerRepository == null) { throw new ArgumentNullException("customerRepository"); }
 
-        #endregion
+         if (transferService == null) { throw new ArgumentNullException("trasferService"); }
 
-        #region Constructor
+         _bankAccountRepository = bankAccountRepository;
+         _customerRepository = customerRepository;
+         _transferService = transferService;
+      }
+      #endregion
 
-        /// <summary>
-        /// Create a new instance 
-        /// </summary>
-        public BankAppService(IBankAccountRepository bankAccountRepository, // the bank account repository dependency
-                              ICustomerRepository customerRepository, // the customer repository dependency
-                              IBankTransferService transferService)
-        {
-            //check preconditions
-            if (bankAccountRepository == null)
-                throw new ArgumentNullException("bankAccountRepository");
+      #region IDisposable Members
+      /// <summary>
+      ///    <see cref="M:System.IDisposable.Dispose" />
+      /// </summary>
+      public void Dispose()
+      {
+         //dispose all resources
+         _bankAccountRepository.Dispose();
+         _customerRepository.Dispose();
+      }
+      #endregion
 
-            if (customerRepository == null)
-                throw new ArgumentNullException("customerRepository");
+      #region Members
+      private readonly IBankAccountRepository _bankAccountRepository;
+      private readonly ICustomerRepository _customerRepository;
+      private readonly IBankTransferService _transferService;
+      #endregion
 
-            if (transferService == null)
-                throw new ArgumentNullException("trasferService");
+      #region IBankAppService Members
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </summary>
+      /// <param name="bankAccountDto">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </param>
+      /// <returns>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </returns>
+      public BankAccountDto AddBankAccount(BankAccountDto bankAccountDto)
+      {
+         if (bankAccountDto == null || bankAccountDto.CustomerId == Guid.Empty) {
+            throw new ArgumentException(Messages.warning_CannotAddNullBankAccountOrInvalidCustomer);
+         }
 
-            _bankAccountRepository = bankAccountRepository;
-            _customerRepository = customerRepository;
-            _transferService = transferService;
-        }
+         //check if exists the customer for this bank account
+         var associatedCustomer = _customerRepository.Get(bankAccountDto.CustomerId);
 
-        #endregion
+         if (associatedCustomer != null) // if the customer exist
+         {
+            //Create a new bank account  number
+            var accountNumber = CalculateNewBankAccountNumber();
 
-        #region IBankAppService Members
+            //Create account from factory 
+            var account = BankAccountFactory.CreateBankAccount(associatedCustomer, accountNumber);
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/>
-        /// </summary>
-        /// <param name="bankAccountDTO"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/></param>
-        /// <returns><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/></returns>
-        public BankAccountDTO AddBankAccount(BankAccountDTO bankAccountDTO)
-        {
-            if (bankAccountDTO == null || bankAccountDTO.CustomerId == Guid.Empty)
-                throw new ArgumentException(Messages.warning_CannotAddNullBankAccountOrInvalidCustomer);
+            //save bank account
+            SaveBankAccount(account);
 
-            //check if exists the customer for this bank account
-            var associatedCustomer = _customerRepository.Get(bankAccountDTO.CustomerId);
+            return account.ProjectedAs<BankAccountDto>();
+         }
+         else //the customer for this bank account not exist, cannot create a new bank account
+         {
+            throw new InvalidOperationException(Messages.warning_CannotCreateBankAccountForNonExistingCustomer);
+         }
 
-            if (associatedCustomer != null) // if the customer exist
+      }
+
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </summary>
+      /// <param name="bankAccountId">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </param>
+      /// <returns>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </returns>
+      public bool LockBankAccount(Guid bankAccountId)
+      {
+         //recover bank account, lock and commit changes
+         var bankAccount = _bankAccountRepository.Get(bankAccountId);
+
+         if (bankAccount != null)
+         {
+            bankAccount.Lock();
+
+            _bankAccountRepository.UnitOfWork.Commit();
+
+            return true;
+         }
+         else // if not exist the bank account return false
+         {
+            LoggerFactory.CreateLog().LogWarning(Messages.warning_CannotLockNonExistingBankAccount, bankAccountId);
+
+            return false;
+         }
+      }
+
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </summary>
+      /// <returns>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </returns>
+      public List<BankAccountDto> FindBankAccounts()
+      {
+         var bankAccounts = _bankAccountRepository.GetAll();
+
+         if (bankAccounts != null && bankAccounts.Any()) {
+            return bankAccounts.ProjectedAsCollection<BankAccountDto>();
+         }
+         else // no results
+         {
+            return null;
+         }
+      }
+
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </summary>
+      /// <param name="fromAccount">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </param>
+      /// <param name="toAccount">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </param>
+      /// <param name="amount">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </param>
+      public void PerformBankTransfer(BankAccountDto fromAccount, BankAccountDto toAccount, decimal amount)
+      {
+         //Application-Logic Process: 
+         // 1º Get Accounts objects from Repositories
+         // 2º Start Transaction
+         // 3º Call PerformTransfer method in Domain Service
+         // 4º If no exceptions, commit the unit of work and complete transaction
+
+         if (BankAccountHasIdentity(fromAccount) && BankAccountHasIdentity(toAccount))
+         {
+            var source = _bankAccountRepository.Get(fromAccount.Id);
+            var target = _bankAccountRepository.Get(toAccount.Id);
+
+            if (source != null & target != null) // if all accounts exist
             {
-                //Create a new bank account  number
-                var accountNumber = CalculateNewBankAccountNumber();
+               using (var scope = new TransactionScope())
+               {
+                  //perform transfer
+                  _transferService.PerformTransfer(amount, source, target);
 
-                //Create account from factory 
-                var account = BankAccountFactory.CreateBankAccount(associatedCustomer, accountNumber);
+                  //comit unit of work
+                  _bankAccountRepository.UnitOfWork.Commit();
 
-                //save bank account
-                SaveBankAccount(account);
-
-                return account.ProjectedAs<BankAccountDTO>();
-            }
-            else //the customer for this bank account not exist, cannot create a new bank account
-                throw new InvalidOperationException(Messages.warning_CannotCreateBankAccountForNonExistingCustomer);
-
-
-        }
-
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/>
-        /// </summary>
-        /// <param name="bankAccountId"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/></param>
-        /// <returns><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/></returns>
-        public bool LockBankAccount(Guid bankAccountId)
-        {
-            //recover bank account, lock and commit changes
-            var bankAccount = _bankAccountRepository.Get(bankAccountId);
-
-            if (bankAccount != null)
-            {
-                bankAccount.Lock();
-
-                _bankAccountRepository.UnitOfWork.Commit();
-
-                return true;
-            }
-            else // if not exist the bank account return false
-            {
-                LoggerFactory.CreateLog().LogWarning(Messages.warning_CannotLockNonExistingBankAccount, bankAccountId);
-
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/>
-        /// </summary>
-        /// <returns><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/></returns>
-        public List<BankAccountDTO> FindBankAccounts()
-        {
-            var bankAccounts = _bankAccountRepository.GetAll();
-
-            if (bankAccounts != null
-                &&
-                bankAccounts.Any())
-            {
-                return bankAccounts.ProjectedAsCollection<BankAccountDTO>();
-            }
-            else // no results
-                return null;
-        }
-
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/>
-        /// </summary>
-        /// <param name="fromAccount"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/></param>
-        /// <param name="toAccount"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/></param>
-        /// <param name="amount"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/></param>
-        public void PerformBankTransfer(BankAccountDTO fromAccount, BankAccountDTO toAccount, decimal amount)
-        {
-            //Application-Logic Process: 
-            // 1º Get Accounts objects from Repositories
-            // 2º Start Transaction
-            // 3º Call PerformTransfer method in Domain Service
-            // 4º If no exceptions, commit the unit of work and complete transaction
-
-            if (BankAccountHasIdentity(fromAccount)
-                &&
-                BankAccountHasIdentity(toAccount))
-            {
-                var source = _bankAccountRepository.Get(fromAccount.Id);
-                var target = _bankAccountRepository.Get(toAccount.Id);
-
-                if (source != null & target != null) // if all accounts exist
-                {
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        //perform transfer
-                        _transferService.PerformTransfer(amount, source, target);
-
-                        //comit unit of work
-                        _bankAccountRepository.UnitOfWork.Commit();
-
-                        //complete transaction
-                        scope.Complete();
-                    }
-                }
-                else
-                    LoggerFactory.CreateLog().LogError(Messages.error_CannotPerformTransferInvalidAccounts);
+                  //complete transaction
+                  scope.Complete();
+               }
             }
             else
-                LoggerFactory.CreateLog().LogError(Messages.error_CannotPerformTransferInvalidAccounts);
-
-        }
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService"/>
-        /// </summary>
-        /// <param name="bankAccountId"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.ERPModule.Services.IBankManagementService"/></param>
-        /// <returns><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.ERPModule.Services.IBankManagementService"/></returns>
-        public List<BankActivityDTO> FindBankAccountActivities(Guid bankAccountId)
-        {
-            var account = _bankAccountRepository.Get(bankAccountId);
-
-            if (account != null)
             {
-                return account.BankAccountActivity
-                              .ProjectedAsCollection<BankActivityDTO>();
+               LoggerFactory.CreateLog().LogError(Messages.error_CannotPerformTransferInvalidAccounts);
             }
-            else // the bank account not exist
-            {
-                LoggerFactory.CreateLog().LogWarning(Messages.warning_CannotGetActivitiesForInvalidOrNotExistingBankAccount);
-                return null;
-            }
-        }
+         }
+         else
+         {
+            LoggerFactory.CreateLog().LogError(Messages.error_CannotPerformTransferInvalidAccounts);
+         }
 
-        #endregion
+      }
 
-        #region IDisposable Members
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IBankAppService" />
+      /// </summary>
+      /// <param name="bankAccountId">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.ERPModule.Services.IBankManagementService" />
+      /// </param>
+      /// <returns>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.ERPModule.Services.IBankManagementService" />
+      /// </returns>
+      public List<BankActivityDto> FindBankAccountActivities(Guid bankAccountId)
+      {
+         var account = _bankAccountRepository.Get(bankAccountId);
 
-        /// <summary>
-        /// <see cref="M:System.IDisposable.Dispose"/>
-        /// </summary>
-        public void Dispose()
-        {
-            //dispose all resources
-            _bankAccountRepository.Dispose();
-            _customerRepository.Dispose();
-        }
+         if (account != null) {
+            return account.BankAccountActivity.ProjectedAsCollection<BankActivityDto>();
+         }
+         else // the bank account not exist
+         {
+            LoggerFactory.CreateLog().LogWarning(Messages.warning_CannotGetActivitiesForInvalidOrNotExistingBankAccount);
+            return null;
+         }
+      }
+      #endregion
 
-        #endregion
+      #region Private Methods
+      private void SaveBankAccount(BankAccount bankAccount)
+      {
+         //validate bank account
+         var validator = EntityValidatorFactory.CreateValidator();
 
-        #region Private Methods
+         if (validator.IsValid<BankAccount>(bankAccount)) // save entity
+         {
+            _bankAccountRepository.Add(bankAccount);
+            _bankAccountRepository.UnitOfWork.Commit();
+         }
+         else //throw validation errors
+         {
+            throw new ApplicationValidationErrorsException(validator.GetInvalidMessages(bankAccount));
+         }
+      }
 
-        void SaveBankAccount(BankAccount bankAccount)
-        {
-            //validate bank account
-            var validator = EntityValidatorFactory.CreateValidator();
+      private BankAccountNumber CalculateNewBankAccountNumber()
+      {
+         var bankAccountNumber = new BankAccountNumber();
 
-            if (validator.IsValid<BankAccount>(bankAccount)) // save entity
-            {
-                _bankAccountRepository.Add(bankAccount);
-                _bankAccountRepository.UnitOfWork.Commit();
-            }
-            else //throw validation errors
-                throw new ApplicationValidationErrorsException(validator.GetInvalidMessages(bankAccount));
-        }
+         //simulate bank account number creation....
 
-        BankAccountNumber CalculateNewBankAccountNumber()
-        {
-            var bankAccountNumber = new BankAccountNumber();
+         bankAccountNumber.OfficeNumber = "2354";
+         bankAccountNumber.NationalBankCode = "2134";
+         bankAccountNumber.CheckDigits = "02";
+         bankAccountNumber.AccountNumber = new Random().Next(1, Int32.MaxValue).ToString();
 
-            //simulate bank account number creation....
+         return bankAccountNumber;
 
-            bankAccountNumber.OfficeNumber = "2354";
-            bankAccountNumber.NationalBankCode = "2134";
-            bankAccountNumber.CheckDigits = "02";
-            bankAccountNumber.AccountNumber = new Random().Next(1, Int32.MaxValue).ToString();
+      }
 
-            return bankAccountNumber;
+      private bool BankAccountHasIdentity(BankAccountDto bankAccountDto)
+      {
+         //return true is bank account dto has identity
+         return (bankAccountDto != null && bankAccountDto.Id != Guid.Empty);
+      }
+      #endregion
+   }
 
-        }
-
-        bool BankAccountHasIdentity(BankAccountDTO bankAccountDTO)
-        {
-            //return true is bank account dto has identity
-            return (bankAccountDTO != null && bankAccountDTO.Id != Guid.Empty);
-        }
-
-        #endregion
-    }
 }

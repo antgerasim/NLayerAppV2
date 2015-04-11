@@ -10,16 +10,17 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
 namespace Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.OrderAgg
 {
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
-    /// <summary>
-    /// The order repository contract
-    /// </summary>
-    public interface IOrderRepository
-        :IRepository<Order>
-    {
-    }
+   /// <summary>
+   ///    The order repository contract
+   /// </summary>
+   public interface IOrderRepository : IRepository<Order>
+   {
+
+   }
+
 }

@@ -10,39 +10,43 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System;
+using System.Collections.Generic;
+using System.ServiceModel;
+
+using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
+using Microsoft.Samples.NLayerApp.DistributedServices.Seedwork.ErrorHandlers;
 
 namespace Microsoft.Samples.NLayerApp.DistributedServices.MainBoundedContext
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ServiceModel;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
-    using Microsoft.Samples.NLayerApp.DistributedServices.Seedwork.ErrorHandlers;
-    
-    /// <summary>
-    /// WCF SERVICE FACADE for Banking Module
-    /// </summary>
-    [ServiceContract]
-    public interface IBankingModuleService : IDisposable
-    {
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        BankAccountDTO AddNewBankAccount(BankAccountDTO bankAccount);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        bool LockBankAccount(Guid bankAccountId);
+   /// <summary>
+   ///    WCF SERVICE FACADE for Banking Module
+   /// </summary>
+   [ServiceContract]
+   public interface IBankingModuleService : IDisposable
+   {
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        List<BankAccountDTO> FindBankAccounts();
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      BankAccountDto AddNewBankAccount(BankAccountDto bankAccount);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        List<BankActivityDTO> FindBankAccountActivities(Guid bankAccountId);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      bool LockBankAccount(Guid bankAccountId);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        void PerformTransfer(BankAccountDTO from, BankAccountDTO to, decimal amount);
-    }
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      List<BankAccountDto> FindBankAccounts();
+
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      List<BankActivityDto> FindBankAccountActivities(Guid bankAccountId);
+
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      void PerformTransfer(BankAccountDto from, BankAccountDto to, decimal amount);
+
+   }
+
 }

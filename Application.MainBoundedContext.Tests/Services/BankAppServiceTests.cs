@@ -10,454 +10,475 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Application.MainBoundedContext.Tests
+using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services;
+using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg.Fakes;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Services;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg.Fakes;
+using Microsoft.Samples.NLayerApp.Domain.Seedwork.Fakes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Application.MainBoundedContext.Tests.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg.Moles;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Services;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg.Moles;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork.Moles;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.Moles;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Logging;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Validator;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Validator;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Adapter;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.ERPModule;
 
-    [TestClass()]
-    public class BankAppServiceTests
-    {
-        [TestMethod()]
-        public void LockBankAccountReturnFalseIfIdentifierIsEmpty()
-        {
-            //Arrange
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            bankAccountRepository.GetGuid = guid =>
+   [TestClass()]
+   public class BankAppServiceTests
+   {
+
+      [TestMethod()]
+      public void LockBankAccountReturnFalseIfIdentifierIsEmpty()
+      {
+         //Arrange
+         var bankAccountRepository = new StubIBankAccountRepository();
+         bankAccountRepository.GetGuid = guid =>
+         {
+            if (guid == Guid.Empty) {
+               return null;
+            }
+            else
             {
-                if (guid == Guid.Empty)
-                    return null;
-                else
-                    return new BankAccount { };
-            };
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            IBankTransferService transferService = new BankTransferService();
+               return new BankAccount
+               {
+               };
+            }
+         };
+         var customerRepository = new StubICustomerRepository();
+         IBankTransferService transferService = new BankTransferService();
 
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
 
-            //Act
-            var result = bankingService.LockBankAccount(Guid.Empty);
+         //Act
+         var result = bankingService.LockBankAccount(Guid.Empty);
 
-            //Assert
-            Assert.IsFalse(result);
-        }
-        [TestMethod()]
-        public void LockBankAccountReturnFalseIfBankAccountNotExist()
-        {
-            //Arrange
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            IBankTransferService transferService = new BankTransferService();
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            bankAccountRepository.UnitOfWorkGet = () =>
+         //Assert
+         Assert.IsFalse(result);
+      }
+
+      [TestMethod()]
+      public void LockBankAccountReturnFalseIfBankAccountNotExist()
+      {
+         //Arrange
+         var customerRepository = new StubICustomerRepository();
+         IBankTransferService transferService = new BankTransferService();
+         var bankAccountRepository = new StubIBankAccountRepository();
+         bankAccountRepository.UnitOfWorkGet = () =>
+         {
+            var uow = new StubIUnitOfWork();
+            uow.Commit = () => { };
+
+            return uow;
+         };
+         bankAccountRepository.GetGuid = (guid) => { return null; };
+
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+
+         //Act
+         var result = bankingService.LockBankAccount(Guid.NewGuid());
+
+         //Assert
+         Assert.IsFalse(result);
+      }
+
+      [TestMethod()]
+      public void LockBankAccountReturnTrueIfBankAccountIsLocked()
+      {
+         //Arrange
+         var customerRepository = new StubICustomerRepository();
+         IBankTransferService transferService = new BankTransferService();
+
+         var bankAccountRepository = new StubIBankAccountRepository();
+         bankAccountRepository.UnitOfWorkGet = () =>
+         {
+            var uow = new StubIUnitOfWork();
+            uow.Commit = () => { };
+
+            return uow;
+         };
+
+         bankAccountRepository.GetGuid = (guid) =>
+         {
+            var customer = new Customer();
+            customer.GenerateNewIdentity();
+
+            var bankAccount = new BankAccount();
+            bankAccount.GenerateNewIdentity();
+
+            bankAccount.SetCustomerOwnerOfThisBankAccount(customer);
+
+            return bankAccount;
+         };
+
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+
+         //Act
+         var result = bankingService.LockBankAccount(Guid.NewGuid());
+
+         //Assert
+         Assert.IsTrue(result);
+      }
+
+      [TestMethod()]
+      [ExpectedException(typeof (ArgumentException))]
+      public void AddBankAccountThrowArgumentNullExceptionWhenBankAccountDtoIsNull()
+      {
+         //Arrange
+         var bankAccountRepository = new StubIBankAccountRepository();
+         var customerRepository = new StubICustomerRepository();
+         IBankTransferService transferService = new BankTransferService();
+
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+
+         //Act
+         var result = bankingService.AddBankAccount(null);
+
+         //Assert
+
+         Assert.IsNull(result);
+      }
+
+      [TestMethod()]
+      [ExpectedException(typeof (ArgumentException))]
+      public void AddBankAccountReturnNullWhenCustomerIdIsEmpty()
+      {
+         //Arrange
+         var bankAccountRepository = new StubIBankAccountRepository();
+         var customerRepository = new StubICustomerRepository();
+         IBankTransferService transferService = new BankTransferService();
+
+         var dto = new BankAccountDto()
+         {
+            CustomerId = Guid.Empty
+         };
+
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+
+         //Act
+         var result = bankingService.AddBankAccount(dto);
+      }
+
+      [TestMethod()]
+      [ExpectedException(typeof (InvalidOperationException))]
+      public void AddBankAccountThrowInvalidOperationExceptionWhenCustomerNotExist()
+      {
+         //Arrange
+         var bankAccountRepository = new StubIBankAccountRepository();
+         var customerRepository = new StubICustomerRepository();
+         customerRepository.GetGuid = (guid) => { return null; };
+
+         IBankTransferService transferService = new BankTransferService();
+
+         var dto = new BankAccountDto()
+         {
+            CustomerId = Guid.NewGuid()
+         };
+
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+
+         //Act
+         bankingService.AddBankAccount(dto);
+      }
+
+      [TestMethod()]
+      public void AddBankAccountReturnDtoWhenSaveSucceed()
+      {
+         //Arrange
+         IBankTransferService transferService = new BankTransferService();
+
+         var customerRepository = new StubICustomerRepository();
+         customerRepository.GetGuid = (guid) =>
+         {
+            var customer = new Customer()
             {
-                var uow = new SIUnitOfWork();
-                uow.Commit = () => { };
-
-                return uow;
-            };
-            bankAccountRepository.GetGuid = (guid) =>
-            {
-                return null;
-            };
-
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
-
-            //Act
-            var result = bankingService.LockBankAccount(Guid.NewGuid());
-
-            //Assert
-            Assert.IsFalse(result);
-        }
-        [TestMethod()]
-        public void LockBankAccountReturnTrueIfBankAccountIsLocked()
-        {
-            //Arrange
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            IBankTransferService transferService = new BankTransferService();
-            
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            bankAccountRepository.UnitOfWorkGet = () =>
-            {
-                var uow = new SIUnitOfWork();
-                uow.Commit = () => { };
-
-                return uow;
-            };
-
-            bankAccountRepository.GetGuid = (guid) =>
-            {
-                var customer = new Customer();
-                customer.GenerateNewIdentity();
-
-                var bankAccount = new BankAccount();
-                bankAccount.GenerateNewIdentity();
-
-                bankAccount.SetCustomerOwnerOfThisBankAccount(customer);
-
-                return bankAccount;
-            };
-
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
-
-            //Act
-            var result = bankingService.LockBankAccount(Guid.NewGuid());
-
-            //Assert
-            Assert.IsTrue(result);
-        }
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void AddBankAccountThrowArgumentNullExceptionWhenBankAccountDTOIsNull()
-        {
-            //Arrange
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            IBankTransferService transferService = new BankTransferService();
-            
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
-
-            //Act
-            var result = bankingService.AddBankAccount(null);
-
-            //Assert
-
-            Assert.IsNull(result);
-        }
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void AddBankAccountReturnNullWhenCustomerIdIsEmpty()
-        {
-            //Arrange
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            IBankTransferService transferService = new BankTransferService();
-          
-            var dto = new BankAccountDTO()
-            {
-                CustomerId = Guid.Empty
-            };
-
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
-
-            //Act
-            var result = bankingService.AddBankAccount(dto);
-        }
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void AddBankAccountThrowInvalidOperationExceptionWhenCustomerNotExist()
-        {
-            //Arrange
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            customerRepository.GetGuid = (guid) => { return null; };
-
-            IBankTransferService transferService = new BankTransferService();
-
-            var dto = new BankAccountDTO()
-            {
-                CustomerId = Guid.NewGuid()
-            };
-
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
-
-            //Act
-            bankingService.AddBankAccount(dto);
-        }
-
-        [TestMethod()]
-        public void AddBankAccountReturnDTOWhenSaveSucceed()
-        {
-            //Arrange
-            IBankTransferService transferService = new BankTransferService();
-
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            customerRepository.GetGuid = (guid) =>
-            {
-                var customer = new Customer()
-                {
-                    FirstName = "Jhon",
-                    LastName = "El rojo"
-                };
-
-                customer.ChangeCurrentIdentity(guid);
-
-                return customer;
+               FirstName = "Jhon",
+               LastName = "El rojo"
             };
 
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            bankAccountRepository.AddBankAccount = (ba) => { };
-            bankAccountRepository.UnitOfWorkGet = () =>
-            {
-                var uow = new SIUnitOfWork();
-                uow.Commit = () => { };
+            customer.ChangeCurrentIdentity(guid);
 
-                return uow;
+            return customer;
+         };
+
+         var bankAccountRepository = new StubIBankAccountRepository();
+         bankAccountRepository.AddBankAccount = (ba) => { };
+         bankAccountRepository.UnitOfWorkGet = () =>
+         {
+            var uow = new StubIUnitOfWork();
+            uow.Commit = () => { };
+
+            return uow;
+         };
+
+         var dto = new BankAccountDto()
+         {
+            CustomerId = Guid.NewGuid(),
+            BankAccountNumber = "BA"
+         };
+
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+
+         //Act
+         var result = bankingService.AddBankAccount(dto);
+
+         //Assert
+         Assert.IsNotNull(result);
+
+      }
+
+      [TestMethod()]
+      public void FindBankAccountsReturnAllItems()
+      {
+         var bankAccountRepository = new StubIBankAccountRepository();
+         bankAccountRepository.GetAll = () =>
+         {
+            var customer = new Customer();
+            customer.GenerateNewIdentity();
+
+            var bankAccount = new BankAccount()
+            {
+               BankAccountNumber = new BankAccountNumber("4444", "5555", "3333333333", "02"),
+            };
+            bankAccount.SetCustomerOwnerOfThisBankAccount(customer);
+            bankAccount.GenerateNewIdentity();
+
+            var accounts = new List<BankAccount>()
+            {
+               bankAccount
             };
 
+            return accounts;
 
-            var dto = new BankAccountDTO()
+         };
+
+         var customerRepository = new StubICustomerRepository();
+         IBankTransferService transferService = new BankTransferService();
+
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+
+         //Act
+         var result = bankingService.FindBankAccounts();
+
+         Assert.IsNotNull(result);
+         Assert.IsTrue(result.Count == 1);
+
+      }
+
+      [TestMethod()]
+      public void FindBankAccountActivitiesReturnNullWhenBankAccountIdIsEmpty()
+      {
+         //Arrange
+
+         var bankAccountRepository = new StubIBankAccountRepository();
+         bankAccountRepository.GetGuid = guid =>
+         {
+            if (guid == Guid.Empty) {
+               return null;
+            }
+            else
             {
-                CustomerId = Guid.NewGuid(),
-                BankAccountNumber = "BA"
-            };
+               return new BankAccount
+               {
+               };
+            }
+         };
+         var customerRepository = new StubICustomerRepository();
+         IBankTransferService transferService = new BankTransferService();
 
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
 
-            //Act
-            var result = bankingService.AddBankAccount(dto);
+         //Act
+         var result = bankingService.FindBankAccountActivities(Guid.Empty);
 
-            //Assert
-            Assert.IsNotNull(result);
+         //Assert
+         Assert.IsNull(result);
+      }
 
-        }
+      [TestMethod()]
+      public void FindBankAccountActivitiesReturnNullWhenBankAccountNotExists()
+      {
+         //Arrange
 
-        [TestMethod()]
-        public void FindBankAccountsReturnAllItems()
-        {
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            bankAccountRepository.GetAll = () =>
+         var bankAccountRepository = new StubIBankAccountRepository();
+         bankAccountRepository.GetGuid = (guid) => { return null; };
+         var customerRepository = new StubICustomerRepository();
+         IBankTransferService transferService = new BankTransferService();
+
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+
+         //Act
+         var result = bankingService.FindBankAccountActivities(Guid.NewGuid());
+
+         //Assert
+         Assert.IsNull(result);
+      }
+
+      [TestMethod()]
+      public void FindBankAccountActivitiesReturnAllItems()
+      {
+         //Arrange
+         var bankAccountRepository = new StubIBankAccountRepository();
+         bankAccountRepository.GetGuid = (guid) =>
+         {
+            var bActivity1 = new BankAccountActivity()
             {
-                var customer = new Customer();
-                customer.GenerateNewIdentity();
-
-                var bankAccount = new BankAccount()
-                {
-                    BankAccountNumber = new BankAccountNumber("4444", "5555", "3333333333", "02"),
-                };
-                bankAccount.SetCustomerOwnerOfThisBankAccount(customer);
-                bankAccount.GenerateNewIdentity();
-
-                var accounts = new List<BankAccount>(){ bankAccount };
-
-                return accounts;
-
+               Date = DateTime.Now,
+               Amount = 1000
             };
+            bActivity1.GenerateNewIdentity();
 
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            IBankTransferService transferService = new BankTransferService();
-
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
-
-            //Act
-            var result = bankingService.FindBankAccounts();
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Count == 1);
-
-        }
-
-        [TestMethod()]
-        public void FindBankAccountActivitiesReturnNullWhenBankAccountIdIsEmpty()
-        {
-            //Arrange
-
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            bankAccountRepository.GetGuid = guid =>
+            var bActivity2 = new BankAccountActivity()
             {
-                if (guid == Guid.Empty)
-                    return null;
-                else
-                    return new BankAccount { };
+               Date = DateTime.Now,
+               Amount = 1000
             };
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            IBankTransferService transferService = new BankTransferService();
+            bActivity2.GenerateNewIdentity();
 
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
-
-            //Act
-            var result = bankingService.FindBankAccountActivities(Guid.Empty);
-
-
-            //Assert
-            Assert.IsNull(result);
-        }
-        [TestMethod()]
-        public void FindBankAccountActivitiesReturnNullWhenBankAccountNotExists()
-        {
-            //Arrange
-
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            bankAccountRepository.GetGuid = (guid) =>
+            var bankAccount = new BankAccount()
             {
-                return null;
+               BankAccountActivity = new HashSet<BankAccountActivity>()
+               {
+                  bActivity1,
+                  bActivity2
+               }
             };
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            IBankTransferService transferService = new BankTransferService();
+            bankAccount.GenerateNewIdentity();
 
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+            return bankAccount;
+         };
 
-            //Act
-            var result = bankingService.FindBankAccountActivities(Guid.NewGuid());
+         var customerRepository = new StubICustomerRepository();
+         IBankTransferService transferService = new BankTransferService();
 
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
 
-            //Assert
-            Assert.IsNull(result);
-        }
-        [TestMethod()]
-        public void FindBankAccountActivitiesReturnAllItems()
-        {
-            //Arrange
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            bankAccountRepository.GetGuid = (guid) =>
-            {
-                var bActivity1 = new BankAccountActivity() { Date = DateTime.Now, Amount = 1000 };
-                bActivity1.GenerateNewIdentity();
+         //Act
+         var result = bankingService.FindBankAccountActivities(Guid.NewGuid());
 
-                var bActivity2 = new BankAccountActivity() { Date = DateTime.Now, Amount = 1000 };
-                bActivity2.GenerateNewIdentity();
+         //Assert
+         Assert.IsNotNull(result);
+         Assert.IsTrue(result.Count == 2);
+      }
 
-                var bankAccount = new BankAccount()
-                {
-                    BankAccountActivity = new HashSet<BankAccountActivity>(){ bActivity1,bActivity2}
-                };
-                bankAccount.GenerateNewIdentity();
+      [TestMethod()]
+      public void PerformBankTransfer()
+      {
+         //Arrange
 
-                return bankAccount;
-            };
+         //--> source bank account data
+         var sourceId = new Guid("3481009C-A037-49DB-AE05-44FF6DB67DEC");
+         var bankAccountNumberSource = new BankAccountNumber("4444", "5555", "3333333333", "02");
+         var sourceCustomer = new Customer();
+         sourceCustomer.GenerateNewIdentity();
 
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            IBankTransferService transferService = new BankTransferService();
+         var source = BankAccountFactory.CreateBankAccount(sourceCustomer, bankAccountNumberSource);
+         source.ChangeCurrentIdentity(sourceId);
+         source.DepositMoney(1000, "initial");
 
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+         var sourceBankAccountDto = new BankAccountDto()
+         {
+            Id = sourceId,
+            BankAccountNumber = source.Iban
+         };
 
-            //Act
-            var result = bankingService.FindBankAccountActivities(Guid.NewGuid());
+         //--> target bank account data
+         var targetCustomer = new Customer();
+         targetCustomer.GenerateNewIdentity();
+         var targetId = new Guid("8A091975-F783-4730-9E03-831E9A9435C1");
+         var bankAccountNumberTarget = new BankAccountNumber("1111", "2222", "3333333333", "01");
+         var target = BankAccountFactory.CreateBankAccount(targetCustomer, bankAccountNumberTarget);
+         target.ChangeCurrentIdentity(targetId);
 
+         var targetBankAccountDto = new BankAccountDto()
+         {
+            Id = targetId,
+            BankAccountNumber = target.Iban
+         };
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Count == 2);
-        }
+         var accounts = new List<BankAccount>()
+         {
+            source,
+            target
+         };
 
-        [TestMethod()]
-        public void PerformBankTransfer()
-        {
-            //Arrange
+         var bankAccountRepository = new StubIBankAccountRepository();
+         bankAccountRepository.GetGuid = (guid) => { return accounts.Where(ba => ba.Id == guid).SingleOrDefault(); };
+         bankAccountRepository.UnitOfWorkGet = () =>
+         {
+            var unitOfWork = new StubIUnitOfWork();
+            unitOfWork.Commit = () => { };
 
-            //--> source bank account data
+            return unitOfWork;
+         };
 
-            var sourceId = new Guid("3481009C-A037-49DB-AE05-44FF6DB67DEC");
-            var bankAccountNumberSource = new BankAccountNumber("4444", "5555", "3333333333", "02");
-            var sourceCustomer = new Customer();
-            sourceCustomer.GenerateNewIdentity();
+         var customerRepository = new StubICustomerRepository();
+         IBankTransferService transferService = new BankTransferService();
 
-            var source = BankAccountFactory.CreateBankAccount(sourceCustomer, bankAccountNumberSource);
-            source.ChangeCurrentIdentity(sourceId);
-            source.DepositMoney(1000, "initial");
+         IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
 
-            var sourceBankAccountDTO = new BankAccountDTO()
-            {
-                Id = sourceId,
-                BankAccountNumber = source.Iban
-            };
+         //Act
+         bankingService.PerformBankTransfer(sourceBankAccountDto, targetBankAccountDto, 100M);
 
-            //--> target bank account data
-            var targetCustomer = new Customer();
-            targetCustomer.GenerateNewIdentity();
-            var targetId = new Guid("8A091975-F783-4730-9E03-831E9A9435C1");
-            var bankAccountNumberTarget = new BankAccountNumber("1111", "2222", "3333333333", "01");
-            var target = BankAccountFactory.CreateBankAccount(targetCustomer, bankAccountNumberTarget);
-            target.ChangeCurrentIdentity(targetId);
+         //Assert
+         Assert.AreEqual(source.Balance, 900);
+         Assert.AreEqual(target.Balance, 100);
+      }
 
+      [TestMethod()]
+      [ExpectedException(typeof (ArgumentNullException))]
+      public void ConstructorThrowExceptionIfBankTransferServiceDependencyIsNull()
+      {
+         //Arrange
+         var customerRepository = new StubICustomerRepository();
+         var bankAcccountRepository = new StubIBankAccountRepository();
+         IBankTransferService transferService = null;
 
-            var targetBankAccountDTO = new BankAccountDTO()
-            {
-                Id = targetId,
-                BankAccountNumber = target.Iban
-            };
+         //Act
+         IBankAppService bankingService = new BankAppService(
+            bankAcccountRepository,
+            customerRepository,
+            transferService);
 
-            var accounts = new List<BankAccount>() { source, target };
+      }
 
+      [TestMethod()]
+      [ExpectedException(typeof (ArgumentNullException))]
+      public void ConstructorThrowExceptionIfCustomerRepositoryDependencyIsNull()
+      {
+         //Arrange
+         StubICustomerRepository customerRepository = null;
+         StubIBankAccountRepository bankAcccountRepository = new StubIBankAccountRepository();
+         IBankTransferService transferService = new BankTransferService();
 
-            SIBankAccountRepository bankAccountRepository = new SIBankAccountRepository();
-            bankAccountRepository.GetGuid = (guid) =>
-            {
-                return accounts.Where(ba => ba.Id == guid).SingleOrDefault();
-            };
-            bankAccountRepository.UnitOfWorkGet = () =>
-            {
-                var unitOfWork = new SIUnitOfWork();
-                unitOfWork.Commit = () => { };
+         //Act
+         IBankAppService bankingService = new BankAppService(
+            bankAcccountRepository,
+            customerRepository,
+            transferService);
 
-                return unitOfWork;
-            };
+      }
 
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            IBankTransferService transferService = new BankTransferService();
+      [TestMethod()]
+      [ExpectedException(typeof (ArgumentNullException))]
+      public void ConstructorThrowExceptionIfBankAccountRepositoryDependencyIsNull()
+      {
+         //Arrange
+         StubICustomerRepository customerRepository = new StubICustomerRepository();
+         StubIBankAccountRepository bankAcccountRepository = null;
+         IBankTransferService transferService = new BankTransferService();
 
-            IBankAppService bankingService = new BankAppService(bankAccountRepository, customerRepository, transferService);
+         //Act
+         IBankAppService bankingService = new BankAppService(
+            bankAcccountRepository,
+            customerRepository,
+            transferService);
 
-            //Act
-            bankingService.PerformBankTransfer(sourceBankAccountDTO, targetBankAccountDTO, 100M);
+      }
 
+   }
 
-            //Assert
-            Assert.AreEqual(source.Balance, 900);
-            Assert.AreEqual(target.Balance, 100);
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ConstructorThrowExceptionIfBankTransferServiceDependencyIsNull()
-        {
-            //Arrange
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            SIBankAccountRepository bankAcccountRepository = new SIBankAccountRepository();
-            IBankTransferService transferService = null;
-            
-
-            //Act
-            IBankAppService bankingService = new BankAppService(bankAcccountRepository, customerRepository, transferService);
-
-        }
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ConstructorThrowExceptionIfCustomerRepositoryDependencyIsNull()
-        {
-            //Arrange
-            SICustomerRepository customerRepository = null;
-            SIBankAccountRepository bankAcccountRepository = new SIBankAccountRepository();
-            IBankTransferService transferService = new BankTransferService();
-            
-
-            //Act
-            IBankAppService bankingService = new BankAppService(bankAcccountRepository, customerRepository, transferService);
-
-        }
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ConstructorThrowExceptionIfBankAccountRepositoryDependencyIsNull()
-        {
-            //Arrange
-            SICustomerRepository customerRepository = new SICustomerRepository();
-            SIBankAccountRepository bankAcccountRepository = null;
-            IBankTransferService transferService = new BankTransferService();
-
-            //Act
-            IBankAppService bankingService = new BankAppService(bankAcccountRepository, customerRepository, transferService);
-
-        }
-
-        
-    }
 }

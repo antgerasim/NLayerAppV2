@@ -1,64 +1,69 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+
+using Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.ViewModels;
 
 namespace Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.Controls
 {
-    public partial class MenuControl : UserControl
-    {
-        public MenuControl()
-        {
-            // Required to initialize variables
-            InitializeComponent();
-            this.DataContext = new ViewModels.VMMenu();
-        }
 
-        public string actualState
-        {
-            get { return ((MainPage)App.Current.RootVisual).actualState; }
-            set { ((MainPage)App.Current.RootVisual).actualState = value; }
-        }
+   public partial class MenuControl : UserControl
+   {
 
-        public MainPage mainPage
-        {
-            get { return ((MainPage)App.Current.RootVisual); }
-        }
+      public MenuControl()
+      {
+         // Required to initialize variables
+         InitializeComponent();
+         this.DataContext = new VmMenu();
+      }
 
+      public string ActualState
+      {
+         get
+         {
+            return ((MainPage) App.Current.RootVisual).ActualState;
+         }
+         set
+         {
+            ((MainPage) App.Current.RootVisual).ActualState = value;
+         }
+      }
+      public MainPage MainPage
+      {
+         get
+         {
+            return ((MainPage) App.Current.RootVisual);
+         }
+      }
 
-
-        private void BTN_Menu_Click(object sender, RoutedEventArgs e)
-        {
-            Button control = (Button)sender;
-            switch (control.Name)
+      private void BTN_Menu_Click(object sender, RoutedEventArgs e)
+      {
+         var control = (Button) sender;
+         switch (control.Name)
+         {
+            case "BTN_Customer":
             {
-                case "BTN_Customer":
-                    {
-                        VisualStateManager.GoToState(mainPage, "ToCustomer", true);
-                        actualState = "ToBanking";
+               VisualStateManager.GoToState(MainPage, "ToCustomer", true);
+               ActualState = "ToBanking";
 
-                        break;
-                    }
-
-                case "BTN_Orders":
-                    {
-                        VisualStateManager.GoToState(mainPage, "ToOrders", true);
-                        actualState = "ToOrders";
-                        break;
-                    }
-
-                case "BTN_Banking":
-                    {
-                        VisualStateManager.GoToState(mainPage, "ToBanking", true);
-                        actualState = "ToBanking";
-                        break;
-                    }
+               break;
             }
-        }
-    }
+
+            case "BTN_Orders":
+            {
+               VisualStateManager.GoToState(MainPage, "ToOrders", true);
+               ActualState = "ToOrders";
+               break;
+            }
+
+            case "BTN_Banking":
+            {
+               VisualStateManager.GoToState(MainPage, "ToBanking", true);
+               ActualState = "ToBanking";
+               break;
+            }
+         }
+      }
+
+   }
+
 }

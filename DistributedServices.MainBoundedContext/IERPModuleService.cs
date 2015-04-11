@@ -10,83 +10,87 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System;
+using System.Collections.Generic;
+using System.ServiceModel;
+
+using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
+using Microsoft.Samples.NLayerApp.DistributedServices.Seedwork.ErrorHandlers;
+
 namespace Microsoft.Samples.NLayerApp.DistributedServices.MainBoundedContext
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ServiceModel;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
-    using Microsoft.Samples.NLayerApp.DistributedServices.Seedwork.ErrorHandlers;
 
-    /// <summary>
-    /// WCF SERVICE FACADE FOR ERP MODULE
-    /// </summary>
-    [ServiceContract]
-    public interface IERPModuleService
-        :IDisposable
-    {
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        CustomerDTO AddNewCustomer(CustomerDTO customer);
+   /// <summary>
+   ///    WCF SERVICE FACADE FOR ERP MODULE
+   /// </summary>
+   [ServiceContract]
+   public interface IErpModuleService : IDisposable
+   {
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        void UpdateCustomer(CustomerDTO customer);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      CustomerDto AddNewCustomer(CustomerDto customer);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        void RemoveCustomer(Guid customer);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      void UpdateCustomer(CustomerDto customer);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        List<CustomerListDTO> FindCustomersInPage(int pageIndex, int pageCount);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      void RemoveCustomer(Guid customer);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        CustomerDTO FindCustomer(Guid customerId);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      List<CustomerListDto> FindCustomersInPage(int pageIndex, int pageCount);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        List<CustomerListDTO> FindCustomersByFilter(string filter);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      CustomerDto FindCustomer(Guid customerId);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        List<CountryDTO> FindCountriesInPage(int pageIndex, int pageCount);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      List<CustomerListDto> FindCustomersByFilter(string filter);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        List<CountryDTO> FindCountriesByFilter(string filter);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      List<CountryDto> FindCountriesInPage(int pageIndex, int pageCount);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        List<OrderListDTO> FindOrdersInPage(int pageIndex, int pageCount);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      List<CountryDto> FindCountriesByFilter(string filter);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        List<OrderListDTO> FindOrdersByFilter(DateTime from, DateTime to);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      List<OrderListDto> FindOrdersInPage(int pageIndex, int pageCount);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        List<OrderListDTO> FindOrdersByCustomer(Guid customerId);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      List<OrderListDto> FindOrdersByFilter(DateTime from, DateTime to);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        List<ProductDTO> FindProductsInPage(int pageIndex, int pageCount);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      List<OrderListDto> FindOrdersByCustomer(Guid customerId);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        List<ProductDTO> FindProductsByFilter(string filter);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      List<ProductDto> FindProductsInPage(int pageIndex, int pageCount);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        OrderDTO AddNewOrder(OrderDTO order);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      List<ProductDto> FindProductsByFilter(string filter);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        SoftwareDTO AddNewSoftware(SoftwareDTO software);
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      OrderDto AddNewOrder(OrderDto order);
 
-        [OperationContract()]
-        [FaultContract(typeof(ApplicationServiceError))]
-        BookDTO AddNewBook(BookDTO book);
-    }
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      SoftwareDto AddNewSoftware(SoftwareDto software);
+
+      [OperationContract()]
+      [FaultContract(typeof (ApplicationServiceError))]
+      BookDto AddNewBook(BookDto book);
+
+   }
+
 }

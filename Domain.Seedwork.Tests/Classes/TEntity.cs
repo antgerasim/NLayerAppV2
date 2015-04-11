@@ -10,18 +10,16 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
 namespace Domain.Seedwork.Tests.Classes
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
-    public class SampleEntity
-        :Entity
-    {
-        public string SampleProperty { get; set; }
-    }
+   public class SampleEntity : Entity
+   {
+
+      public string SampleProperty { get; set; }
+
+   }
+
 }

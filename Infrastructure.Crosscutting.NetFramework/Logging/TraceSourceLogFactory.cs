@@ -9,25 +9,27 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
+
+using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging;
 
 namespace Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Logging
 {
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging;
 
-    /// <summary>
-    /// A Trace Source base, log factory
-    /// </summary>
-    public class TraceSourceLogFactory
-        :ILoggerFactory
-    {
-        /// <summary>
-        /// Create the trace source log
-        /// </summary>
-        /// <returns>New ILog based on Trace Source infrastructure</returns>
-        public ILogger Create()
-        {
-            return new TraceSourceLog();
-        }
-    }
+   /// <summary>
+   ///    A Trace Source base, log factory
+   /// </summary>
+   public class TraceSourceLogFactory : ILoggerFactory
+   {
+
+      /// <summary>
+      ///    Create the trace source log
+      /// </summary>
+      /// <returns>New ILog based on Trace Source infrastructure</returns>
+      public ILogger Create()
+      {
+         return new TraceSourceLog();
+      }
+
+   }
+
 }

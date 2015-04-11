@@ -9,25 +9,30 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
+
+using System.Data.Entity;
+
+using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.UnitOfWork;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace Infrastructure.Data.MainBoundedContext.Tests.Initializers
 {
-    using System.Data.Entity;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.UnitOfWork;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    [TestClass]
-    public class AssemblyTestsInitialize
-    {
-        /// <summary>
-        /// In this beta, the unit of work initializer is MainBCUnitOfWorkInitializer
-        /// </summary>
-        /// <param name="context">The MS TEST context</param>
-        [AssemblyInitialize()]
-        public static void RebuildUnitOfWork(TestContext context)
-        {
-            //Set default initializer for MainBCUnitOfWork
-            Database.SetInitializer<MainBCUnitOfWork>(new MainBCUnitOfWorkInitializer());
-        }
-    }
+   [TestClass]
+   public class AssemblyTestsInitialize
+   {
+
+      /// <summary>
+      ///    In this beta, the unit of work initializer is MainBCUnitOfWorkInitializer
+      /// </summary>
+      /// <param name="context">The MS TEST context</param>
+      [AssemblyInitialize()]
+      public static void RebuildUnitOfWork(TestContext context)
+      {
+         //Set default initializer for MainBCUnitOfWork
+         Database.SetInitializer<MainBcUnitOfWork>(new MainBcUnitOfWorkInitializer());
+      }
+
+   }
+
 }

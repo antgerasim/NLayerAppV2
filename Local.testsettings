@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<TestSettings name="Local" id="db910890-551a-444e-bf2c-4efbd80b75b8" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+
+<TestSettings name="Local" id="db910890-551a-444e-bf2c-4efbd80b75b8"
+              xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Description>These are default test settings for a local test run.</Description>
   <Execution>
     <TestTypeSpecific>
@@ -21,20 +23,50 @@
     </TestTypeSpecific>
     <AgentRule name="LocalMachineDefaultRole">
       <DataCollectors>
-        <DataCollector uri="datacollector://microsoft/CodeCoverage/1.0" assemblyQualifiedName="Microsoft.VisualStudio.TestTools.CodeCoverage.CoveragePlugIn, Microsoft.VisualStudio.QualityTools.Plugins.CodeCoverage, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" friendlyName="Code Coverage">
+        <DataCollector uri="datacollector://microsoft/CodeCoverage/1.0"
+                       assemblyQualifiedName="Microsoft.VisualStudio.TestTools.CodeCoverage.CoveragePlugIn, Microsoft.VisualStudio.QualityTools.Plugins.CodeCoverage, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                       friendlyName="Code Coverage">
           <Configuration>
             <CodeCoverage xmlns="">
               <Regular>
-                <CodeCoverageItem binaryFile="Infrastructure.Data.Seedwork\bin\Debug\NLayerApp.Infrastructure.Data.Seedwork.dll" pdbFile="Infrastructure.Data.Seedwork\bin\Debug\NLayerApp.Infrastructure.Data.Seedwork.pdb" instrumentInPlace="true" />
-                <CodeCoverageItem binaryFile="Infrastructure.Data.MainBoundedContext\bin\Debug\NLayerApp.Infrastructure.Data.MainBoundedContext.dll" pdbFile="Infrastructure.Data.MainBoundedContext\bin\Debug\NLayerApp.Infrastructure.Data.MainBoundedContext.pdb" instrumentInPlace="true" />
-                <CodeCoverageItem binaryFile="Infrastructure.Crosscutting.NetFramework\bin\Debug\NLayerApp.Infrastructure.Crosscutting.NetFramework.dll" pdbFile="Infrastructure.Crosscutting.NetFramework\bin\Debug\NLayerApp.Infrastructure.Crosscutting.NetFramework.pdb" instrumentInPlace="true" />
-                <CodeCoverageItem binaryFile="Infrastructure.Crosscutting\bin\Debug\NLayerApp.Infrastructure.Crosscutting.dll" pdbFile="Infrastructure.Crosscutting\bin\Debug\NLayerApp.Infrastructure.Crosscutting.pdb" instrumentInPlace="true" />
-                <CodeCoverageItem binaryFile="Domain.Seedwork\bin\Debug\NLayerApp.Domain.Seedwork.dll" pdbFile="Domain.Seedwork\bin\Debug\NLayerApp.Domain.Seedwork.pdb" instrumentInPlace="true" />
-                <CodeCoverageItem binaryFile="Domain.MainBoundedContext\bin\Debug\NLayerApp.Domain.MainBoundedContext.dll" pdbFile="Domain.MainBoundedContext\bin\Debug\NLayerApp.Domain.MainBoundedContext.pdb" instrumentInPlace="true" />
-                <CodeCoverageItem binaryFile="DistributedServices.Seedwork\bin\Debug\NLayerApp.DistributedServices.Seedwork.dll" pdbFile="DistributedServices.Seedwork\bin\Debug\NLayerApp.DistributedServices.Seedwork.pdb" instrumentInPlace="true" />
-                <CodeCoverageItem binaryFile="Application.Seedwork\bin\Debug\NLayerApp.Application.Seedwork.dll" pdbFile="Application.Seedwork\bin\Debug\NLayerApp.Application.Seedwork.pdb" instrumentInPlace="true" />
-                <CodeCoverageItem binaryFile="Application.MainBoundedContext.DTO\bin\Debug\NLayerApp.Application.MainBoundedContext.DTO.dll" pdbFile="Application.MainBoundedContext.DTO\bin\Debug\NLayerApp.Application.MainBoundedContext.DTO.pdb" instrumentInPlace="true" />
-                <CodeCoverageItem binaryFile="Application.MainBoundedContext\bin\Debug\NLayerApp.Application.MainBoundedContext.dll" pdbFile="Application.MainBoundedContext\bin\Debug\NLayerApp.Application.MainBoundedContext.pdb" instrumentInPlace="true" />
+                <CodeCoverageItem
+                  binaryFile="Infrastructure.Data.Seedwork\bin\Debug\NLayerApp.Infrastructure.Data.Seedwork.dll"
+                  pdbFile="Infrastructure.Data.Seedwork\bin\Debug\NLayerApp.Infrastructure.Data.Seedwork.pdb"
+                  instrumentInPlace="true" />
+                <CodeCoverageItem
+                  binaryFile="Infrastructure.Data.MainBoundedContext\bin\Debug\NLayerApp.Infrastructure.Data.MainBoundedContext.dll"
+                  pdbFile="Infrastructure.Data.MainBoundedContext\bin\Debug\NLayerApp.Infrastructure.Data.MainBoundedContext.pdb"
+                  instrumentInPlace="true" />
+                <CodeCoverageItem
+                  binaryFile="Infrastructure.Crosscutting.NetFramework\bin\Debug\NLayerApp.Infrastructure.Crosscutting.NetFramework.dll"
+                  pdbFile="Infrastructure.Crosscutting.NetFramework\bin\Debug\NLayerApp.Infrastructure.Crosscutting.NetFramework.pdb"
+                  instrumentInPlace="true" />
+                <CodeCoverageItem
+                  binaryFile="Infrastructure.Crosscutting\bin\Debug\NLayerApp.Infrastructure.Crosscutting.dll"
+                  pdbFile="Infrastructure.Crosscutting\bin\Debug\NLayerApp.Infrastructure.Crosscutting.pdb"
+                  instrumentInPlace="true" />
+                <CodeCoverageItem binaryFile="Domain.Seedwork\bin\Debug\NLayerApp.Domain.Seedwork.dll"
+                                  pdbFile="Domain.Seedwork\bin\Debug\NLayerApp.Domain.Seedwork.pdb"
+                                  instrumentInPlace="true" />
+                <CodeCoverageItem
+                  binaryFile="Domain.MainBoundedContext\bin\Debug\NLayerApp.Domain.MainBoundedContext.dll"
+                  pdbFile="Domain.MainBoundedContext\bin\Debug\NLayerApp.Domain.MainBoundedContext.pdb"
+                  instrumentInPlace="true" />
+                <CodeCoverageItem
+                  binaryFile="DistributedServices.Seedwork\bin\Debug\NLayerApp.DistributedServices.Seedwork.dll"
+                  pdbFile="DistributedServices.Seedwork\bin\Debug\NLayerApp.DistributedServices.Seedwork.pdb"
+                  instrumentInPlace="true" />
+                <CodeCoverageItem binaryFile="Application.Seedwork\bin\Debug\NLayerApp.Application.Seedwork.dll"
+                                  pdbFile="Application.Seedwork\bin\Debug\NLayerApp.Application.Seedwork.pdb"
+                                  instrumentInPlace="true" />
+                <CodeCoverageItem
+                  binaryFile="Application.MainBoundedContext.DTO\bin\Debug\NLayerApp.Application.MainBoundedContext.DTO.dll"
+                  pdbFile="Application.MainBoundedContext.DTO\bin\Debug\NLayerApp.Application.MainBoundedContext.DTO.pdb"
+                  instrumentInPlace="true" />
+                <CodeCoverageItem
+                  binaryFile="Application.MainBoundedContext\bin\Debug\NLayerApp.Application.MainBoundedContext.dll"
+                  pdbFile="Application.MainBoundedContext\bin\Debug\NLayerApp.Application.MainBoundedContext.pdb"
+                  instrumentInPlace="true" />
               </Regular>
             </CodeCoverage>
           </Configuration>

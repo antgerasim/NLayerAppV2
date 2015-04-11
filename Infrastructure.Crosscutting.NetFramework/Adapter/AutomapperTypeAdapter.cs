@@ -9,46 +9,57 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
+
+using AutoMapper;
+
+using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter;
 
 namespace Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Adapter
 {
-    using AutoMapper;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter;
 
-    /// <summary>
-    /// Automapper type adapter implementation
-    /// </summary>
-    public class AutomapperTypeAdapter
-        :ITypeAdapter
-    {
-        #region ITypeAdapter Members
+   /// <summary>
+   ///    Automapper type adapter implementation
+   /// </summary>
+   public class AutomapperTypeAdapter : ITypeAdapter
+   {
+      #region ITypeAdapter Members
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter" />
+      /// </summary>
+      /// <typeparam name="TSource">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter" />
+      /// </typeparam>
+      /// <typeparam name="TTarget">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter" />
+      /// </typeparam>
+      /// <param name="source">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter" />
+      /// </param>
+      /// <returns>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter" />
+      /// </returns>
+      public TTarget Adapt<TSource, TTarget>(TSource source) where TSource : class where TTarget : class, new()
+      {
+         return Mapper.Map<TSource, TTarget>(source);
+      }
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter"/>
-        /// </summary>
-        /// <typeparam name="TSource"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter"/></typeparam>
-        /// <typeparam name="TTarget"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter"/></typeparam>
-        /// <param name="source"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter"/></param>
-        /// <returns><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter"/></returns>
-        public TTarget Adapt<TSource, TTarget>(TSource source)
-            where TSource : class
-            where TTarget : class, new()
-        {
-            return Mapper.Map<TSource, TTarget>(source);
-        }
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter" />
+      /// </summary>
+      /// <typeparam name="TTarget">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter" />
+      /// </typeparam>
+      /// <param name="source">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter" />
+      /// </param>
+      /// <returns>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter" />
+      /// </returns>
+      public TTarget Adapt<TTarget>(object source) where TTarget : class, new()
+      {
+         return Mapper.Map<TTarget>(source);
+      }
+      #endregion
+   }
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter"/>
-        /// </summary>
-        /// <typeparam name="TTarget"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter"/></typeparam>
-        /// <param name="source"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter"/></param>
-        /// <returns><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter.ITypeAdapter"/></returns>
-        public TTarget Adapt<TTarget>(object source) where TTarget : class, new()
-        {
-            return Mapper.Map<TTarget>(source);
-        }
-
-        #endregion
-    }
 }

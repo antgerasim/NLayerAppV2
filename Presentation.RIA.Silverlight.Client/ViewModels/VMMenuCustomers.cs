@@ -9,107 +9,95 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //====================================================================================
-using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client;
+
+using Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.ViewModelBase;
 
 namespace Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.ViewModels
 {
-    /// <summary>
-    /// ViewModel menu customers
-    /// </summary>
-    public class VMMenuCustomers
-        : ObservableObject
-    {
-        #region Declarations
 
-        private ICommand _addCustomerCommand;
-        private ICommand _viewCustomersCommand;
+   /// <summary>
+   ///    ViewModel menu customers
+   /// </summary>
+   public class VmMenuCustomers : ObservableObject
+   {
+      #region Declarations
+      private ICommand _addCustomerCommand;
+      private ICommand _viewCustomersCommand;
+      #endregion
 
-        #endregion
+      #region Properties
+      public string ActualState
+      {
+         get
+         {
+            return ((MainPage) App.Current.RootVisual).ActualState;
+         }
+         set
+         {
+            ((MainPage) App.Current.RootVisual).ActualState = value;
+         }
+      }
 
-        #region Properties
+      public MainPage MainPage
+      {
+         get
+         {
+            return ((MainPage) App.Current.RootVisual);
+         }
+      }
+      #endregion
 
-        public string actualState
-        {
-            get { return ((MainPage)App.Current.RootVisual).actualState; }
-            set { ((MainPage)App.Current.RootVisual).actualState = value; }
-        }
-
-        public MainPage mainPage
-        {
-            get { return ((MainPage)App.Current.RootVisual); }
-        }
-
-        #endregion
-
-        #region Command Properties
-
-        public ICommand AddCommand
-        {
-            get
-            {
-                if (_addCustomerCommand == null)
-                {
-                    _addCustomerCommand = new DelegateCommand(AddCustomerExecute, CanAddCustomerExecute);
-                }
-                return _addCustomerCommand;
+      #region Command Properties
+      public ICommand AddCommand
+      {
+         get
+         {
+            if (_addCustomerCommand == null) {
+               _addCustomerCommand = new DelegateCommand(AddCustomerExecute, CanAddCustomerExecute);
             }
-        }
+            return _addCustomerCommand;
+         }
+      }
 
-        public ICommand ViewCommand
-        {
-            get
-            {
-                if (_viewCustomersCommand == null)
-                {
-                    _viewCustomersCommand = new DelegateCommand(ViewCustomersExecute, CanViewCustomersExecute);
-                }
-                return _viewCustomersCommand;
+      public ICommand ViewCommand
+      {
+         get
+         {
+            if (_viewCustomersCommand == null) {
+               _viewCustomersCommand = new DelegateCommand(ViewCustomersExecute, CanViewCustomersExecute);
             }
-        }
+            return _viewCustomersCommand;
+         }
+      }
+      #endregion
 
-        #endregion
+      #region Constructors
+      #endregion
 
-        #region Constructors
+      #region Command Methods
+      private bool CanAddCustomerExecute()
+      {
+         return true;
+      }
 
+      private void AddCustomerExecute()
+      {
+         MainPage.addCustomer.DataContext = new VmAddCustomer();
+         MainPage.GotoAddCustomer.Begin();
+      }
 
-        #endregion
+      private bool CanViewCustomersExecute()
+      {
+         return true;
+      }
 
-        #region Command Methods
+      private void ViewCustomersExecute()
+      {
+         ((VmCustomerListView) MainPage.ViewListCustomers.DataContext).GetCustomers();
+         MainPage.GoBackAddCustomer.Begin();
+      }
+      #endregion
+   }
 
-        private bool CanAddCustomerExecute()
-        {
-            return true;
-        }
-
-        private void AddCustomerExecute()
-        {
-            mainPage.addCustomer.DataContext = new VMAddCustomer();
-            mainPage.GotoAddCustomer.Begin();
-        }
-
-        private bool CanViewCustomersExecute()
-        {
-            return true;
-        }
-
-        private void ViewCustomersExecute()
-        {
-            ((VMCustomerListView)mainPage.viewListCustomers.DataContext).GetCustomers();
-            mainPage.GoBackAddCustomer.Begin();
-        }
-
-        #endregion
-
-
-    }
 }

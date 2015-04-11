@@ -9,217 +9,247 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
+
+using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.Security;
+
+using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging;
 
 namespace Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Logging
 {
-    using System;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Security;
 
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging;
-    
-    /// <summary>
-    /// Implementation of contract <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/>
-    /// using System.Diagnostics API.
-    /// </summary>
-    public sealed class TraceSourceLog
-        :ILogger
-    {
-        #region Members
+   /// <summary>
+   ///    Implementation of contract <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+   ///    using System.Diagnostics API.
+   /// </summary>
+   public sealed class TraceSourceLog : ILogger
+   {
+      #region Members
+      private TraceSource _source;
+      #endregion
 
-        TraceSource source;
+      #region  Constructor
+      /// <summary>
+      ///    Create a new instance of this trace manager
+      /// </summary>
+      public TraceSourceLog()
+      {
+         // Create default source
+         _source = new TraceSource("NLayerApp");
+      }
+      #endregion
 
-        #endregion
+      #region Private Methods
+      /// <summary>
+      ///    Trace internal message in configured listeners
+      /// </summary>
+      /// <param name="eventType">Event type to trace</param>
+      /// <param name="message">Message of event</param>
+      private void TraceInternal(TraceEventType eventType, string message)
+      {
 
-        #region  Constructor
-
-        /// <summary>
-        /// Create a new instance of this trace manager
-        /// </summary>
-        public TraceSourceLog()
-        {
-            // Create default source
-            source = new TraceSource("NLayerApp");
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        /// <summary>
-        /// Trace internal message in configured listeners
-        /// </summary>
-        /// <param name="eventType">Event type to trace</param>
-        /// <param name="message">Message of event</param>
-        void TraceInternal(TraceEventType eventType, string message)
-        {
-
-            if (source != null)
-            {
-                try
-                {
-                    source.TraceEvent(eventType, (int)eventType, message);
-                }
-                catch (SecurityException)
-                {
-                    //Cannot access to file listener or cannot have
-                    //privileges to write in event log etc...
-                }
+         if (_source != null)
+         {
+            try {
+               _source.TraceEvent(eventType, (int) eventType, message);
             }
-        }
-        #endregion
-
-        #region ILogger Members
-
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/>
-        /// </summary>
-        /// <param name="message"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        /// <param name="args"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        public void LogInfo(string message, params object[] args)
-        {
-            if (!String.IsNullOrWhiteSpace(message))
+            catch (SecurityException)
             {
-                var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
-
-                TraceInternal(TraceEventType.Information, messageToTrace);
+               //Cannot access to file listener or cannot have
+               //privileges to write in event log etc...
             }
-        }
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/>
-        /// </summary>
-        /// <param name="message"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        /// <param name="args"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        public void LogWarning(string message, params object[] args)
-        {
+         }
+      }
+      #endregion
 
-            if (!String.IsNullOrWhiteSpace(message))
-            {
-                var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
+      #region ILogger Members
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </summary>
+      /// <param name="message">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      /// <param name="args">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      public void LogInfo(string message, params object[] args)
+      {
+         if (!String.IsNullOrWhiteSpace(message))
+         {
+            var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
 
-                TraceInternal(TraceEventType.Warning, messageToTrace);
-            }
-        }
+            TraceInternal(TraceEventType.Information, messageToTrace);
+         }
+      }
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/>
-        /// </summary>
-        /// <param name="message"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        /// <param name="args"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        public void LogError(string message, params object[] args)
-        {
-            if (!String.IsNullOrWhiteSpace(message))
-            {
-                var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </summary>
+      /// <param name="message">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      /// <param name="args">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      public void LogWarning(string message, params object[] args)
+      {
 
-                TraceInternal(TraceEventType.Error, messageToTrace);
-            }
-        }
+         if (!String.IsNullOrWhiteSpace(message))
+         {
+            var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/>
-        /// </summary>
-        /// <param name="message"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        /// <param name="exception"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        /// <param name="args"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        public void LogError(string message, Exception exception, params object[] args)
-        {
-            if (!String.IsNullOrWhiteSpace(message)
-                &&
-                exception != null)
-            {
-                var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
+            TraceInternal(TraceEventType.Warning, messageToTrace);
+         }
+      }
 
-                var exceptionData = exception.ToString(); // The ToString() create a string representation of the current exception
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </summary>
+      /// <param name="message">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      /// <param name="args">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      public void LogError(string message, params object[] args)
+      {
+         if (!String.IsNullOrWhiteSpace(message))
+         {
+            var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
 
-                TraceInternal(TraceEventType.Error, string.Format(CultureInfo.InvariantCulture, "{0} Exception:{1}", messageToTrace, exceptionData));
-            }
-        }
+            TraceInternal(TraceEventType.Error, messageToTrace);
+         }
+      }
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/>
-        /// </summary>
-        /// <param name="message"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        /// <param name="args"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        public void Debug(string message, params object[] args)
-        {
-            if (!String.IsNullOrWhiteSpace(message))
-            {
-                var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </summary>
+      /// <param name="message">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      /// <param name="exception">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      /// <param name="args">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      public void LogError(string message, Exception exception, params object[] args)
+      {
+         if (!String.IsNullOrWhiteSpace(message) && exception != null)
+         {
+            var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
 
-                TraceInternal(TraceEventType.Verbose, messageToTrace);
-            }
-        }
+            var exceptionData = exception.ToString();
+            // The ToString() create a string representation of the current exception
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/>
-        /// </summary>
-        /// <param name="message"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        /// <param name="exception"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        /// <param name="args"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        public void Debug(string message, Exception exception,params object[] args)
-        {
-            if (!String.IsNullOrWhiteSpace(message)
-                &&
-                exception != null)
-            {
-                var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
+            TraceInternal(
+               TraceEventType.Error,
+               string.Format(CultureInfo.InvariantCulture, "{0} Exception:{1}", messageToTrace, exceptionData));
+         }
+      }
 
-                var exceptionData = exception.ToString(); // The ToString() create a string representation of the current exception
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </summary>
+      /// <param name="message">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      /// <param name="args">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      public void Debug(string message, params object[] args)
+      {
+         if (!String.IsNullOrWhiteSpace(message))
+         {
+            var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
 
-                TraceInternal(TraceEventType.Error, string.Format(CultureInfo.InvariantCulture, "{0} Exception:{1}", messageToTrace, exceptionData));
-            }
-        }
+            TraceInternal(TraceEventType.Verbose, messageToTrace);
+         }
+      }
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/>
-        /// </summary>
-        /// <param name="item"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        public void Debug(object item)
-        {
-            if (item != null)
-            {
-                TraceInternal(TraceEventType.Verbose, item.ToString());
-            }
-        }
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </summary>
+      /// <param name="message">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      /// <param name="exception">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      /// <param name="args">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      public void Debug(string message, Exception exception, params object[] args)
+      {
+         if (!String.IsNullOrWhiteSpace(message) && exception != null)
+         {
+            var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/>
-        /// </summary>
-        /// <param name="message"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        /// <param name="args"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        public void Fatal(string message, params object[] args)
-        {
-            if (!String.IsNullOrWhiteSpace(message))
-            {
-                var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
+            var exceptionData = exception.ToString();
+            // The ToString() create a string representation of the current exception
 
-                TraceInternal(TraceEventType.Critical, messageToTrace);
-            }
-        }
+            TraceInternal(
+               TraceEventType.Error,
+               string.Format(CultureInfo.InvariantCulture, "{0} Exception:{1}", messageToTrace, exceptionData));
+         }
+      }
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/>
-        /// </summary>
-        /// <param name="message"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        /// <param name="exception"><see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger"/></param>
-        public void Fatal(string message, Exception exception,params object[] args)
-        {
-            if (!String.IsNullOrWhiteSpace(message)
-                &&
-                exception != null)
-            {
-                var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </summary>
+      /// <param name="item">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      public void Debug(object item)
+      {
+         if (item != null) { TraceInternal(TraceEventType.Verbose, item.ToString()); }
+      }
 
-                var exceptionData = exception.ToString(); // The ToString() create a string representation of the current exception
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </summary>
+      /// <param name="message">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      /// <param name="args">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      public void Fatal(string message, params object[] args)
+      {
+         if (!String.IsNullOrWhiteSpace(message))
+         {
+            var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
 
-                TraceInternal(TraceEventType.Critical, string.Format(CultureInfo.InvariantCulture, "{0} Exception:{1}", messageToTrace, exceptionData));
-            }
-        }
+            TraceInternal(TraceEventType.Critical, messageToTrace);
+         }
+      }
 
+      /// <summary>
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </summary>
+      /// <param name="message">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      /// <param name="exception">
+      ///    <see cref="Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Logging.ILogger" />
+      /// </param>
+      public void Fatal(string message, Exception exception, params object[] args)
+      {
+         if (!String.IsNullOrWhiteSpace(message) && exception != null)
+         {
+            var messageToTrace = string.Format(CultureInfo.InvariantCulture, message, args);
 
-        #endregion
-    }
+            var exceptionData = exception.ToString();
+            // The ToString() create a string representation of the current exception
+
+            TraceInternal(
+               TraceEventType.Critical,
+               string.Format(CultureInfo.InvariantCulture, "{0} Exception:{1}", messageToTrace, exceptionData));
+         }
+      }
+      #endregion
+   }
+
 }

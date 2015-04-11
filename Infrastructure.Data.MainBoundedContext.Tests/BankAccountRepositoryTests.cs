@@ -9,182 +9,177 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
+
+using System;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
+using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.BankingModule.Repositories;
+using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.ERPModule.Repositories;
+using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.UnitOfWork;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace Infrastructure.Data.MainBoundedContext.Tests
 {
-    using System;
-    using System.Linq;
 
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
+   /// <summary>
+   ///    Summary description for BankAccountRepositoryTests
+   /// </summary>
+   [TestClass]
+   public class BankAccountRepositoryTests
+   {
 
-    using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.BankingModule.Repositories;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.UnitOfWork;
+      [TestMethod]
+      public void BankAccountRepositoryGetMethodReturnMaterializedEntityById()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var bankAccountRepository = new BankAccountRepository(unitOfWork);
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
-    using System.Data.Entity.Validation;
-    using System.Data.Entity.Infrastructure;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.ERPModule.Repositories;
+         var selectedBankAccount = new Guid("0343C0B0-7C40-444A-B044-B463F36A1A1F");
 
-    /// <summary>
-    /// Summary description for BankAccountRepositoryTests
-    /// </summary>
-    [TestClass]
-    public class BankAccountRepositoryTests
-    {
-        [TestMethod]
-        public void BankAccountRepositoryGetMethodReturnMaterializedEntityById()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var bankAccountRepository = new BankAccountRepository(unitOfWork);
+         //Act
+         var bankAccount = bankAccountRepository.Get(selectedBankAccount);
 
-            var selectedBankAccount = new Guid("0343C0B0-7C40-444A-B044-B463F36A1A1F");
+         //Assert
+         Assert.IsNotNull(bankAccount);
+         Assert.IsTrue(bankAccount.Id == selectedBankAccount);
+      }
 
-            //Act
-            var bankAccount = bankAccountRepository.Get(selectedBankAccount);
+      [TestMethod]
+      public void BankAccountRepositoryGetMethodReturnNullWhenIdIsEmpty()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var bankAccountRepository = new BankAccountRepository(unitOfWork);
 
-            //Assert
-            Assert.IsNotNull(bankAccount);
-            Assert.IsTrue(bankAccount.Id == selectedBankAccount);
-        }
+         //Act
+         var bankAccount = bankAccountRepository.Get(Guid.Empty);
 
-        [TestMethod]
-        public void BankAccountRepositoryGetMethodReturnNullWhenIdIsEmpty()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var bankAccountRepository = new BankAccountRepository(unitOfWork);
+         //Assert
+         Assert.IsNull(bankAccount);
+      }
 
-            //Act
-            var bankAccount = bankAccountRepository.Get(Guid.Empty);
+      [TestMethod]
+      public void BankAccountRepositoryAddNewItemSaveItem()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var customerRepository = new CustomerRepository(unitOfWork);
+         var bankAccountRepository = new BankAccountRepository(unitOfWork);
 
-            //Assert
-            Assert.IsNull(bankAccount);
-        }
-        [TestMethod]
-        public void BankAccountRepositoryAddNewItemSaveItem()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var customerRepository = new CustomerRepository(unitOfWork);
-            var bankAccountRepository = new BankAccountRepository(unitOfWork);
-           
-            var customer = customerRepository.Get(new Guid("43A38AC8-EAA9-4DF0-981F-2685882C7C45"));
-            
-            var bankAccountNumber = new BankAccountNumber("1111", "2222", "3333333333", "01");
+         var customer = customerRepository.Get(new Guid("43A38AC8-EAA9-4DF0-981F-2685882C7C45"));
 
-            var newBankAccount = BankAccountFactory.CreateBankAccount(customer,bankAccountNumber);
-            
+         var bankAccountNumber = new BankAccountNumber("1111", "2222", "3333333333", "01");
 
-            //Act
-            bankAccountRepository.Add(newBankAccount);
+         var newBankAccount = BankAccountFactory.CreateBankAccount(customer, bankAccountNumber);
 
-            try
-            {
-                unitOfWork.Commit();
-            }
-            catch (DbUpdateException ex)
-            {
-                var entry = ex.Entries.First();
-            }
-        }
+         //Act
+         bankAccountRepository.Add(newBankAccount);
 
-        [TestMethod()]
-        public void BankAccountRepositoryGetAllReturnMaterializedBankAccountsAndCustomers()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var bankAccountRepository = new BankAccountRepository(unitOfWork);
+         try { unitOfWork.Commit(); }
+         catch (DbUpdateException ex) {
+            var entry = ex.Entries.First();
+         }
+      }
 
-            //Act
-            var allItems = bankAccountRepository.GetAll();
+      [TestMethod()]
+      public void BankAccountRepositoryGetAllReturnMaterializedBankAccountsAndCustomers()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var bankAccountRepository = new BankAccountRepository(unitOfWork);
 
-            //Assert
-            Assert.IsNotNull(allItems);
-            Assert.IsTrue(allItems.Any());
-            Assert.IsTrue(allItems.All(ba => ba.Customer != null));
-        }
-        [TestMethod()]
-        public void BankAccountRepositoryAllMatchingMethodReturnEntitiesWithSatisfiedCriteria()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var bankAccountRepository = new BankAccountRepository(unitOfWork);
+         //Act
+         var allItems = bankAccountRepository.GetAll();
 
-            string iban = string.Format("ES{0} {1} {2} {0}{3}","02","4444","5555","3333333333");
+         //Assert
+         Assert.IsNotNull(allItems);
+         Assert.IsTrue(allItems.Any());
+         Assert.IsTrue(allItems.All(ba => ba.Customer != null));
+      }
 
-            var spec =BankAccountSpecifications.BankAccountIbanNumber(iban);
+      [TestMethod()]
+      public void BankAccountRepositoryAllMatchingMethodReturnEntitiesWithSatisfiedCriteria()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var bankAccountRepository = new BankAccountRepository(unitOfWork);
 
-            //Act
-            var result = bankAccountRepository.AllMatching(spec);
+         var iban = string.Format("ES{0} {1} {2} {0}{3}", "02", "4444", "5555", "3333333333");
 
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.All(b => b.Iban == iban));
-        }
-        [TestMethod()]
-        public void BankAccountRepositoryFilterMethodReturnEntitisWithSatisfiedFilter()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var bankAccountRepository = new BankAccountRepository(unitOfWork);
+         var spec = BankAccountSpecifications.BankAccountIbanNumber(iban);
 
-            string iban = string.Format("ES{0} {1} {2} {0}{3}", "02", "4444", "5555", "3333333333");
-            
-            
-            //Act
-            var allItems = bankAccountRepository.GetFiltered(ba => ba.Iban == iban);
+         //Act
+         var result = bankAccountRepository.AllMatching(spec);
 
-            //Assert
-            Assert.IsNotNull(allItems);
-            Assert.IsTrue(allItems.All(b => b.Iban == iban));
-        }
-        [TestMethod()]
-        public void BankAccountRepositoryPagedMethodReturnEntitiesInPageFashion()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var bankAccountRepository = new BankAccountRepository(unitOfWork);
-           
-            //Act
-            var pageI = bankAccountRepository.GetPaged(0, 1, b => b.Id, false);
-            var pageII = bankAccountRepository.GetPaged(1, 1, b => b.Id, false);
+         //Assert
+         Assert.IsNotNull(result);
+         Assert.IsTrue(result.All(b => b.Iban == iban));
+      }
 
-            //Assert
-            Assert.IsNotNull(pageI);
-            Assert.IsTrue(pageI.Count() == 1);
+      [TestMethod()]
+      public void BankAccountRepositoryFilterMethodReturnEntitisWithSatisfiedFilter()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var bankAccountRepository = new BankAccountRepository(unitOfWork);
 
-            Assert.IsNotNull(pageII);
-            Assert.IsTrue(pageII.Count() == 1);
+         var iban = string.Format("ES{0} {1} {2} {0}{3}", "02", "4444", "5555", "3333333333");
 
-            Assert.IsFalse(pageI.Intersect(pageII).Any());
-        }
+         //Act
+         var allItems = bankAccountRepository.GetFiltered(ba => ba.Iban == iban);
 
-        [TestMethod()]
-        public void BankAccountRepositoryRemoveItemDeleteIt()
-        {
-            //Arrange
-            var unitOfWork = new MainBCUnitOfWork();
-            var customerRepository = new CustomerRepository(unitOfWork);
-            var bankAccountRepository = new BankAccountRepository(unitOfWork);
+         //Assert
+         Assert.IsNotNull(allItems);
+         Assert.IsTrue(allItems.All(b => b.Iban == iban));
+      }
 
-            var customer = customerRepository.Get(new Guid("43A38AC8-EAA9-4DF0-981F-2685882C7C45"));
-           
-            var bankAccountNumber = new BankAccountNumber("4444", "5555", "3333333333", "02");
+      [TestMethod()]
+      public void BankAccountRepositoryPagedMethodReturnEntitiesInPageFashion()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var bankAccountRepository = new BankAccountRepository(unitOfWork);
 
-            var newBankAccount = BankAccountFactory.CreateBankAccount(customer, bankAccountNumber);
-            
+         //Act
+         var pageI = bankAccountRepository.GetPaged(0, 1, b => b.Id, false);
+         var pageIi = bankAccountRepository.GetPaged(1, 1, b => b.Id, false);
 
-            bankAccountRepository.Add(newBankAccount);
-            unitOfWork.Commit();
+         //Assert
+         Assert.IsNotNull(pageI);
+         Assert.IsTrue(pageI.Count() == 1);
 
-            //Act
-            bankAccountRepository.Remove(newBankAccount);
-            unitOfWork.Commit();
+         Assert.IsNotNull(pageIi);
+         Assert.IsTrue(pageIi.Count() == 1);
 
-          
-        }
-    }
+         Assert.IsFalse(pageI.Intersect(pageIi).Any());
+      }
+
+      [TestMethod()]
+      public void BankAccountRepositoryRemoveItemDeleteIt()
+      {
+         //Arrange
+         var unitOfWork = new MainBcUnitOfWork();
+         var customerRepository = new CustomerRepository(unitOfWork);
+         var bankAccountRepository = new BankAccountRepository(unitOfWork);
+
+         var customer = customerRepository.Get(new Guid("43A38AC8-EAA9-4DF0-981F-2685882C7C45"));
+
+         var bankAccountNumber = new BankAccountNumber("4444", "5555", "3333333333", "02");
+
+         var newBankAccount = BankAccountFactory.CreateBankAccount(customer, bankAccountNumber);
+
+         bankAccountRepository.Add(newBankAccount);
+         unitOfWork.Commit();
+
+         //Act
+         bankAccountRepository.Remove(newBankAccount);
+         unitOfWork.Commit();
+
+      }
+
+   }
+
 }

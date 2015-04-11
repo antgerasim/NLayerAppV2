@@ -10,53 +10,59 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System;
+
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
 
 namespace Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.OrderAgg
 {
-    using System;
 
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.OrderAgg;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.Resources;
+   /// <summary>
+   ///    This is the factory for Order creation, which means that the main purpose
+   ///    is to encapsulate the creation knowledge.
+   ///    What is created is a transient entity instance, with nothing being said about persistence as yet
+   /// </summary>
+   public static class OrderFactory
+   {
 
-    /// <summary>
-    /// This is the factory for Order creation, which means that the main purpose
-    /// is to encapsulate the creation knowledge.
-    /// What is created is a transient entity instance, with nothing being said about persistence as yet
-    /// </summary>
-    public static class OrderFactory
-    {
-        /// <summary>
-        /// Create a new order
-        /// </summary>
-        /// <param name="customer">Associated customer</param>
-        /// <param name="shippingName">The order shipping name</param>
-        /// <param name="shippingCity">The order shipping city</param>
-        /// <param name="shippingAddress">The order shipping address</param>
-        /// <param name="shippingZipCode">The order shipping zip cocde</param>
-        /// <returns>Associated order</returns>
-        public static Order CreateOrder(Customer customer,string shippingName,string shippingCity,string shippingAddress,string shippingZipCode)
-        {
-            //create the order
-            var order = new Order();
+      /// <summary>
+      ///    Create a new order
+      /// </summary>
+      /// <param name="customer">Associated customer</param>
+      /// <param name="shippingName">The order shipping name</param>
+      /// <param name="shippingCity">The order shipping city</param>
+      /// <param name="shippingAddress">The order shipping address</param>
+      /// <param name="shippingZipCode">The order shipping zip cocde</param>
+      /// <returns>Associated order</returns>
+      public static Order CreateOrder(
+         Customer customer,
+         string shippingName,
+         string shippingCity,
+         string shippingAddress,
+         string shippingZipCode)
+      {
+         //create the order
+         var order = new Order();
 
-            //create shipping
-            var shipping = new ShippingInfo(shippingName, shippingAddress, shippingCity, shippingZipCode);
-            
-            //set default values
-            order.OrderDate = DateTime.UtcNow;
+         //create shipping
+         var shipping = new ShippingInfo(shippingName, shippingAddress, shippingCity, shippingZipCode);
 
-            order.DeliveryDate = null;
+         //set default values
+         order.OrderDate = DateTime.UtcNow;
 
-            order.ShippingInformation = shipping;
+         order.DeliveryDate = null;
 
-            //set customer information
-            order.SetTheCustomerForThisOrder(customer);
+         order.ShippingInformation = shipping;
 
-            //set identity
-            order.GenerateNewIdentity();
+         //set customer information
+         order.SetTheCustomerForThisOrder(customer);
 
-            return order;
-        }
-    }
+         //set identity
+         order.GenerateNewIdentity();
+
+         return order;
+      }
+
+   }
+
 }

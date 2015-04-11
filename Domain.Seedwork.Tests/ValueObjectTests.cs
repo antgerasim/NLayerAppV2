@@ -10,223 +10,222 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using Domain.Seedwork.Tests.Classes;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Domain.Seedwork.Tests
 {
-    using Domain.Seedwork.Tests.Classes;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    [TestClass()]
-    public class ValueObjectTests
-    {
-        [TestMethod()]
-        public void IdenticalDataEqualsIsTrueTest()
-        {
-            //Arrange
-            Address address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
-            Address address2 = new Address("streetLine1", "streetLine2", "city", "zipcode");
+   [TestClass()]
+   public class ValueObjectTests
+   {
 
-            //Act
-            bool resultEquals = address1.Equals(address2);
-            bool resultEqualsSimetric = address2.Equals(address1);
-            bool resultEqualsOnThis = address1.Equals(address1);
+      [TestMethod()]
+      public void IdenticalDataEqualsIsTrueTest()
+      {
+         //Arrange
+         var address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
+         var address2 = new Address("streetLine1", "streetLine2", "city", "zipcode");
 
-            //Assert
-            Assert.IsTrue(resultEquals);
-            Assert.IsTrue(resultEqualsSimetric);
-            Assert.IsTrue(resultEqualsOnThis);
-        }
+         //Act
+         var resultEquals = address1.Equals(address2);
+         var resultEqualsSimetric = address2.Equals(address1);
+         var resultEqualsOnThis = address1.Equals(address1);
 
-        [TestMethod()]
-        public void IdenticalDataEqualOperatorIsTrueTest()
-        {
-            //Arraneg
-            Address address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
-            Address address2 = new Address("streetLine1", "streetLine2", "city", "zipcode");
+         //Assert
+         Assert.IsTrue(resultEquals);
+         Assert.IsTrue(resultEqualsSimetric);
+         Assert.IsTrue(resultEqualsOnThis);
+      }
 
-            //Act
-            bool resultEquals = (address1 == address2);
-            bool resultEqualsSimetric = (address2 == address1);
-            bool resultEqualsOnThis = (address1 == address1);
+      [TestMethod()]
+      public void IdenticalDataEqualOperatorIsTrueTest()
+      {
+         //Arraneg
+         var address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
+         var address2 = new Address("streetLine1", "streetLine2", "city", "zipcode");
 
-            //Assert
-            Assert.IsTrue(resultEquals);
-            Assert.IsTrue(resultEqualsSimetric);
-            Assert.IsTrue(resultEqualsOnThis);
-        }
+         //Act
+         var resultEquals = (address1 == address2);
+         var resultEqualsSimetric = (address2 == address1);
+         var resultEqualsOnThis = (address1 == address1);
 
-        [TestMethod()]
-        public void IdenticalDataIsNotEqualOperatorIsFalseTest()
-        {
-            //Arraneg
-            Address address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
-            Address address2 = new Address("streetLine1", "streetLine2", "city", "zipcode");
+         //Assert
+         Assert.IsTrue(resultEquals);
+         Assert.IsTrue(resultEqualsSimetric);
+         Assert.IsTrue(resultEqualsOnThis);
+      }
 
-            //Act
-            bool resultEquals = (address1 != address2);
-            bool resultEqualsSimetric = (address2 != address1);
-            bool resultEqualsOnThis = (address1 != address1);
+      [TestMethod()]
+      public void IdenticalDataIsNotEqualOperatorIsFalseTest()
+      {
+         //Arraneg
+         var address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
+         var address2 = new Address("streetLine1", "streetLine2", "city", "zipcode");
 
-            //Assert
-            Assert.IsFalse(resultEquals);
-            Assert.IsFalse(resultEqualsSimetric);
-            Assert.IsFalse(resultEqualsOnThis);
-        }
+         //Act
+         var resultEquals = (address1 != address2);
+         var resultEqualsSimetric = (address2 != address1);
+         var resultEqualsOnThis = (address1 != address1);
 
-        [TestMethod()]
-        public void DiferentDataEqualsIsFalseTest()
-        {
-            //Arrange
-            Address address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
-            Address address2 = new Address("streetLine2", "streetLine1", "city", "zipcode");
+         //Assert
+         Assert.IsFalse(resultEquals);
+         Assert.IsFalse(resultEqualsSimetric);
+         Assert.IsFalse(resultEqualsOnThis);
+      }
 
-            //Act
-            bool result = address1.Equals(address2);
-            bool resultSimetric = address2.Equals(address1);
+      [TestMethod()]
+      public void DiferentDataEqualsIsFalseTest()
+      {
+         //Arrange
+         var address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
+         var address2 = new Address("streetLine2", "streetLine1", "city", "zipcode");
 
-            //Assert
-            Assert.IsFalse(result);
-            Assert.IsFalse(resultSimetric);
-        }
+         //Act
+         var result = address1.Equals(address2);
+         var resultSimetric = address2.Equals(address1);
 
-        [TestMethod()]
-        public void DiferentDataIsNotEqualOperatorIsTrueTest()
-        {
-            //Arrange
-            Address address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
-            Address address2 = new Address("streetLine2", "streetLine1", "city", "zipcode");
+         //Assert
+         Assert.IsFalse(result);
+         Assert.IsFalse(resultSimetric);
+      }
 
-            //Act
-            bool result = (address1 != address2);
-            bool resultSimetric = (address2 != address1);
+      [TestMethod()]
+      public void DiferentDataIsNotEqualOperatorIsTrueTest()
+      {
+         //Arrange
+         var address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
+         var address2 = new Address("streetLine2", "streetLine1", "city", "zipcode");
 
-            //Assert
-            Assert.IsTrue(result);
-            Assert.IsTrue(resultSimetric);
-        }
+         //Act
+         var result = (address1 != address2);
+         var resultSimetric = (address2 != address1);
 
-        [TestMethod()]
-        public void DiferentDataEqualOperatorIsFalseTest()
-        {
-            //Arrange
-            Address address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
-            Address address2 = new Address("streetLine2", "streetLine1", "city", "zipcode");
+         //Assert
+         Assert.IsTrue(result);
+         Assert.IsTrue(resultSimetric);
+      }
 
-            //Act
-            bool result = (address1 == address2);
-            bool resultSimetric = (address2 == address1);
+      [TestMethod()]
+      public void DiferentDataEqualOperatorIsFalseTest()
+      {
+         //Arrange
+         var address1 = new Address("streetLine1", "streetLine2", "city", "zipcode");
+         var address2 = new Address("streetLine2", "streetLine1", "city", "zipcode");
 
-            //Assert
-            Assert.IsFalse(result);
-            Assert.IsFalse(resultSimetric);
-        }
+         //Act
+         var result = (address1 == address2);
+         var resultSimetric = (address2 == address1);
 
-        [TestMethod()]
-        public void SameDataInDiferentPropertiesIsEqualsFalseTest()
-        {
-            //Arrange
-            Address address1 = new Address("streetLine1", "streetLine2",null, null);
-            Address address2 = new Address("streetLine2", "streetLine1", null, null);
+         //Assert
+         Assert.IsFalse(result);
+         Assert.IsFalse(resultSimetric);
+      }
 
-            //Act
-            bool result = address1.Equals(address2);
-            
+      [TestMethod()]
+      public void SameDataInDiferentPropertiesIsEqualsFalseTest()
+      {
+         //Arrange
+         var address1 = new Address("streetLine1", "streetLine2", null, null);
+         var address2 = new Address("streetLine2", "streetLine1", null, null);
 
-            //Assert
-            Assert.IsFalse(result);
-        }
+         //Act
+         var result = address1.Equals(address2);
 
-        [TestMethod()]
-        public void SameDataInDiferentPropertiesEqualOperatorFalseTest()
-        {
-            //Arrange
-            Address address1 = new Address("streetLine1", "streetLine2", null, null);
-            Address address2 = new Address("streetLine2", "streetLine1", null, null);
+         //Assert
+         Assert.IsFalse(result);
+      }
 
-            //Act
-            bool result = (address1 == address2);
+      [TestMethod()]
+      public void SameDataInDiferentPropertiesEqualOperatorFalseTest()
+      {
+         //Arrange
+         var address1 = new Address("streetLine1", "streetLine2", null, null);
+         var address2 = new Address("streetLine2", "streetLine1", null, null);
 
+         //Act
+         var result = (address1 == address2);
 
-            //Assert
-            Assert.IsFalse(result);
-        }
+         //Assert
+         Assert.IsFalse(result);
+      }
 
-        [TestMethod()]
-        public void DiferentDataInDiferentPropertiesProduceDiferentHashCodeTest()
-        {
-            //Arrange
-            Address address1 = new Address("streetLine1", "streetLine2", null, null);
-            Address address2 = new Address("streetLine2", "streetLine1", null, null);
+      [TestMethod()]
+      public void DiferentDataInDiferentPropertiesProduceDiferentHashCodeTest()
+      {
+         //Arrange
+         var address1 = new Address("streetLine1", "streetLine2", null, null);
+         var address2 = new Address("streetLine2", "streetLine1", null, null);
 
-            //Act
-            int address1HashCode = address1.GetHashCode();
-            int address2HashCode = address2.GetHashCode();
+         //Act
+         var address1HashCode = address1.GetHashCode();
+         var address2HashCode = address2.GetHashCode();
 
+         //Assert
+         Assert.AreNotEqual(address1HashCode, address2HashCode);
+      }
 
-            //Assert
-            Assert.AreNotEqual(address1HashCode, address2HashCode);
-        }
-        [TestMethod()]
-        public void SameDataInDiferentPropertiesProduceDiferentHashCodeTest()
-        {
-            //Arrange
-            Address address1 = new Address("streetLine1", null, null, "streetLine1");
-            Address address2 = new Address(null, "streetLine1", "streetLine1", null);
+      [TestMethod()]
+      public void SameDataInDiferentPropertiesProduceDiferentHashCodeTest()
+      {
+         //Arrange
+         var address1 = new Address("streetLine1", null, null, "streetLine1");
+         var address2 = new Address(null, "streetLine1", "streetLine1", null);
 
-            //Act
-            int address1HashCode = address1.GetHashCode();
-            int address2HashCode = address2.GetHashCode();
+         //Act
+         var address1HashCode = address1.GetHashCode();
+         var address2HashCode = address2.GetHashCode();
 
+         //Assert
+         Assert.AreNotEqual(address1HashCode, address2HashCode);
+      }
 
-            //Assert
-            Assert.AreNotEqual(address1HashCode, address2HashCode);
-        }
-        [TestMethod()]
-        public void SameReferenceEqualsTrueTest()
-        {
-            //Arrange
-            Address address1 = new Address("streetLine1", null, null, "streetLine1");
-            Address address2 = address1;
+      [TestMethod()]
+      public void SameReferenceEqualsTrueTest()
+      {
+         //Arrange
+         var address1 = new Address("streetLine1", null, null, "streetLine1");
+         var address2 = address1;
 
+         //Act
+         if (!address1.Equals(address2)) { Assert.Fail(); }
 
-            //Act
-            if (!address1.Equals(address2))
-                Assert.Fail();
+         if (!(address1 == address2)) { Assert.Fail(); }
 
-            if (!(address1 == address2))
-                Assert.Fail();
+      }
 
-        }
-        [TestMethod()]
-        public void SameDataSameHashCodeTest()
-        {
-            //Arrange
-            Address address1 = new Address("streetLine1", "streetLine2", null, null);
-            Address address2 = new Address("streetLine1", "streetLine2", null, null);
+      [TestMethod()]
+      public void SameDataSameHashCodeTest()
+      {
+         //Arrange
+         var address1 = new Address("streetLine1", "streetLine2", null, null);
+         var address2 = new Address("streetLine1", "streetLine2", null, null);
 
-            //Act
-            int address1HashCode = address1.GetHashCode();
-            int address2HashCode = address2.GetHashCode();
+         //Act
+         var address1HashCode = address1.GetHashCode();
+         var address2HashCode = address2.GetHashCode();
 
+         //Assert
+         Assert.AreEqual(address1HashCode, address2HashCode);
+      }
 
-            //Assert
-            Assert.AreEqual(address1HashCode, address2HashCode);
-        }
+      [TestMethod()]
+      public void SelfReferenceNotProduceInfiniteLoop()
+      {
+         //Arrange
+         var aReference = new SelfReference();
+         var bReference = new SelfReference();
 
-        [TestMethod()]
-        public void SelfReferenceNotProduceInfiniteLoop()
-        {
-            //Arrange
-            SelfReference aReference = new SelfReference();
-            SelfReference bReference = new SelfReference();
+         //Act
+         aReference.Value = bReference;
+         bReference.Value = aReference;
 
-            //Act
-            aReference.Value = bReference;
-            bReference.Value = aReference;
+         //Assert
 
-            //Assert
+         Assert.AreNotEqual(aReference, bReference);
+      }
 
-            Assert.AreNotEqual(aReference, bReference);
-        }
-    }
+   }
+
 }

@@ -1,26 +1,21 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
 using Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.ViewModels;
 
-
-namespace Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client
+namespace Microsoft.Samples.NLayerApp.Presentation.Silverlight.Client.Views.OrdersViews
 {
-	public partial class OrderView : UserControl
-	{
-		public OrderView()
-		{
-			// Required to initialize variables
-			InitializeComponent();
 
-		    DataContext = new VMOrderList();
-		}
-	}
+   public partial class OrderView : UserControl
+   {
+
+      public OrderView()
+      {
+         // Required to initialize variables
+         InitializeComponent();
+
+         DataContext = new VmOrderList();
+      }
+
+   }
+
 }

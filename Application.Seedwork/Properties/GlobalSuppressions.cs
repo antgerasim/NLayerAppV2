@@ -7,4 +7,8 @@
 // Error List, point to "Suppress Message(s)", and click 
 // "In Project Suppression File".
 // You do not need to add suppressions to this file manually.
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Scope = "type", Target = "Microsoft.Samples.NLayerApp.Application.Seedwork.ApplicationValidationErrorsException")]
+using System.Diagnostics.CodeAnalysis;
+
+[assembly:
+   SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Scope = "type",
+      Target = "Microsoft.Samples.NLayerApp.Application.Seedwork.ApplicationValidationErrorsException")]

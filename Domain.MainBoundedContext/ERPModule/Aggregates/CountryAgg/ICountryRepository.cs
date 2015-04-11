@@ -10,17 +10,18 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
 namespace Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg
 {
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
-    /// <summary>
-    /// Base contract for country repository
-    /// <see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{Country}"/>
-    /// </summary>
-    public interface ICountryRepository
-        :IRepository<Country>
-    {
-    }
+   /// <summary>
+   ///    Base contract for country repository
+   ///    <see cref="Microsoft.Samples.NLayerApp.Domain.Seedwork.IRepository{Country}" />
+   /// </summary>
+   public interface ICountryRepository : IRepository<Country>
+   {
+
+   }
+
 }

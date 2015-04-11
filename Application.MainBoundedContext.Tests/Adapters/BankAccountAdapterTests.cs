@@ -1,5 +1,4 @@
-﻿
-//===================================================================================
+﻿//===================================================================================
 // Microsoft Developer & Platform Evangelism
 //=================================================================================== 
 // THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
@@ -11,133 +10,152 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Application.MainBoundedContext.Tests
+using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
+using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Application.MainBoundedContext.Tests.Adapters
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.ERPModule;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Adapter;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    [TestClass()]
-    public class BankAccountAdapterTests
-    {
-        [TestMethod()]
-        public void AdaptBankActivityToBankActivityDTO()
-        {
-            //Arrange
-            BankAccountActivity activity = new BankAccountActivity();
+   [TestClass()]
+   public class BankAccountAdapterTests
+   {
 
-            activity.GenerateNewIdentity();
-            activity.Date = DateTime.Now;
-            activity.Amount = 1000;
-            activity.ActivityDescription = "transfer...";
+      [TestMethod()]
+      public void AdaptBankActivityToBankActivityDto()
+      {
+         //Arrange
+         var activity = new BankAccountActivity();
 
+         activity.GenerateNewIdentity();
+         activity.Date = DateTime.Now;
+         activity.Amount = 1000;
+         activity.ActivityDescription = "transfer...";
 
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var activityDTO = adapter.Adapt<BankAccountActivity, BankActivityDTO>(activity);
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var activityDto = adapter.Adapt<BankAccountActivity, BankActivityDto>(activity);
 
-            //Assert
-            Assert.AreEqual(activity.Date, activityDTO.Date);
-            Assert.AreEqual(activity.Amount, activityDTO.Amount);
-            Assert.AreEqual(activity.ActivityDescription, activityDTO.ActivityDescription);
-        }
-        [TestMethod()]
-        public void AdaptEnumerableBankActivityToListBankActivityDTO()
-        {
-            //Arrange
-            BankAccountActivity activity = new BankAccountActivity();
+         //Assert
+         Assert.AreEqual(activity.Date, activityDto.Date);
+         Assert.AreEqual(activity.Amount, activityDto.Amount);
+         Assert.AreEqual(activity.ActivityDescription, activityDto.ActivityDescription);
+      }
 
-            activity.GenerateNewIdentity();
-            activity.Date = DateTime.Now;
-            activity.Amount = 1000;
-            activity.ActivityDescription = "transfer...";
+      [TestMethod()]
+      public void AdaptEnumerableBankActivityToListBankActivityDto()
+      {
+         //Arrange
+         var activity = new BankAccountActivity();
 
-            IEnumerable<BankAccountActivity> activities = new List<BankAccountActivity>() { activity };
+         activity.GenerateNewIdentity();
+         activity.Date = DateTime.Now;
+         activity.Amount = 1000;
+         activity.ActivityDescription = "transfer...";
 
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var activitiesDTO = adapter.Adapt<IEnumerable<BankAccountActivity>, List<BankActivityDTO>>(activities);
+         IEnumerable<BankAccountActivity> activities = new List<BankAccountActivity>()
+         {
+            activity
+         };
 
-            //Assert
-            Assert.IsNotNull(activitiesDTO);
-            Assert.IsTrue(activitiesDTO.Count() == 1);
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var activitiesDto = adapter.Adapt<IEnumerable<BankAccountActivity>, List<BankActivityDto>>(activities);
 
-            Assert.AreEqual(activity.Date, activitiesDTO[0].Date);
-            Assert.AreEqual(activity.Amount, activitiesDTO[0].Amount);
-            Assert.AreEqual(activity.ActivityDescription, activitiesDTO[0].ActivityDescription);
-        }
-        [TestMethod()]
-        public void AdaptBankAccountToBankAccountDTO()
-        {
-            //Arrange
-            var country = new Country("Spain", "es-ES");
-            country.GenerateNewIdentity();
+         //Assert
+         Assert.IsNotNull(activitiesDto);
+         Assert.IsTrue(activitiesDto.Count() == 1);
 
-            var customer = CustomerFactory.CreateCustomer("jhon", "el rojo","+3441","company", country, new Address("", "", "", ""));
-            customer.GenerateNewIdentity();
+         Assert.AreEqual(activity.Date, activitiesDto[0].Date);
+         Assert.AreEqual(activity.Amount, activitiesDto[0].Amount);
+         Assert.AreEqual(activity.ActivityDescription, activitiesDto[0].ActivityDescription);
+      }
 
-            BankAccount account = new BankAccount();
-            account.GenerateNewIdentity();
-            account.BankAccountNumber = new BankAccountNumber("4444", "5555", "3333333333", "02");
-            account.SetCustomerOwnerOfThisBankAccount(customer);
-            account.DepositMoney(1000, "reason");
-            account.Lock();
+      [TestMethod()]
+      public void AdaptBankAccountToBankAccountDto()
+      {
+         //Arrange
+         var country = new Country("Spain", "es-ES");
+         country.GenerateNewIdentity();
 
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var bankAccountDTO = adapter.Adapt<BankAccount, BankAccountDTO>(account);
+         var customer = CustomerFactory.CreateCustomer(
+            "jhon",
+            "el rojo",
+            "+3441",
+            "company",
+            country,
+            new Address("", "", "", ""));
+         customer.GenerateNewIdentity();
 
+         var account = new BankAccount();
+         account.GenerateNewIdentity();
+         account.BankAccountNumber = new BankAccountNumber("4444", "5555", "3333333333", "02");
+         account.SetCustomerOwnerOfThisBankAccount(customer);
+         account.DepositMoney(1000, "reason");
+         account.Lock();
 
-            //Assert
-            Assert.AreEqual(account.Id, bankAccountDTO.Id);
-            Assert.AreEqual(account.Iban, bankAccountDTO.BankAccountNumber);
-            Assert.AreEqual(account.Balance, bankAccountDTO.Balance);
-            Assert.AreEqual(account.Customer.FirstName, bankAccountDTO.CustomerFirstName);
-            Assert.AreEqual(account.Customer.LastName, bankAccountDTO.CustomerLastName);
-            Assert.AreEqual(account.Locked, bankAccountDTO.Locked);
-        }
-        [TestMethod()]
-        public void AdaptEnumerableBankAccountToListBankAccountListDTO()
-        {
-            //Arrange
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var bankAccountDto = adapter.Adapt<BankAccount, BankAccountDto>(account);
 
-            var country = new Country("spain", "es-ES");
-            country.GenerateNewIdentity();
+         //Assert
+         Assert.AreEqual(account.Id, bankAccountDto.Id);
+         Assert.AreEqual(account.Iban, bankAccountDto.BankAccountNumber);
+         Assert.AreEqual(account.Balance, bankAccountDto.Balance);
+         Assert.AreEqual(account.Customer.FirstName, bankAccountDto.CustomerFirstName);
+         Assert.AreEqual(account.Customer.LastName, bankAccountDto.CustomerLastName);
+         Assert.AreEqual(account.Locked, bankAccountDto.Locked);
+      }
 
-            var customer = CustomerFactory.CreateCustomer("jhon", "el rojo","+341232","company", country, new Address("", "", "", ""));
-            customer.GenerateNewIdentity();
+      [TestMethod()]
+      public void AdaptEnumerableBankAccountToListBankAccountListDto()
+      {
+         //Arrange
 
-            BankAccount account = new BankAccount();
-            account.GenerateNewIdentity();
-            account.BankAccountNumber = new BankAccountNumber("4444", "5555", "3333333333", "02");
-            account.SetCustomerOwnerOfThisBankAccount(customer);
-            account.DepositMoney(1000, "reason");
-            var accounts = new List<BankAccount>() { account };
+         var country = new Country("spain", "es-ES");
+         country.GenerateNewIdentity();
 
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var bankAccountsDTO = adapter.Adapt<IEnumerable<BankAccount>, List<BankAccountDTO>>(accounts);
+         var customer = CustomerFactory.CreateCustomer(
+            "jhon",
+            "el rojo",
+            "+341232",
+            "company",
+            country,
+            new Address("", "", "", ""));
+         customer.GenerateNewIdentity();
 
+         var account = new BankAccount();
+         account.GenerateNewIdentity();
+         account.BankAccountNumber = new BankAccountNumber("4444", "5555", "3333333333", "02");
+         account.SetCustomerOwnerOfThisBankAccount(customer);
+         account.DepositMoney(1000, "reason");
+         var accounts = new List<BankAccount>()
+         {
+            account
+         };
 
-            //Assert
-            Assert.IsNotNull(bankAccountsDTO);
-            Assert.IsTrue(bankAccountsDTO.Count == 1);
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var bankAccountsDto = adapter.Adapt<IEnumerable<BankAccount>, List<BankAccountDto>>(accounts);
 
-            Assert.AreEqual(account.Id, bankAccountsDTO[0].Id);
-            Assert.AreEqual(account.Iban, bankAccountsDTO[0].BankAccountNumber);
-            Assert.AreEqual(account.Balance, bankAccountsDTO[0].Balance);
-            Assert.AreEqual(account.Customer.FirstName, bankAccountsDTO[0].CustomerFirstName);
-            Assert.AreEqual(account.Customer.LastName, bankAccountsDTO[0].CustomerLastName);
-        }
-    }
+         //Assert
+         Assert.IsNotNull(bankAccountsDto);
+         Assert.IsTrue(bankAccountsDto.Count == 1);
+
+         Assert.AreEqual(account.Id, bankAccountsDto[0].Id);
+         Assert.AreEqual(account.Iban, bankAccountsDto[0].BankAccountNumber);
+         Assert.AreEqual(account.Balance, bankAccountsDto[0].Balance);
+         Assert.AreEqual(account.Customer.FirstName, bankAccountsDto[0].CustomerFirstName);
+         Assert.AreEqual(account.Customer.LastName, bankAccountsDto[0].CustomerLastName);
+      }
+
+   }
+
 }

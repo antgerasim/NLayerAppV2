@@ -9,49 +9,50 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
+
+using System;
+using System.Linq;
+
+using AutoMapper;
+
+using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter;
+
 namespace Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Adapter
 {
-    using System;
-    using System.Linq;
-    using AutoMapper;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter;
 
-    public class AutomapperTypeAdapterFactory
-        :ITypeAdapterFactory
-    {
-        #region Constructor
+   public class AutomapperTypeAdapterFactory : ITypeAdapterFactory
+   {
+      #region Constructor
+      /// <summary>
+      ///    Create a new Automapper type adapter factory
+      /// </summary>
+      public AutomapperTypeAdapterFactory()
+      {
+         //scan all assemblies finding Automapper Profile
+         var profiles =
+            AppDomain.CurrentDomain.GetAssemblies()
+               .SelectMany(a => a.GetTypes())
+               .Where(t => t.BaseType == typeof (Profile));
 
-        /// <summary>
-        /// Create a new Automapper type adapter factory
-        /// </summary>
-        public AutomapperTypeAdapterFactory()
-        {
-            //scan all assemblies finding Automapper Profile
-            var profiles = AppDomain.CurrentDomain
-                                    .GetAssemblies()
-                                    .SelectMany(a => a.GetTypes())
-                                    .Where(t => t.BaseType == typeof(Profile));
-
-            Mapper.Initialize(cfg =>
+         Mapper.Initialize(
+            cfg =>
             {
-                foreach (var item in profiles)
-                {
-                    if (item.FullName != "AutoMapper.SelfProfiler`2")
-                        cfg.AddProfile(Activator.CreateInstance(item) as Profile);
-                } 
+               foreach (var item in profiles)
+               {
+                  if (item.FullName != "AutoMapper.SelfProfiler`2") {
+                     cfg.AddProfile(Activator.CreateInstance(item) as Profile);
+                  }
+               }
             });
-        }
+      }
+      #endregion
 
-        #endregion
+      #region ITypeAdapterFactory Members
+      public ITypeAdapter Create()
+      {
+         return new AutomapperTypeAdapter();
+      }
+      #endregion
+   }
 
-        #region ITypeAdapterFactory Members
-
-        public ITypeAdapter Create()
-        {
-            return new AutomapperTypeAdapter();
-        }
-
-        #endregion
-    }
 }

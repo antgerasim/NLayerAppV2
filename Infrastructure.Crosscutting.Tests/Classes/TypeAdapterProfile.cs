@@ -1,5 +1,4 @@
-﻿
-//===================================================================================
+﻿//===================================================================================
 // Microsoft Developer & Platform Evangelism
 //=================================================================================== 
 // THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
@@ -11,18 +10,21 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using AutoMapper;
+
 namespace Infrastructure.Crosscutting.Tests.Classes
 {
-    using AutoMapper;
 
-    class TypeAdapterProfile
-        :Profile
-    {
-        protected override void  Configure()
-        {
-            var map = Mapper.CreateMap<Customer, CustomerDTO>();
-            map.ForMember(dto => dto.CustomerId, mc => mc.MapFrom(e => e.Id));
-            map.ForMember(dto => dto.FullName, mc => mc.MapFrom(e => string.Format("{0},{1}",e.LastName,e.FirstName)));
-        }
-    }
+   internal class TypeAdapterProfile : Profile
+   {
+
+      protected override void Configure()
+      {
+         var map = Mapper.CreateMap<Customer, CustomerDto>();
+         map.ForMember(dto => dto.CustomerId, mc => mc.MapFrom(e => e.Id));
+         map.ForMember(dto => dto.FullName, mc => mc.MapFrom(e => string.Format("{0},{1}", e.LastName, e.FirstName)));
+      }
+
+   }
+
 }

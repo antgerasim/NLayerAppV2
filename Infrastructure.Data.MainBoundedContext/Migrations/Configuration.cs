@@ -1,107 +1,134 @@
+using System;
+using System.Data.Entity.Migrations;
+
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
+using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.UnitOfWork;
+
 namespace Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Data.MainBoundedContext.UnitOfWork;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.BankingModule.Aggregates.BankAccountAgg;
 
-    public sealed class Configuration : DbMigrationsConfiguration<MainBCUnitOfWork>
-    {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = false;
-        }
+   public sealed class Configuration : DbMigrationsConfiguration<MainBcUnitOfWork>
+   {
 
-        protected override void Seed(MainBCUnitOfWork context)
-        {
-            //NOTE: Each time you change the content of this method, ALL the records will be added to the database!!
-            //If you change this method, it is better to delete de whole database first.
-            
-            ////Demo data
+      public Configuration()
+      {
+         AutomaticMigrationsEnabled = false;
+      }
 
-            //Countries
-            var spain = new Country("Spain", "ES");
-            spain.GenerateNewIdentity();
-            context.Countries.Add(spain);
+      protected override void Seed(MainBcUnitOfWork context)
+      {
+         //NOTE: Each time you change the content of this method, ALL the records will be added to the database!!
+         //If you change this method, it is better to delete de whole database first.
 
-            var us = new Country("U.S.", "US");
-            us.GenerateNewIdentity();
-            context.Countries.Add(us);
+         ////Demo data
 
-            var uk = new Country("U.K.", "GB");
-            uk.GenerateNewIdentity();
-            context.Countries.Add(uk);
+         //Countries
+         var spain = new Country("Spain", "ES");
+         spain.GenerateNewIdentity();
+         context.Countries.Add(spain);
 
-            var canada = new Country("Canada", "CA");
-            canada.GenerateNewIdentity();
-            context.Countries.Add(canada);
+         var us = new Country("U.S.", "US");
+         us.GenerateNewIdentity();
+         context.Countries.Add(us);
 
-            var italy = new Country("Italy", "IT");
-            italy.GenerateNewIdentity();
-            context.Countries.Add(italy);
+         var uk = new Country("U.K.", "GB");
+         uk.GenerateNewIdentity();
+         context.Countries.Add(uk);
 
-            var france = new Country("France", "FR");
-            france.GenerateNewIdentity();
-            context.Countries.Add(france);
+         var canada = new Country("Canada", "CA");
+         canada.GenerateNewIdentity();
+         context.Countries.Add(canada);
 
-            var argentina = new Country("Argentina", "AR");
-            argentina.GenerateNewIdentity();
-            context.Countries.Add(argentina);
+         var italy = new Country("Italy", "IT");
+         italy.GenerateNewIdentity();
+         context.Countries.Add(italy);
 
-            var russia = new Country("Russian Federation", "RUS");
-            russia.GenerateNewIdentity();
-            context.Countries.Add(russia);
+         var france = new Country("France", "FR");
+         france.GenerateNewIdentity();
+         context.Countries.Add(france);
 
-            var israel = new Country("Israel", "IS");
-            israel.GenerateNewIdentity();
-            context.Countries.Add(israel);
+         var argentina = new Country("Argentina", "AR");
+         argentina.GenerateNewIdentity();
+         context.Countries.Add(argentina);
 
-            var brazil = new Country("Brazil", "BZ");
-            brazil.GenerateNewIdentity();
-            context.Countries.Add(brazil);
+         var russia = new Country("Russian Federation", "RUS");
+         russia.GenerateNewIdentity();
+         context.Countries.Add(russia);
 
-            ////
-            //Customers
+         var israel = new Country("Israel", "IS");
+         israel.GenerateNewIdentity();
+         context.Countries.Add(israel);
 
-            //Cesar de la Torre
-            var customer1 = CustomerFactory.CreateCustomer("Cesar", "De la Torre", "+34 1234567", "Microsoft", spain, new Address("Madrid", "28700", "Calle Club Deportivo 1", "Parque Empresarial La Finca, Edif. 1"));
-            customer1.SetTheCountryReference(spain.Id);                                    
-            context.Customers.Add(customer1);
+         var brazil = new Country("Brazil", "BZ");
+         brazil.GenerateNewIdentity();
+         context.Countries.Add(brazil);
 
-            //Unai Zorrilla
-            var customer2 = CustomerFactory.CreateCustomer("Unai", "Zorrilla", "+34 1234567", "Plain Concepts", spain, new Address("Madrid", "12345", "Calle Plain", "Barrio San Chinarro"));
-            customer2.SetTheCountryReference(spain.Id);                                    
-            context.Customers.Add(customer2);
+         ////
+         //Customers
 
-            //Miguel Angel
-            var customer3 = CustomerFactory.CreateCustomer("Miguel Angel", "Ramos", "+1 1234567", "Microsoft", us, new Address("Redmond", "12345", "One Microsoft Way", "Building X"));
-            customer3.SetTheCountryReference(us.Id);                                    
-            context.Customers.Add(customer3);
+         //Cesar de la Torre
+         var customer1 = CustomerFactory.CreateCustomer(
+            "Cesar",
+            "De la Torre",
+            "+34 1234567",
+            "Microsoft",
+            spain,
+            new Address("Madrid", "28700", "Calle Club Deportivo 1", "Parque Empresarial La Finca, Edif. 1"));
+         customer1.SetTheCountryReference(spain.Id);
+         context.Customers.Add(customer1);
 
-            //Eric Evans            
-            var customer4 = CustomerFactory.CreateCustomer("Eric", "Evans", "+1 1234567", "Domain Language", us, new Address("City", "12345", "DDD Street", "Building X"));
-            customer4.SetTheCountryReference(us.Id);                                    
-            context.Customers.Add(customer4);
+         //Unai Zorrilla
+         var customer2 = CustomerFactory.CreateCustomer(
+            "Unai",
+            "Zorrilla",
+            "+34 1234567",
+            "Plain Concepts",
+            spain,
+            new Address("Madrid", "12345", "Calle Plain", "Barrio San Chinarro"));
+         customer2.SetTheCountryReference(spain.Id);
+         context.Customers.Add(customer2);
 
-            ////
-            //Bank Accounts
+         //Miguel Angel
+         var customer3 = CustomerFactory.CreateCustomer(
+            "Miguel Angel",
+            "Ramos",
+            "+1 1234567",
+            "Microsoft",
+            us,
+            new Address("Redmond", "12345", "One Microsoft Way", "Building X"));
+         customer3.SetTheCountryReference(us.Id);
+         context.Customers.Add(customer3);
 
-            //Account 001
-            var bankAccountNumber001 = new BankAccountNumber("1111", "2222", "3333333333", "01");
-            var newBankAccount001 = BankAccountFactory.CreateBankAccount(customer1,bankAccountNumber001);
-            newBankAccount001.DepositMoney(System.Convert.ToDecimal(5000), "Initial Balance");
-            context.BankAccounts.Add(newBankAccount001);
+         //Eric Evans            
+         var customer4 = CustomerFactory.CreateCustomer(
+            "Eric",
+            "Evans",
+            "+1 1234567",
+            "Domain Language",
+            us,
+            new Address("City", "12345", "DDD Street", "Building X"));
+         customer4.SetTheCountryReference(us.Id);
+         context.Customers.Add(customer4);
 
-            //Account 002
-            var bankAccountNumber002 = new BankAccountNumber("1111", "2222", "3333333333", "02");
-            var newBankAccount002 = BankAccountFactory.CreateBankAccount(customer2, bankAccountNumber002);
-            newBankAccount002.DepositMoney(System.Convert.ToDecimal(3000), "Initial Balance");
-            context.BankAccounts.Add(newBankAccount002);
+         ////
+         //Bank Accounts
 
-        }
-    }
+         //Account 001
+         var bankAccountNumber001 = new BankAccountNumber("1111", "2222", "3333333333", "01");
+         var newBankAccount001 = BankAccountFactory.CreateBankAccount(customer1, bankAccountNumber001);
+         newBankAccount001.DepositMoney(Convert.ToDecimal(5000), "Initial Balance");
+         context.BankAccounts.Add(newBankAccount001);
+
+         //Account 002
+         var bankAccountNumber002 = new BankAccountNumber("1111", "2222", "3333333333", "02");
+         var newBankAccount002 = BankAccountFactory.CreateBankAccount(customer2, bankAccountNumber002);
+         newBankAccount002.DepositMoney(Convert.ToDecimal(3000), "Initial Balance");
+         context.BankAccounts.Add(newBankAccount002);
+
+      }
+
+   }
+
 }

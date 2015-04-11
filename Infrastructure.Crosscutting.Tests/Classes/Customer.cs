@@ -9,14 +9,19 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
 
 namespace Infrastructure.Crosscutting.Tests.Classes
 {
-    class Customer
-    {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-    }
+
+   internal class Customer
+   {
+
+      public int Id { get; set; }
+
+      public string FirstName { get; set; }
+
+      public string LastName { get; set; }
+
+   }
+
 }

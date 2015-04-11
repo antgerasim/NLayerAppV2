@@ -10,30 +10,30 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using Microsoft.Samples.NLayerApp.Domain.Seedwork;
+
 namespace Domain.Seedwork.Tests.Classes
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
 
+   public class Address : ValueObject<Address>
+   {
 
+      public Address(string streetLine1, string streetLine2, string city, string zipCode)
+      {
+         this.StreetLine1 = streetLine1;
+         this.StreetLine2 = streetLine2;
+         this.City = city;
+         this.ZipCode = zipCode;
+      }
 
-    public class Address
-        :ValueObject<Address>
-    {
-        public string StreetLine1 { get; private set; }
-        public string StreetLine2 { get; private set; }
-        public string City { get; private set; }
-        public string ZipCode { get; private set; }
+      public string StreetLine1 { get; private set; }
 
-        public Address(string streetLine1, string streetLine2, string city, string zipCode)
-        {
-            this.StreetLine1 = streetLine1;
-            this.StreetLine2 = streetLine2;
-            this.City = city;
-            this.ZipCode = zipCode;
-        }
-    }
+      public string StreetLine2 { get; private set; }
+
+      public string City { get; private set; }
+
+      public string ZipCode { get; private set; }
+
+   }
+
 }

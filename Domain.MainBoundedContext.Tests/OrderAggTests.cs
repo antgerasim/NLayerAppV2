@@ -9,288 +9,312 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
+
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.OrderAgg;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Domain.MainBoundedContext.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.OrderAgg;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CustomerAgg;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
-    using System.ComponentModel.DataAnnotations;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg;
 
-    [TestClass()]
-    public class OrderAggTests
-    {
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void OrderCannotSetTransientCustomer()
-        {
-            //Arrange 
-            Customer customer = new Customer();
+   [TestClass()]
+   public class OrderAggTests
+   {
 
-            Order order = new Order();
+      [TestMethod()]
+      [ExpectedException(typeof (ArgumentException))]
+      public void OrderCannotSetTransientCustomer()
+      {
+         //Arrange 
+         var customer = new Customer();
 
-            //Act
-            order.SetTheCustomerForThisOrder(customer);
-        }
+         var order = new Order();
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
-        public void OrderCannotSetNullCustomer()
-        {
-            //Arrange 
-            Customer customer = new Customer();
+         //Act
+         order.SetTheCustomerForThisOrder(customer);
+      }
 
-            Order order = new Order();
+      [TestMethod()]
+      [ExpectedException(typeof (ArgumentException))]
+      public void OrderCannotSetNullCustomer()
+      {
+         //Arrange 
+         var customer = new Customer();
 
-            //Act
-            order.SetTheCustomerForThisOrder(customer);
-        }
+         var order = new Order();
 
-        [TestMethod()]
-        public void OrderSetDeliveredSetDateAndState()
-        {
-            //Arrange 
-            Order order = new Order();
+         //Act
+         order.SetTheCustomerForThisOrder(customer);
+      }
 
-            //Act
-            order.SetOrderAsDelivered();
+      [TestMethod()]
+      public void OrderSetDeliveredSetDateAndState()
+      {
+         //Arrange 
+         var order = new Order();
 
-            //Assert
-            Assert.IsTrue(order.IsDelivered);
-            Assert.IsNotNull(order.DeliveryDate);
-            Assert.IsTrue(order.DeliveryDate != default(DateTime));
-        }
-        [TestMethod()]
-        public void OrderAddNewOrderLineFixOrderId()
-        {
-            //Arrange
-            string shippingName= "shippingName";
-            string shippingCity = "shippingCity";
-            string shippingZipCode = "shippingZipCode";
-            string shippingAddress = "shippingAddress";
+         //Act
+         order.SetOrderAsDelivered();
 
-            Customer customer = new Customer();
-            customer.GenerateNewIdentity();
+         //Assert
+         Assert.IsTrue(order.IsDelivered);
+         Assert.IsNotNull(order.DeliveryDate);
+         Assert.IsTrue(order.DeliveryDate != default(DateTime));
+      }
 
-            Order order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
-            order.GenerateNewIdentity();
+      [TestMethod()]
+      public void OrderAddNewOrderLineFixOrderId()
+      {
+         //Arrange
+         var shippingName = "shippingName";
+         var shippingCity = "shippingCity";
+         var shippingZipCode = "shippingZipCode";
+         var shippingAddress = "shippingAddress";
 
-            var line = order.AddNewOrderLine(Guid.NewGuid(), 1, 1, 0);
+         var customer = new Customer();
+         customer.GenerateNewIdentity();
 
-            //Assert
-            Assert.AreEqual(order.Id, line.OrderId);
-        }
+         var order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
+         order.GenerateNewIdentity();
 
-        [TestMethod()]
-        public void OrderGetTotalOrderSumLines()
-        {
-            //Arrange
-            string shippingName= "shippingName";
-            string shippingCity = "shippingCity";
-            string shippingZipCode = "shippingZipCode";
-            string shippingAddress = "shippingAddress";
+         var line = order.AddNewOrderLine(Guid.NewGuid(), 1, 1, 0);
 
-            Customer customer = new Customer();
-            customer.GenerateNewIdentity();
+         //Assert
+         Assert.AreEqual(order.Id, line.OrderId);
+      }
 
-            Order order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
+      [TestMethod()]
+      public void OrderGetTotalOrderSumLines()
+      {
+         //Arrange
+         var shippingName = "shippingName";
+         var shippingCity = "shippingCity";
+         var shippingZipCode = "shippingZipCode";
+         var shippingAddress = "shippingAddress";
 
-            order.AddNewOrderLine(Guid.NewGuid(),1,500, 10);
-            order.AddNewOrderLine(Guid.NewGuid(),2,300, 10);
+         var customer = new Customer();
+         customer.GenerateNewIdentity();
 
-            decimal expected = ((1 * 500) * (1 - (10M / 100M))) + ((2 * 300) * (1 - (10M / 100M)));
+         var order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
 
-            //Act
-            
-            decimal actual = order.GetOrderTotal();
+         order.AddNewOrderLine(Guid.NewGuid(), 1, 500, 10);
+         order.AddNewOrderLine(Guid.NewGuid(), 2, 300, 10);
 
-            //Assert
-            Assert.AreEqual(expected,actual);
-        }
-        [TestMethod()]
-        public void OrderDiscountInOrderLineCanBeZero()
-        {
-            //Arrange
-            string shippingName = "shippingName";
-            string shippingCity = "shippingCity";
-            string shippingZipCode = "shippingZipCode";
-            string shippingAddress = "shippingAddress";
+         var expected = ((1 * 500) * (1 - (10M / 100M))) + ((2 * 300) * (1 - (10M / 100M)));
 
-            Customer customer = new Customer();
-            customer.GenerateNewIdentity();
+         //Act
 
-            Order order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
+         var actual = order.GetOrderTotal();
 
-            order.AddNewOrderLine(Guid.NewGuid(), 1, 500, 0);
-            order.AddNewOrderLine(Guid.NewGuid(), 2, 300, 0);
+         //Assert
+         Assert.AreEqual(expected, actual);
+      }
 
-            decimal expected = ((1 * 500) * (1 - (0M / 100M))) + ((2 * 300) * (1 - (0M / 100M)));
+      [TestMethod()]
+      public void OrderDiscountInOrderLineCanBeZero()
+      {
+         //Arrange
+         var shippingName = "shippingName";
+         var shippingCity = "shippingCity";
+         var shippingZipCode = "shippingZipCode";
+         var shippingAddress = "shippingAddress";
 
-            //Act
-            decimal actual = order.GetOrderTotal();
+         var customer = new Customer();
+         customer.GenerateNewIdentity();
 
-            //Assert
-            Assert.AreEqual(expected, actual);
-        }
-        [TestMethod()]
-        public void OrderDiscountLessThanZeroIsEqualToZeroDiscount()
-        {
-            //Arrange
-            string shippingName = "shippingName";
-            string shippingCity = "shippingCity";
-            string shippingZipCode = "shippingZipCode";
-            string shippingAddress = "shippingAddress";
+         var order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
 
-            Customer customer = new Customer();
-            customer.GenerateNewIdentity();
+         order.AddNewOrderLine(Guid.NewGuid(), 1, 500, 0);
+         order.AddNewOrderLine(Guid.NewGuid(), 2, 300, 0);
 
-            Order order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
+         var expected = ((1 * 500) * (1 - (0M / 100M))) + ((2 * 300) * (1 - (0M / 100M)));
 
-            order.AddNewOrderLine(Guid.NewGuid(), 1, 500, -10);
-            order.AddNewOrderLine(Guid.NewGuid(), 2, 300, -10);
+         //Act
+         var actual = order.GetOrderTotal();
 
-            decimal expected = ((1 * 500) * (1 - (0M / 100M))) + ((2 * 300) * (1 - (0M / 100M)));
+         //Assert
+         Assert.AreEqual(expected, actual);
+      }
 
-            //Act
-            decimal actual = order.GetOrderTotal();
+      [TestMethod()]
+      public void OrderDiscountLessThanZeroIsEqualToZeroDiscount()
+      {
+         //Arrange
+         var shippingName = "shippingName";
+         var shippingCity = "shippingCity";
+         var shippingZipCode = "shippingZipCode";
+         var shippingAddress = "shippingAddress";
 
-            //Assert
-            Assert.AreEqual(expected, actual);
-        }
-        [TestMethod()]
-        public void OrderDiscountGreatherThan100IsEqualTo100Discount()
-        {
-            //Arrange
-            string shippingName = "shippingName";
-            string shippingCity = "shippingCity";
-            string shippingZipCode = "shippingZipCode";
-            string shippingAddress = "shippingAddress";
+         var customer = new Customer();
+         customer.GenerateNewIdentity();
 
-            Customer customer = new Customer();
-            customer.GenerateNewIdentity();
+         var order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
 
-            Order order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
+         order.AddNewOrderLine(Guid.NewGuid(), 1, 500, -10);
+         order.AddNewOrderLine(Guid.NewGuid(), 2, 300, -10);
 
-            order.AddNewOrderLine(Guid.NewGuid(), 1, 500, 101);
-            order.AddNewOrderLine(Guid.NewGuid(), 2, 300, 101);
+         var expected = ((1 * 500) * (1 - (0M / 100M))) + ((2 * 300) * (1 - (0M / 100M)));
 
-            decimal expected = ((1 * 500) * (1 - (100M / 100M))) + ((2 * 300) * (1 - (100M / 100M)));
+         //Act
+         var actual = order.GetOrderTotal();
 
-            //Act
-            decimal actual = order.GetOrderTotal();
+         //Assert
+         Assert.AreEqual(expected, actual);
+      }
 
-            //Assert
-            Assert.AreEqual(expected, actual);
-        }
-        [TestMethod()]
-        public void OrderFactoryCreateValidOrder()
-        {
-            //Arrange
-            
-            string shippingName = "shippingName";
-            string shippingCity = "shippingCity";
-            string shippingZipCode = "shippingZipCode";
-            string shippingAddress = "shippingAddress";
+      [TestMethod()]
+      public void OrderDiscountGreatherThan100IsEqualTo100Discount()
+      {
+         //Arrange
+         var shippingName = "shippingName";
+         var shippingCity = "shippingCity";
+         var shippingZipCode = "shippingZipCode";
+         var shippingAddress = "shippingAddress";
 
-            Customer customer = new Customer();
-            customer.GenerateNewIdentity();
+         var customer = new Customer();
+         customer.GenerateNewIdentity();
 
-            //Act
-            Order order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
-            var validationContext = new ValidationContext(order, null, null);
-            var validationResult = order.Validate(validationContext);
+         var order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
 
-            //Assert
-            ShippingInfo shippingInfo = new ShippingInfo(shippingName, shippingAddress, shippingCity, shippingZipCode);
+         order.AddNewOrderLine(Guid.NewGuid(), 1, 500, 101);
+         order.AddNewOrderLine(Guid.NewGuid(), 2, 300, 101);
 
-            Assert.AreEqual(shippingInfo, order.ShippingInformation);
-            Assert.AreEqual(order.Customer, customer);
-            Assert.AreEqual(order.CustomerId, customer.Id);
-            Assert.IsFalse(order.IsDelivered);
-            Assert.IsNull(order.DeliveryDate);
-            Assert.IsTrue(order.OrderDate != default(DateTime));
-            Assert.IsFalse(validationResult.Any());
-        }
-        [TestMethod()]
-        public void IsCreditValidForOrderReturnTrueIfTotalOrderIsLessThanCustomerCredit()
-        {
-            //Arrange
-            string shippingName = "shippingName";
-            string shippingCity = "shippingCity";
-            string shippingZipCode = "shippingZipCode";
-            string shippingAddress = "shippingAddress";
+         var expected = ((1 * 500) * (1 - (100M / 100M))) + ((2 * 300) * (1 - (100M / 100M)));
 
-            Country country = new Country("Spain", "es-ES");
-            country.GenerateNewIdentity();
+         //Act
+         var actual = order.GetOrderTotal();
 
-            var customer = CustomerFactory.CreateCustomer("jhon", "el rojo", "+3422", "company", country, new Address("city", "zipCode", "address line1", "addres line2"));
-            
+         //Assert
+         Assert.AreEqual(expected, actual);
+      }
 
-            //Act
-            Order order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
-            order.AddNewOrderLine(Guid.NewGuid(), 1, 240, 0); // this is less that 1000 ( default customer credit )
-            
-            //assert
-            var result = order.IsCreditValidForOrder();
+      [TestMethod()]
+      public void OrderFactoryCreateValidOrder()
+      {
+         //Arrange
 
-            //Assert
-            Assert.IsTrue(result);
+         var shippingName = "shippingName";
+         var shippingCity = "shippingCity";
+         var shippingZipCode = "shippingZipCode";
+         var shippingAddress = "shippingAddress";
 
+         var customer = new Customer();
+         customer.GenerateNewIdentity();
 
-        }
-        [TestMethod()]
-        public void IsCreditValidForOrderReturnFalseIfTotalOrderIsGreaterThanCustomerCredit()
-        {
-            //Arrange
-            string shippingName = "shippingName";
-            string shippingCity = "shippingCity";
-            string shippingZipCode = "shippingZipCode";
-            string shippingAddress = "shippingAddress";
+         //Act
+         var order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
+         var validationContext = new ValidationContext(order, null, null);
+         var validationResult = order.Validate(validationContext);
 
-            var country = new Country("spain", "es-ES");
-            country.GenerateNewIdentity();
+         //Assert
+         var shippingInfo = new ShippingInfo(shippingName, shippingAddress, shippingCity, shippingZipCode);
 
-            var customer = CustomerFactory.CreateCustomer("jhon", "el rojo", "+3422", "company", country, new Address("city", "zipCode", "address line1", "addres line2"));
-            
-            //Act
-            Order order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
-            order.AddNewOrderLine(Guid.NewGuid(), 100, 240, 0); // this is greater that 1000 ( default customer credit )
-           
-            //assert
-            var result = order.IsCreditValidForOrder();
+         Assert.AreEqual(shippingInfo, order.ShippingInformation);
+         Assert.AreEqual(order.Customer, customer);
+         Assert.AreEqual(order.CustomerId, customer.Id);
+         Assert.IsFalse(order.IsDelivered);
+         Assert.IsNull(order.DeliveryDate);
+         Assert.IsTrue(order.OrderDate != default(DateTime));
+         Assert.IsFalse(validationResult.Any());
+      }
 
-            //Assert
-            Assert.IsFalse(result);
-        }
+      [TestMethod()]
+      public void IsCreditValidForOrderReturnTrueIfTotalOrderIsLessThanCustomerCredit()
+      {
+         //Arrange
+         var shippingName = "shippingName";
+         var shippingCity = "shippingCity";
+         var shippingZipCode = "shippingZipCode";
+         var shippingAddress = "shippingAddress";
 
-        [TestMethod()]
-        public void OrderNumberIsComposedWithOrderDateAndSequenceOrderNumber()
-        {
-            //Arrange
+         var country = new Country("Spain", "es-ES");
+         country.GenerateNewIdentity();
 
-            string shippingName = "shippingName";
-            string shippingCity = "shippingCity";
-            string shippingZipCode = "shippingZipCode";
-            string shippingAddress = "shippingAddress";
+         var customer = CustomerFactory.CreateCustomer(
+            "jhon",
+            "el rojo",
+            "+3422",
+            "company",
+            country,
+            new Address("city", "zipCode", "address line1", "addres line2"));
 
-            Customer customer = new Customer();
-            customer.GenerateNewIdentity();
+         //Act
+         var order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
+         order.AddNewOrderLine(Guid.NewGuid(), 1, 240, 0);
+         // this is less that 1000 ( default customer credit )
 
-            Order order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
+         //assert
+         var result = order.IsCreditValidForOrder();
 
-            //Act
-            string expected = string.Format("{0}/{1}-{2}", order.OrderDate.Year, order.OrderDate.Month, order.SequenceNumberOrder);
-            string result = order.OrderNumber;
+         //Assert
+         Assert.IsTrue(result);
 
-            //Assert
-            Assert.AreEqual(expected, result);
-        }
-    }
+      }
+
+      [TestMethod()]
+      public void IsCreditValidForOrderReturnFalseIfTotalOrderIsGreaterThanCustomerCredit()
+      {
+         //Arrange
+         var shippingName = "shippingName";
+         var shippingCity = "shippingCity";
+         var shippingZipCode = "shippingZipCode";
+         var shippingAddress = "shippingAddress";
+
+         var country = new Country("spain", "es-ES");
+         country.GenerateNewIdentity();
+
+         var customer = CustomerFactory.CreateCustomer(
+            "jhon",
+            "el rojo",
+            "+3422",
+            "company",
+            country,
+            new Address("city", "zipCode", "address line1", "addres line2"));
+
+         //Act
+         var order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
+         order.AddNewOrderLine(Guid.NewGuid(), 100, 240, 0);
+         // this is greater that 1000 ( default customer credit )
+
+         //assert
+         var result = order.IsCreditValidForOrder();
+
+         //Assert
+         Assert.IsFalse(result);
+      }
+
+      [TestMethod()]
+      public void OrderNumberIsComposedWithOrderDateAndSequenceOrderNumber()
+      {
+         //Arrange
+
+         var shippingName = "shippingName";
+         var shippingCity = "shippingCity";
+         var shippingZipCode = "shippingZipCode";
+         var shippingAddress = "shippingAddress";
+
+         var customer = new Customer();
+         customer.GenerateNewIdentity();
+
+         var order = OrderFactory.CreateOrder(customer, shippingName, shippingCity, shippingAddress, shippingZipCode);
+
+         //Act
+         var expected = string.Format(
+            "{0}/{1}-{2}",
+            order.OrderDate.Year,
+            order.OrderDate.Month,
+            order.SequenceNumberOrder);
+         var result = order.OrderNumber;
+
+         //Assert
+         Assert.AreEqual(expected, result);
+      }
+
+   }
+
 }

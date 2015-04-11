@@ -9,108 +9,139 @@
 // This code is released under the terms of the MS-LPL license, 
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
-			
+
+using System;
+using System.Collections.Generic;
+using System.ServiceModel;
+
+using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services;
+using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
+using Microsoft.Samples.NLayerApp.DistributedServices.MainBoundedContext.InstanceProviders;
+using Microsoft.Samples.NLayerApp.DistributedServices.Seedwork.ErrorHandlers;
 
 namespace Microsoft.Samples.NLayerApp.DistributedServices.MainBoundedContext
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ServiceModel;
 
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services;
-    using Microsoft.Samples.NLayerApp.DistributedServices.MainBoundedContext.InstanceProviders;
-    using Microsoft.Samples.NLayerApp.DistributedServices.Seedwork.ErrorHandlers;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
-    
+   [ApplicationErrorHandler()] // manage all unhandled exceptions
+   [UnityInstanceProviderServiceBehavior()]
+   //create instance and inject dependencies using unity container
+   [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+   public class BankingModuleService : IBankingModuleService
+   {
+      #region Members
+      private readonly IBankAppService _bankAppService;
+      #endregion
 
-    [ApplicationErrorHandlerAttribute()] // manage all unhandled exceptions
-    [UnityInstanceProviderServiceBehavior()] //create instance and inject dependencies using unity container
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
-    public class BankingModuleService : IBankingModuleService
-    {
-        #region Members
+      #region Constructor
+      /// <summary>
+      ///    Create a new instance of banking module service
+      /// </summary>
+      /// <param name="bankAppService">The bank application service dependency</param>
+      public BankingModuleService(IBankAppService bankAppService)
+      {
+         if (bankAppService == null) { throw new ArgumentNullException("bankAppService"); }
 
-        readonly IBankAppService _bankAppService;
+         _bankAppService = bankAppService;
+      }
+      #endregion
 
-        #endregion
+      #region IDisposable Members
+      /// <summary>
+      ///    <see cref="M:System.IDisposable.Dispose" />
+      /// </summary>
+      public void Dispose()
+      {
+         //dispose all resources
+         _bankAppService.Dispose();
+      }
+      #endregion
 
-        #region Constructor
+      #region IBaningModuleService Members
+      /// <summary>
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </summary>
+      /// <param name="newBankAccount">
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </param>
+      /// <returns>
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </returns>
+      public BankAccountDto AddNewBankAccount(BankAccountDto newBankAccount)
+      {
+         return _bankAppService.AddBankAccount(newBankAccount);
+      }
 
-        /// <summary>
-        /// Create a new instance of banking module service
-        /// </summary>
-        /// <param name="bankAppService">The bank application service dependency</param>
-        public BankingModuleService(IBankAppService bankAppService)
-        {
-            if (bankAppService == null)
-                throw new ArgumentNullException("bankAppService");
+      /// <summary>
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </summary>
+      /// <param name="bankAccountId">
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </param>
+      /// <returns>
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </returns>
+      public bool LockBankAccount(Guid bankAccountId)
+      {
+         return _bankAppService.LockBankAccount(bankAccountId);
+      }
 
-            _bankAppService = bankAppService;
-        }
-        #endregion
+      /// <summary>
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </summary>
+      /// <returns>
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </returns>
+      public List<BankAccountDto> FindBankAccounts()
+      {
+         return _bankAppService.FindBankAccounts();
+      }
 
-        #region IBaningModuleService Members
+      /// <summary>
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </summary>
+      /// <param name="bankAccountId">
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </param>
+      /// <returns>
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </returns>
+      public List<BankActivityDto> FindBankAccountActivities(Guid bankAccountId)
+      {
+         return _bankAppService.FindBankAccountActivities(bankAccountId);
+      }
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/>
-        /// </summary>
-        /// <param name="newBankAccount"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/></param>
-        /// <returns><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/></returns>
-        public BankAccountDTO AddNewBankAccount(BankAccountDTO newBankAccount)
-        {
-            return _bankAppService.AddBankAccount(newBankAccount);
-        }
+      /// <summary>
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </summary>
+      /// <param name="from">
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </param>
+      /// <param name="to">
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </param>
+      /// <param name="amount">
+      ///    <see
+      ///       cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService" />
+      /// </param>
+      public void PerformTransfer(BankAccountDto from, BankAccountDto to, decimal amount)
+      {
+         _bankAppService.PerformBankTransfer(from, to, amount);
+      }
+      #endregion
+   }
 
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/>
-        /// </summary>
-        /// <param name="bankAccountId"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/></param>
-        /// <returns><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/></returns>
-        public bool LockBankAccount(Guid bankAccountId)
-        {
-            return _bankAppService.LockBankAccount(bankAccountId);
-        }
-
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/>
-        /// </summary>
-        /// <returns><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/></returns>
-        public List<BankAccountDTO> FindBankAccounts()
-        {
-            return _bankAppService.FindBankAccounts();
-        }
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/>
-        /// </summary>
-        /// <param name="bankAccountId"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/></param>
-        /// <returns><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/></returns>
-        public List<BankActivityDTO> FindBankAccountActivities(Guid bankAccountId)
-        {
-            return _bankAppService.FindBankAccountActivities(bankAccountId);
-        }
-        /// <summary>
-        /// <see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/>
-        /// </summary>
-        /// <param name="from"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/></param>
-        /// <param name="to"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/></param>
-        /// <param name="amount"><see cref="Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule.Services.IMainBoundedContextService"/></param>
-        public void PerformTransfer(BankAccountDTO from, BankAccountDTO to, decimal amount)
-        {
-            _bankAppService.PerformBankTransfer(from, to, amount);
-        }
-
-        #endregion
-
-        #region IDisposable Members
-
-        /// <summary>
-        /// <see cref="M:System.IDisposable.Dispose"/>
-        /// </summary>
-        public void Dispose()
-        {
-            //dispose all resources
-            _bankAppService.Dispose();
-        }
-        #endregion
-    }
 }

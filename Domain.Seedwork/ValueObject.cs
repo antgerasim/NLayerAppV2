@@ -10,136 +10,147 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System;
+using System.Linq;
 
 namespace Microsoft.Samples.NLayerApp.Domain.Seedwork
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
 
-    /// <summary>
-    /// Base class for value objects in domain.
-    /// Value
-    /// </summary>
-    /// <typeparam name="TValueObject">The type of this value object</typeparam>
-    public class ValueObject<TValueObject> :IEquatable<TValueObject>
-        where TValueObject : ValueObject<TValueObject>
-    {
+   /// <summary>
+   ///    Base class for value objects in domain.
+   ///    Value
+   /// </summary>
+   /// <typeparam name="TValueObject">The type of this value object</typeparam>
+   public class ValueObject<TValueObject> : IEquatable<TValueObject> where TValueObject : ValueObject<TValueObject>
+   {
+      #region IEquatable and Override Equals operators
+      /// <summary>
+      ///    <see cref="M:System.Object.IEquatable{TValueObject}" />
+      /// </summary>
+      /// <param name="other">
+      ///    <see cref="M:System.Object.IEquatable{TValueObject}" />
+      /// </param>
+      /// <returns>
+      ///    <see cref="M:System.Object.IEquatable{TValueObject}" />
+      /// </returns>
+      public bool Equals(TValueObject other)
+      {
+         if ((object) other == null) { return false; }
 
-        #region IEquatable and Override Equals operators
+         if (ReferenceEquals(this, other)) { return true; }
 
-        /// <summary>
-        /// <see cref="M:System.Object.IEquatable{TValueObject}"/>
-        /// </summary>
-        /// <param name="other"><see cref="M:System.Object.IEquatable{TValueObject}"/></param>
-        /// <returns><see cref="M:System.Object.IEquatable{TValueObject}"/></returns>
-        public bool Equals(TValueObject other)
-        {            
-            if ((object)other == null)
-                return false;
+         //compare all public properties
+         var publicProperties = this.GetType().GetProperties();
 
-            if (Object.ReferenceEquals(this, other))
-                return true;
+         if ((object) publicProperties != null && publicProperties.Any())
+         {
+            return publicProperties.All(
+               p =>
+               {
+                  var left = p.GetValue(this, null);
+                  var right = p.GetValue(other, null);
 
-            //compare all public properties
-            PropertyInfo[] publicProperties = this.GetType().GetProperties();
+                  if (typeof (TValueObject).IsAssignableFrom(left.GetType()))
+                  {
+                     //check not self-references...
+                     return ReferenceEquals(left, right);
+                  }
+                  else
+                  {
+                     return left.Equals(right);
+                  }
 
-            if ((object)publicProperties != null
-                &&
-                publicProperties.Any())
+               });
+         }
+         else
+         {
+            return true;
+         }
+      }
+
+      /// <summary>
+      ///    <see cref="M:System.Object.Equals" />
+      /// </summary>
+      /// <param name="obj">
+      ///    <see cref="M:System.Object.Equals" />
+      /// </param>
+      /// <returns>
+      ///    <see cref="M:System.Object.Equals" />
+      /// </returns>
+      public override bool Equals(object obj)
+      {
+         if ((object) obj == null) { return false; }
+
+         if (ReferenceEquals(this, obj)) { return true; }
+
+         var item = obj as ValueObject<TValueObject>;
+
+         if ((object) item != null) {
+            return Equals((TValueObject) item);
+         }
+         else
+         {
+            return false;
+         }
+
+      }
+
+      /// <summary>
+      ///    <see cref="M:System.Object.GetHashCode" />
+      /// </summary>
+      /// <returns>
+      ///    <see cref="M:System.Object.GetHashCode" />
+      /// </returns>
+      public override int GetHashCode()
+      {
+         var hashCode = 31;
+         var changeMultiplier = false;
+         var index = 1;
+
+         //compare all public properties
+         var publicProperties = this.GetType().GetProperties();
+
+         if ((object) publicProperties != null && publicProperties.Any())
+         {
+            foreach (var item in publicProperties)
             {
-                return publicProperties.All(p =>
-                {
-                    var left = p.GetValue(this, null);
-                    var right = p.GetValue(other, null);
+               var value = item.GetValue(this, null);
 
-                    
-                    if (typeof(TValueObject).IsAssignableFrom(left.GetType()))
-                    {
-                        //check not self-references...
-                        return Object.ReferenceEquals(left, right);
-                    }
-                    else
-                        return left.Equals(right);
-                    
+               if ((object) value != null)
+               {
 
-                });
+                  hashCode = hashCode * ((changeMultiplier) ? 59 : 114) + value.GetHashCode();
+
+                  changeMultiplier = !changeMultiplier;
+               }
+               else
+               {
+                  hashCode = hashCode ^ (index * 13);
+                  //only for support {"a",null,null,"a"} <> {null,"a","a",null}
+               }
             }
-            else
-                return true;
-        }
-        /// <summary>
-        /// <see cref="M:System.Object.Equals"/>
-        /// </summary>
-        /// <param name="obj"><see cref="M:System.Object.Equals"/></param>
-        /// <returns><see cref="M:System.Object.Equals"/></returns>
-        public override bool Equals(object obj)
-        {
-            if ((object)obj == null)
-                return false;
+         }
 
-            if (Object.ReferenceEquals(this, obj))
-                return true;
+         return hashCode;
+      }
 
-            ValueObject<TValueObject> item = obj as ValueObject<TValueObject>;
-            
-            if ((object)item != null)
-                return Equals((TValueObject)item);
-            else
-                return false;
+      public static bool operator ==(ValueObject<TValueObject> left, ValueObject<TValueObject> right)
+      {
+         if (Equals(left, null)) {
+            return (Equals(right, null)) ? true : false;
+         }
+         else
+         {
+            return left.Equals(right);
+         }
 
-        }
-        /// <summary>
-        /// <see cref="M:System.Object.GetHashCode"/>
-        /// </summary>
-        /// <returns><see cref="M:System.Object.GetHashCode"/></returns>
-        public override int GetHashCode()
-        {
-            int hashCode = 31;
-            bool changeMultiplier = false;
-            int index = 1;
+      }
 
-            //compare all public properties
-            PropertyInfo[] publicProperties = this.GetType().GetProperties();
+      public static bool operator !=(ValueObject<TValueObject> left, ValueObject<TValueObject> right)
+      {
+         return !(left == right);
+      }
+      #endregion
+   }
 
-            
-            if ((object)publicProperties != null
-                &&
-                publicProperties.Any())
-            {
-                foreach (var item in publicProperties)
-                {
-                    object value = item.GetValue(this, null);
-
-                    if ((object)value != null)
-                    {
-
-                        hashCode = hashCode * ((changeMultiplier) ? 59 : 114) + value.GetHashCode();
-
-                        changeMultiplier = !changeMultiplier;
-                    }
-                    else
-                        hashCode = hashCode ^ (index * 13);//only for support {"a",null,null,"a"} <> {null,"a","a",null}
-                }
-            }
-
-            return hashCode;
-        }
-
-        public static bool operator ==(ValueObject<TValueObject> left, ValueObject<TValueObject> right)
-        {
-            if (Object.Equals(left, null))
-                return (Object.Equals(right, null)) ? true : false;
-            else
-                return left.Equals(right);
-            
-        }        
-
-        public static bool operator !=(ValueObject<TValueObject> left, ValueObject<TValueObject> right)
-        {
-            return !(left == right);
-        }
-
-        #endregion
-    }
 }

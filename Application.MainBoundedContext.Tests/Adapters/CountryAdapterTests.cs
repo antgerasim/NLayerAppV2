@@ -10,65 +10,67 @@
 // http://microsoftnlayerapp.codeplex.com/license
 //===================================================================================
 
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Application.MainBoundedContext.Tests
+using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
+using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg;
+using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Application.MainBoundedContext.Tests.Adapters
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.Samples.NLayerApp.Domain.Seedwork;
-    using Microsoft.Samples.NLayerApp.Domain.MainBoundedContext.ERPModule.Aggregates.CountryAgg;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.Adapter;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.DTO;
-    using Microsoft.Samples.NLayerApp.Infrastructure.Crosscutting.NetFramework.Adapter;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.BankingModule;
-    using Microsoft.Samples.NLayerApp.Application.MainBoundedContext.ERPModule;
+   [TestClass()]
+   public class CountryAdapterTests
+   {
 
-    [TestClass()]
-    public class CountryAdapterTests
-    {
-        [TestMethod]
-        public void CountryToCountryDTOAdapter()
-        {
-            //Arrange
-            var country = new Country("Spain", "es-ES");
-            country.GenerateNewIdentity();
+      [TestMethod]
+      public void CountryToCountryDtoAdapter()
+      {
+         //Arrange
+         var country = new Country("Spain", "es-ES");
+         country.GenerateNewIdentity();
 
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var dto = adapter.Adapt<Country, CountryDTO>(country);
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var dto = adapter.Adapt<Country, CountryDto>(country);
 
-            //Assert
-            Assert.AreEqual(country.Id, dto.Id);
-            Assert.AreEqual(country.CountryName, dto.CountryName);
-            Assert.AreEqual(country.CountryISOCode, dto.CountryISOCode);
-        }
-        [TestMethod]
-        public void CountryEnumerableToCountryDTOList()
-        {
-            //Arrange
+         //Assert
+         Assert.AreEqual(country.Id, dto.Id);
+         Assert.AreEqual(country.CountryName, dto.CountryName);
+         Assert.AreEqual(country.CountryIsoCode, dto.CountryIsoCode);
+      }
 
-            var country = new Country("Spain", "es-ES");
-            country.GenerateNewIdentity();
+      [TestMethod]
+      public void CountryEnumerableToCountryDtoList()
+      {
+         //Arrange
 
-            IEnumerable<Country> countries = new List<Country>() { country };
+         var country = new Country("Spain", "es-ES");
+         country.GenerateNewIdentity();
 
-            //Act
-            ITypeAdapter adapter = TypeAdapterFactory.CreateAdapter();
-            var dtos = adapter.Adapt<IEnumerable<Country>, List<CountryDTO>>(countries);
+         IEnumerable<Country> countries = new List<Country>()
+         {
+            country
+         };
 
-            //Assert
-            Assert.IsNotNull(dtos);
-            Assert.IsTrue(dtos.Any());
-            Assert.IsTrue(dtos.Count == 1);
+         //Act
+         var adapter = TypeAdapterFactory.CreateAdapter();
+         var dtos = adapter.Adapt<IEnumerable<Country>, List<CountryDto>>(countries);
 
-            var dto = dtos[0];
+         //Assert
+         Assert.IsNotNull(dtos);
+         Assert.IsTrue(dtos.Any());
+         Assert.IsTrue(dtos.Count == 1);
 
-            Assert.AreEqual(country.Id, dto.Id);
-            Assert.AreEqual(country.CountryName, dto.CountryName);
-            Assert.AreEqual(country.CountryISOCode, dto.CountryISOCode);
-        }
-    }
+         var dto = dtos[0];
+
+         Assert.AreEqual(country.Id, dto.Id);
+         Assert.AreEqual(country.CountryName, dto.CountryName);
+         Assert.AreEqual(country.CountryIsoCode, dto.CountryIsoCode);
+      }
+
+   }
+
 }
